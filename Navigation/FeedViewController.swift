@@ -9,7 +9,10 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    var button = UIButton(frame: CGRectMake(150, 240, 90, 30))
+    var firstButton = UIButton()
+    var secondButton = UIButton()
+    
+    var stackView = UIStackView()
     
     var post = Post(title: "Netology")
     
@@ -23,10 +26,28 @@ class FeedViewController: UIViewController {
     private func setupView(){
         title = "Feed"
         view.backgroundColor = .white
-        button.setTitle("Go To Post", for: .normal)
-        button.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
-        button.backgroundColor = .gray
-        view.addSubview(button)
+        firstButton.setTitle("Go To Post", for: .normal)
+        firstButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        firstButton.backgroundColor = .gray
+        
+        secondButton.setTitle("Go To Post", for: .normal)
+        secondButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        secondButton.backgroundColor = .gray
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.addArrangedSubview(firstButton)
+        stackView.addArrangedSubview(secondButton)
+        
+        stackView.spacing = 10
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        
+        view.addSubview(stackView)
+        
+        setupConstrains()
+        
     }
     
     @objc private func buttonIsPressed(){
@@ -39,4 +60,15 @@ class FeedViewController: UIViewController {
     
     }
     
+    private func setupConstrains(){
+        
+        var safeAreaGuide = view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+        
+            stackView.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: safeAreaGuide.centerYAnchor)
+        
+        ])
+    }
 }

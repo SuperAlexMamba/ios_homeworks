@@ -19,38 +19,44 @@ class ProfileHeaderView: UIView{
     private var statusText: String!
     
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        profilePhoto = UIImageView(frame: CGRect(x: 20, y: 95, width: 100, height: 100))
+                
+        profilePhoto = UIImageView()
+        profilePhoto.translatesAutoresizingMaskIntoConstraints = false
         profilePhoto.image = UIImage(named: "hipsterCat")
         profilePhoto.clipsToBounds = true
         profilePhoto.layer.borderWidth = 3
         profilePhoto.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         profilePhoto.layer.cornerRadius = 50
         
-        
         self.addSubview(profilePhoto)
         
-        profileName = UILabel(frame: CGRect(x: 150, y: 70, width: 100, height: 100))
+        profileName = UILabel()
+        profileName.translatesAutoresizingMaskIntoConstraints = false
+
         profileName.text = "Hipster Cat"
         profileName.font = .systemFont(ofSize: 18, weight: .bold)
         profileName.textColor = .black
         
         self.addSubview(profileName)
         
-        profileStatus = UILabel(frame: CGRect(x: 150, y: 120, width: 160, height: 100))
+        profileStatus = UILabel()
+        profileStatus.translatesAutoresizingMaskIntoConstraints = false
+
         profileStatus.text = "Waiting for something..."
         profileStatus.font = .systemFont(ofSize: 14, weight: .regular)
         profileStatus.textColor = .gray
         
         self.addSubview(profileStatus)
         
-        showStatusButton = UIButton(frame: CGRect(x: 27, y: 250, width: 350, height: 55))
+        showStatusButton = UIButton()
+        showStatusButton.translatesAutoresizingMaskIntoConstraints = false
+
         showStatusButton.setTitle("Show status", for: .normal)
         showStatusButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
         showStatusButton.titleLabel?.textColor = .black
+        showStatusButton.contentMode = .center
 
         showStatusButton.backgroundColor = .systemBlue
         showStatusButton.layer.cornerRadius = 15
@@ -64,7 +70,9 @@ class ProfileHeaderView: UIView{
         
         self.addSubview(showStatusButton)
         
-        statusTextField = UITextField(frame: CGRect(x: 150, y: 180, width: 228, height: 45))
+        statusTextField = UITextField()
+        statusTextField.translatesAutoresizingMaskIntoConstraints = false
+
         statusTextField.backgroundColor = .white
         statusTextField.font = .systemFont(ofSize: 15, weight: .regular)
         statusTextField.textColor = .black
@@ -75,6 +83,8 @@ class ProfileHeaderView: UIView{
         statusTextField.addTarget(self, action: #selector(statusTextIsChanged), for: .editingChanged)
         
         self.addSubview(statusTextField)
+        
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -94,5 +104,34 @@ class ProfileHeaderView: UIView{
         statusText = textField.text
     }
     
+    private func setConstraints(){
+        
+        NSLayoutConstraint.activate([
+            
+            profilePhoto.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
+            profilePhoto.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            profilePhoto.widthAnchor.constraint(equalToConstant: 100),
+            profilePhoto.heightAnchor.constraint(equalToConstant: 100),
+            
+            profileName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0),
+            profileName.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            profileName.widthAnchor.constraint(equalToConstant: 100),
+            profileName.heightAnchor.constraint(equalToConstant: 100),
+            
+            showStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
+            showStatusButton.widthAnchor.constraint(equalToConstant: 355),
+            showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            showStatusButton.topAnchor.constraint(equalTo: profilePhoto.bottomAnchor, constant: 32),
+            
+            profileStatus.centerXAnchor.constraint(equalTo: showStatusButton.centerXAnchor, constant: 30),
+            profileStatus.centerYAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -70),
+            profileStatus.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
+            profileStatus.heightAnchor.constraint(equalToConstant: 100),
+            
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            statusTextField.widthAnchor.constraint(equalToConstant: 228),
+            statusTextField.topAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -55),
+            statusTextField.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20)
+        ])
+    }
 }
-
