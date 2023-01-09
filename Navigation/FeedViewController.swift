@@ -62,7 +62,7 @@ class FeedViewController: UIViewController {
     
     private func setupConstrains(){
         
-        var safeAreaGuide = view.safeAreaLayoutGuide
+        let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
         
