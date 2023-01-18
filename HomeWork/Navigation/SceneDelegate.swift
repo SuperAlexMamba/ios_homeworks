@@ -21,19 +21,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedViewController = FeedViewController()
         let profileViewController = ProfileViewContoller()
         let postViewController = PostViewController()
+        let loginViewController = LoginViewController()
         
         let usersNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         
         let tabBarController = UITabBarController()
         
-        tabBarController.viewControllers = [usersNavigationController, profileNavigationController]
+        tabBarController.viewControllers = [usersNavigationController, loginViewController]
 
         usersNavigationController.tabBarItem.title = "Users"
         usersNavigationController.tabBarItem.image = UIImage(systemName: "person.2")
         
-        profileNavigationController.tabBarItem.title = "Profile"
-        profileNavigationController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
+        loginViewController.tabBarItem.title = "Login"
+        loginViewController.tabBarItem.image = UIImage(systemName: "rectangle.portrait.and.arrow.right")
+
+//        profileNavigationController.tabBarItem.title = "Profile"
+//        profileNavigationController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
         
         postViewController.navigationItem.rightBarButtonItem?.title = "INFO"
         

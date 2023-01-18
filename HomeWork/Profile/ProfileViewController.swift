@@ -12,16 +12,19 @@ class ProfileViewContoller: UIViewController{
     
     let profileHeader = ProfileHeaderView()
     
-    var button = UIButton()
+    var button: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Sample Text", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
+        button.backgroundColor = .gray
+
+        return button
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        button.setTitle("Sample Text", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
-        button.backgroundColor = .gray
-        button.translatesAutoresizingMaskIntoConstraints = false
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         view.addSubview(profileHeader)
