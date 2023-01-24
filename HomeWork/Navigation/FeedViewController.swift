@@ -14,7 +14,7 @@ class FeedViewController: UIViewController {
     
     var stackView = UIStackView()
     
-    var post = Post(title: "Netology")
+    var post = Feed(title: "Netology")
     
     override func viewDidLoad() {
         super.viewDidLoad()
