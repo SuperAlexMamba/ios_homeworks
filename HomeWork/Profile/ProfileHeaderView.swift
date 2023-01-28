@@ -126,6 +126,7 @@ class ProfileHeaderView: UIView{
             showStatusButton.widthAnchor.constraint(equalToConstant: 355),
             showStatusButton.heightAnchor.constraint(equalToConstant: 50),
             showStatusButton.topAnchor.constraint(equalTo: profilePhoto.bottomAnchor, constant: 32),
+            showStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
             
             profileStatus.centerXAnchor.constraint(equalTo: showStatusButton.centerXAnchor, constant: 30),
             profileStatus.centerYAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -70),
