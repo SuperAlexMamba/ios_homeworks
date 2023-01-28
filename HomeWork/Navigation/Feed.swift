@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Post{
+struct Feed{
     
     var title: String
     

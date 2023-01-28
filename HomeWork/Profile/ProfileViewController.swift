@@ -8,34 +8,42 @@
 import Foundation
 import UIKit
 
-class ProfileViewContoller: UIViewController{
+class ProfileViewController: UIViewController{
     
     let profileHeader = ProfileHeaderView()
     
-    var button: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Sample Text", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
-        button.backgroundColor = .gray
-
-        return button
+    var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.frame = .zero
+        tableView.headerView(forSection: 0)
+        
+        return tableView
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileHeader.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button)
-        view.addSubview(profileHeader)
-        view.backgroundColor = .lightGray
-        setupConstrains()
-        title = "Profile"
+        setupView()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
       
+    }
+    
+    private func setupView(){
+        profileHeader.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        view.addSubview(profileHeader)
+        view.backgroundColor = .lightGray
+        title = "Profile"
+
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.tableView.headerView(forSection: 0)
+        
+        setupConstrains()
     }
     
     private func setupConstrains(){
@@ -48,11 +56,32 @@ class ProfileViewContoller: UIViewController{
             profileHeader.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
             profileHeader.heightAnchor.constraint(equalToConstant: 220),
             
-            button.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 0),
-            button.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: 0),
-            button.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
-            
-            
+            tableView.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 0),
+            tableView.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: 0),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor, constant: 0),
+            tableView.topAnchor.constraint(equalTo: profileHeader.bottomAnchor, constant: 0)
         ])
+    }
+}
+
+extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let data = [postOne,postTwo,postThree,postFour]
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
+        let data = [postOne,postTwo,postThree,postFour]
+        let items = data[indexPath.row]
+        
+        cell.authorLabel.text = items.author
+        cell.descriptionText.text = items.description
+        cell.viewsLabel.text = "Views: \(items.views)"
+        cell.likesLabel.text = "Likes: \(items.likes)"
+        cell.postImage.image = UIImage(named: items.image)
+        
+        return cell
     }
 }

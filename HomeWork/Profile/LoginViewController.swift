@@ -8,7 +8,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
+        
     let scrollView = UIScrollView()
     let contentView = UIView()
     
@@ -17,11 +17,24 @@ class LoginViewController: UIViewController {
         
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.borderColor = .init(red: 0.128, green: 0.128, blue: 0.128, alpha: 1)
+        stackView.layer.cornerRadius = 10
+        stackView.clipsToBounds = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
     }()
+        
+    var uiView: UIView = {
+        
+        let view = UIView()
+        view.backgroundColor = .gray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     
     var logoImage: UIImageView = {
         
@@ -34,15 +47,12 @@ class LoginViewController: UIViewController {
     var loginTextField: UITextField = {
         
         let textField = UITextField()
-        textField.placeholder = "Email or phone"
-        textField.borderStyle = .roundedRect
+        textField.placeholder = "  Email or phone"
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
         textField.tintColor = .tintColor
         textField.autocapitalizationType = .none
-        textField.layer.borderWidth = 0.5
-        textField.layer.cornerRadius = 10
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
@@ -54,15 +64,11 @@ class LoginViewController: UIViewController {
     var passwordTextField: UITextField = {
         
         let textField = UITextField()
-        textField.placeholder = "Password"
-        textField.borderStyle = .roundedRect
+        textField.placeholder = "  Password"
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
-        textField.tintColor = .tintColor
         textField.autocapitalizationType = .none
-        textField.layer.borderWidth = 0.5
-        textField.layer.cornerRadius = 10
         textField.isSecureTextEntry = true
         textField.keyboardType = UIKeyboardType.default
         textField.returnKeyType = UIReturnKeyType.done
@@ -96,6 +102,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         stackView.addArrangedSubview(loginTextField)
+        stackView.addArrangedSubview(uiView)
         stackView.addArrangedSubview(passwordTextField)
         
         self.view.backgroundColor = .white
@@ -119,8 +126,8 @@ class LoginViewController: UIViewController {
     
     
     @objc private func buttonIsPressed(){
-        let profileViewController = ProfileViewContoller()
-        self.tabBarController?.present(profileViewController, animated: true) //не получается Present Modally, через метод push контроллер не появляется (пробовал и через свойство navigationController)
+        let profileViewController = ProfileViewController()
+        self.navigationController?.pushViewController(profileViewController, animated: true)
         }
     
     @objc func willShowKeyboard(_ notification: NSNotification){
@@ -179,6 +186,8 @@ class LoginViewController: UIViewController {
             stackView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 120),
             stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
             stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
+            
+            uiView.heightAnchor.constraint(equalToConstant: 0.5),
             
             loginButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
             loginButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),

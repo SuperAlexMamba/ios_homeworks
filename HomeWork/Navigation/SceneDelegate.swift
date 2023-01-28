@@ -11,7 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let scene = (scene as? UIWindowScene) else { return }
@@ -19,22 +18,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         let feedViewController = FeedViewController()
-        let profileViewController = ProfileViewContoller()
+        let profileViewController = ProfileViewController()
         let postViewController = PostViewController()
         let loginViewController = LoginViewController()
         
         let usersNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        let loginNavigationController = UINavigationController(rootViewController: loginViewController)
         
         let tabBarController = UITabBarController()
         
-        tabBarController.viewControllers = [usersNavigationController, loginViewController]
-
+        tabBarController.viewControllers = [usersNavigationController,profileNavigationController,loginNavigationController]
+        tabBarController.setViewControllers([usersNavigationController, loginNavigationController], animated: true)
+        
         usersNavigationController.tabBarItem.title = "Users"
         usersNavigationController.tabBarItem.image = UIImage(systemName: "person.2")
         
-        loginViewController.tabBarItem.title = "Login"
-        loginViewController.tabBarItem.image = UIImage(systemName: "rectangle.portrait.and.arrow.right")
+        loginNavigationController.tabBarItem.title = "Profile"
+        loginNavigationController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
 
 //        profileNavigationController.tabBarItem.title = "Profile"
 //        profileNavigationController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
