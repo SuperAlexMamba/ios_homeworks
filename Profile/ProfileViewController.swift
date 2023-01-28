@@ -5,6 +5,7 @@
 //  Created by Слава Орлов on 28.12.2022.
 //
 
+
 import Foundation
 import UIKit
 
@@ -21,6 +22,7 @@ class ProfileViewContoller: UIViewController{
         title = "Profile"
         
     }
+    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
