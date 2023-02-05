@@ -21,14 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileViewController = ProfileViewController()
         let postViewController = PostViewController()
         let loginViewController = LoginViewController()
+        let photosViewController = PhotosViewController()
         
         let usersNavigationController = UINavigationController(rootViewController: feedViewController)
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        _ = UINavigationController(rootViewController: profileViewController)
         let loginNavigationController = UINavigationController(rootViewController: loginViewController)
+        let photosNavigationController = UINavigationController(rootViewController: photosViewController)
         
         let tabBarController = UITabBarController()
         
-        tabBarController.viewControllers = [usersNavigationController,profileNavigationController,loginNavigationController]
+        tabBarController.viewControllers = [usersNavigationController,loginNavigationController]
         tabBarController.setViewControllers([usersNavigationController, loginNavigationController], animated: true)
         
         usersNavigationController.tabBarItem.title = "Users"
