@@ -12,9 +12,11 @@ class ProfileViewController: UIViewController{
     
     let profileHeader = ProfileHeaderView()
     
+    
     var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.frame = .zero
         tableView.headerView(forSection: 0)
@@ -62,20 +64,43 @@ class ProfileViewController: UIViewController{
             tableView.topAnchor.constraint(equalTo: profileHeader.bottomAnchor, constant: 0)
         ])
     }
+    
+    @objc func buttonIsPressed(){
+        let photosVC = PhotosViewController()
+        self.navigationController?.pushViewController(photosVC, animated: true)
+    }
 }
 
 extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let data = [postOne,postTwo,postThree,postFour]
-        return data.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0{
+            return 1
+        }
+        else{
+            let data = [postOne,postTwo,postThree,postFour]
+            return data.count
+        }
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosCell", for: indexPath) as! PhotosTableViewCell
+            
+            cell.navigationButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+            
+            return cell
+        }
+            
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
         let data = [postOne,postTwo,postThree,postFour]
         let items = data[indexPath.row]
-        
+            
         cell.authorLabel.text = items.author
         cell.descriptionText.text = items.description
         cell.viewsLabel.text = "Views: \(items.views)"
@@ -85,3 +110,4 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         return cell
     }
 }
+
