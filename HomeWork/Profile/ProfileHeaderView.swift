@@ -21,7 +21,16 @@ class ProfileHeaderView: UIView{
         image.layer.borderWidth = 3
         image.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         image.layer.cornerRadius = 50
+        image.isUserInteractionEnabled = true
         return image
+    }()
+    
+    lazy var photoView: UIButton = {
+        let view = UIButton()
+        view.tintColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
     }()
     
     var profileName: UILabel = {
@@ -80,12 +89,13 @@ class ProfileHeaderView: UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.addSubview(profilePhoto)
         self.addSubview(profileName)
         self.addSubview(profileStatus)
         self.addSubview(showStatusButton)
         self.addSubview(statusTextField)
-        
+        self.addSubview(profilePhoto)
+        self.addSubview(photoView)
+
         showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         statusTextField.addTarget(self, action: #selector(statusTextIsChanged), for: .editingChanged)
 
@@ -116,6 +126,11 @@ class ProfileHeaderView: UIView{
             profilePhoto.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             profilePhoto.widthAnchor.constraint(equalToConstant: 100),
             profilePhoto.heightAnchor.constraint(equalToConstant: 100),
+            
+            photoView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
+            photoView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            photoView.widthAnchor.constraint(equalToConstant: 100),
+            photoView.heightAnchor.constraint(equalToConstant: 100),
             
             profileName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0),
             profileName.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),

@@ -11,9 +11,17 @@ import UIKit
 class ProfileViewController: UIViewController{
     
     let profileHeader = ProfileHeaderView()
+    let profilePhoto = ProfileHeaderView().profilePhoto
     
+    let xPhotoPosition = ProfileHeaderView().profilePhoto.bounds.origin.x
+    let yPhotoPosition = ProfileHeaderView().profilePhoto.bounds.origin.y
     
-    var tableView: UITableView = {
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
+    var backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    var cancelButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width / 1.1 , y: UIScreen.main.bounds.height / 4, width: 40, height: 40))
+
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
@@ -23,10 +31,13 @@ class ProfileViewController: UIViewController{
         
         return tableView
     }()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        addGuestRecognizer()
         setupView()
+        self.cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        self.cancelButton.addTarget(nil, action: #selector(cancelProfilePhotoPressed), for: .touchUpInside)
     }
     
     override func viewWillLayoutSubviews() {
@@ -44,8 +55,12 @@ class ProfileViewController: UIViewController{
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.headerView(forSection: 0)
-        
         setupConstrains()
+    }
+    
+    func addGuestRecognizer(){
+        let guest = UITapGestureRecognizer(target: self, action: #selector (animateProfilePhoto))
+        profileHeader.photoView.addGestureRecognizer(guest)
     }
     
     private func setupConstrains(){
@@ -61,10 +76,11 @@ class ProfileViewController: UIViewController{
             tableView.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 0),
             tableView.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor, constant: 0),
-            tableView.topAnchor.constraint(equalTo: profileHeader.bottomAnchor, constant: 0)
+            tableView.topAnchor.constraint(equalTo: profileHeader.bottomAnchor, constant: 0),
+
         ])
     }
-    
+        
     @objc func buttonIsPressed(){
         let photosVC = PhotosViewController()
         self.navigationController?.pushViewController(photosVC, animated: true)
@@ -96,11 +112,11 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
             
             return cell
         }
-            
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
         let data = [postOne,postTwo,postThree,postFour]
         let items = data[indexPath.row]
-            
+        
         cell.authorLabel.text = items.author
         cell.descriptionText.text = items.description
         cell.viewsLabel.text = "Views: \(items.views)"
@@ -109,5 +125,41 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         
         return cell
     }
-}
+    
+    // MARK: - Animation
+    
+    @objc func animateProfilePhoto(){
 
+        view.addSubview(backgroundView)
+        view.addSubview(cancelButton)
+        profileHeader.showStatusButton.isHidden = true
+        profileHeader.profileStatus.isHidden = true
+        profileHeader.statusTextField.isHidden = true
+        view.insertSubview(backgroundView, at: 1)
+        backgroundView.backgroundColor = .black
+        backgroundView.alpha = 0.0
+        UIView.animate(withDuration: 0.3, delay: 0.3) {
+            self.backgroundView.alpha = 0.5
+            self.profileHeader.profilePhoto.center = CGPoint(x: self.screenWidth / 2 , y: self.screenHeight / 2)
+            self.profileHeader.profilePhoto.layer.bounds.size = CGSize(width:self.screenWidth, height: self.screenHeight / 2)
+            self.profileHeader.profilePhoto.layer.cornerRadius = 0
+            self.profileHeader.profilePhoto.layer.borderWidth = 0
+            
+        }
+    }
+    
+    @objc func cancelProfilePhotoPressed(){
+        
+        profileHeader.showStatusButton.isHidden = false
+        profileHeader.profileStatus.isHidden = false
+        profileHeader.statusTextField.isHidden = false
+        UIView.animate(withDuration: 0.3, delay: 0.3) {
+            self.profileHeader.profilePhoto.center = CGPoint(x: self.yPhotoPosition, y: self.yPhotoPosition)
+            self.profileHeader.profilePhoto.layer.bounds.size = CGSize(width: 100, height: 100)
+            self.profileHeader.profilePhoto.layer.cornerRadius = 50
+            self.profileHeader.profilePhoto.layer.borderWidth = 3
+            self.backgroundView.removeFromSuperview()
+            self.cancelButton.removeFromSuperview()
+        }
+    }
+}
