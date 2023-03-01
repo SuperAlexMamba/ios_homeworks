@@ -7,8 +7,11 @@
 
 import Foundation
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController{
+    
+    let posts: [Post] = [postOne,postTwo,postThree,postFour]
     
     let profileHeader = ProfileHeaderView()
     let profilePhoto = ProfileHeaderView().profilePhoto
@@ -49,7 +52,12 @@ class ProfileViewController: UIViewController{
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         view.addSubview(profileHeader)
+        
+        #if DEBUG
         view.backgroundColor = .lightGray
+        #else
+        view.backgroundColor = .red
+        #endif
         title = "Profile"
 
         tableView.delegate = self
@@ -114,8 +122,8 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
-        let data = [postOne,postTwo,postThree,postFour]
-        let items = data[indexPath.row]
+        
+        let items = self.posts[indexPath.row]
         
         cell.authorLabel.text = items.author
         cell.descriptionText.text = items.description
