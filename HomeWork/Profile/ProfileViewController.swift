@@ -13,6 +13,8 @@ class ProfileViewController: UIViewController{
     
     let posts: [Post] = [postOne,postTwo,postThree,postFour]
     
+    var user = User(login: "Hipster Cat", password: "1234", status: "i am super Cat!", image: UIImage(named: "hipsterCat")!)
+        
     let profileHeader = ProfileHeaderView()
     let profilePhoto = ProfileHeaderView().profilePhoto
     
@@ -41,6 +43,7 @@ class ProfileViewController: UIViewController{
         setupView()
         self.cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         self.cancelButton.addTarget(nil, action: #selector(cancelProfilePhotoPressed), for: .touchUpInside)
+                
     }
     
     override func viewWillLayoutSubviews() {
@@ -52,6 +55,10 @@ class ProfileViewController: UIViewController{
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         view.addSubview(profileHeader)
+        
+        profileHeader.profilePhoto.image = user.image
+        profileHeader.profileStatus.text = user.status
+        profileHeader.profileName.text = user.login
         
         #if DEBUG
         view.backgroundColor = .lightGray

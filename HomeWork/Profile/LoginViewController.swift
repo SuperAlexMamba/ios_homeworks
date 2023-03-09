@@ -12,6 +12,8 @@ class LoginViewController: UIViewController {
     let scrollView = UIScrollView()
     let contentView = UIView()
     
+    var currentUser = CurrentUserService()
+            
     var stackView: UIStackView = {
        let stackView = UIStackView()
         
@@ -127,8 +129,21 @@ class LoginViewController: UIViewController {
     
     @objc private func buttonIsPressed(){
         let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        
+        guard let login = loginTextField.text else {return}
+        
+        
+        let user = profileViewController.user
+        currentUser.user = user
+        
+        if (currentUser.checkLogin(login: login)) != nil{
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+            print("Успешная авторизация")
         }
+        else{
+            errorLoginAlert()
+        }
+    }
     
     @objc func willShowKeyboard(_ notification: NSNotification){
         
@@ -215,6 +230,19 @@ class LoginViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
+    
+    private func errorLoginAlert(){
+        
+        let alert = UIAlertController(title: "Error", message: "invalid Login. Enter valid login", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+        
+    }
+    
 }
 
 extension LoginViewController: UITextFieldDelegate{
