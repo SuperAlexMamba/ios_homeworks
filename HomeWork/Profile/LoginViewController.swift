@@ -138,7 +138,7 @@ class LoginViewController: UIViewController {
         
         if (currentUser.checkLogin(login: login)) != nil{
             self.navigationController?.pushViewController(profileViewController, animated: true)
-            print("Успешная авторизация")
+            print("Успешная авторизация ")
         }
         else{
             errorLoginAlert()
