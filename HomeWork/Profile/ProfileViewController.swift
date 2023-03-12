@@ -13,8 +13,9 @@ class ProfileViewController: UIViewController{
     
     let posts: [Post] = [postOne,postTwo,postThree,postFour]
     
-    var user = User(login: "Hipster Cat", password: "1234", status: "i am super Cat!", image: UIImage(named: "hipsterCat")!)
-        
+    let user = CurrentUserService()
+    let testUser = TestUserService()
+    
     let profileHeader = ProfileHeaderView()
     let profilePhoto = ProfileHeaderView().profilePhoto
     
@@ -55,15 +56,17 @@ class ProfileViewController: UIViewController{
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         view.addSubview(profileHeader)
-        
-        profileHeader.profilePhoto.image = user.image
-        profileHeader.profileStatus.text = user.status
-        profileHeader.profileName.text = user.login
-        
+            
         #if DEBUG
         view.backgroundColor = .lightGray
+        profileHeader.profilePhoto.image = testUser.user.image
+        profileHeader.profileStatus.text = testUser.user.status
+        profileHeader.profileName.text = testUser.user.login
         #else
         view.backgroundColor = .red
+        profileHeader.profilePhoto.image = user.user.image
+        profileHeader.profileStatus.text = user.user.status
+        profileHeader.profileName.text = user.user.login
         #endif
         title = "Profile"
 

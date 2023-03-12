@@ -28,12 +28,24 @@ class User {
 }
 
 class CurrentUserService: UserService {
-    var user: User?
+    var user = User(login: "Hipster Cat", password: "1234", status: "i am super Cat!", image: UIImage(named: "hipsterCat")!)
     
     func checkLogin(login: String) -> User? {
-        if login == user?.login {
+        if login == user.login {
             return user
         }
         else{return nil}
     }
+}
+
+class TestUserService: UserService {
+    var user = User(login: "Test Cat", password: "1234", status: "TEST", image: UIImage(named: "space")!)
+    
+    func checkLogin(login: String) -> User? {
+        if login == user.login {
+            return user
+        }
+        else{return nil}
+    }
+    
 }

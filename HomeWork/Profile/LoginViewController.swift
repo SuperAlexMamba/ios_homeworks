@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     let contentView = UIView()
     
     var currentUser = CurrentUserService()
+    var testUser = TestUserService()
             
     var stackView: UIStackView = {
        let stackView = UIStackView()
@@ -132,10 +133,15 @@ class LoginViewController: UIViewController {
         
         guard let login = loginTextField.text else {return}
         
-        
-        let user = profileViewController.user
-        currentUser.user = user
-        
+        #if DEBUG
+        if (testUser.checkLogin(login: login)) != nil{
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+            print("Успешная авторизация ")
+        }
+        else{
+            errorLoginAlert()
+        }
+        #else
         if (currentUser.checkLogin(login: login)) != nil{
             self.navigationController?.pushViewController(profileViewController, animated: true)
             print("Успешная авторизация ")
@@ -143,6 +149,7 @@ class LoginViewController: UIViewController {
         else{
             errorLoginAlert()
         }
+        #endif
     }
     
     @objc func willShowKeyboard(_ notification: NSNotification){
