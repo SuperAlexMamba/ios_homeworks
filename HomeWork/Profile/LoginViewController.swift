@@ -12,6 +12,9 @@ class LoginViewController: UIViewController {
     let scrollView = UIScrollView()
     let contentView = UIView()
     
+    var currentUser = CurrentUserService()
+    var testUser = TestUserService()
+            
     var stackView: UIStackView = {
        let stackView = UIStackView()
         
@@ -127,8 +130,35 @@ class LoginViewController: UIViewController {
     
     @objc private func buttonIsPressed(){
         let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        
+        guard let login = loginTextField.text else {return}
+        
+        #if DEBUG
+        if (testUser.checkLogin(login: login)) != nil{
+            profileViewController.profileHeader.profilePhoto.image = testUser.testUser.image
+            profileViewController.profileHeader.profileName.text = testUser.testUser.login
+            profileViewController.profileHeader.profileStatus.text = testUser.testUser.status
+            profileViewController.view.backgroundColor = .blue
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+            print("Успешная авторизация ")
         }
+        else{
+            errorLoginAlert()
+        }
+        #else
+        if (currentUser.checkLogin(login: login)) != nil{
+            profileViewController.profileHeader.profilePhoto.image = currentUser.user.image
+            profileViewController.profileHeader.profileName.text = currentUser.user.login
+            profileViewController.profileHeader.profileStatus.text = currentUser.user.status
+            profileViewController.view.backgroundColor = .lightGray
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+            print("Успешная авторизация ")
+        }
+        else{
+            errorLoginAlert()
+        }
+        #endif
+    }
     
     @objc func willShowKeyboard(_ notification: NSNotification){
         
@@ -215,6 +245,19 @@ class LoginViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
+    
+    private func errorLoginAlert(){
+        
+        let alert = UIAlertController(title: "Error", message: "invalid Login. Enter valid login", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+        
+    }
+    
 }
 
 extension LoginViewController: UITextFieldDelegate{

@@ -16,6 +16,7 @@
 		DD511C8429AFA4460021D4AC /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD511C6F29AFA4460021D4AC /* StorageService.framework */; };
 		DD511C8529AFA4460021D4AC /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD511C6F29AFA4460021D4AC /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD511C8D29AFA4A70021D4AC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD18717E2982B6F000E489D9 /* Post.swift */; };
+		DD511C9429B368290021D4AC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD511C9329B368290021D4AC /* User.swift */; };
 		DD6682362985832F009368F3 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6682352985832F009368F3 /* PhotosTableViewCell.swift */; };
 		DD66823829859776009368F3 /* PreviewPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66823729859776009368F3 /* PreviewPhotosCollectionViewCell.swift */; };
 		DD66823A29882E10009368F3 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66823929882E10009368F3 /* PhotosViewController.swift */; };
@@ -79,6 +80,7 @@
 		DD511C7229AFA4460021D4AC /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
 		DD511C7829AFA4460021D4AC /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD511C7F29AFA4460021D4AC /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
+		DD511C9329B368290021D4AC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DD6682352985832F009368F3 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		DD66823729859776009368F3 /* PreviewPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD66823929882E10009368F3 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				DD78C41629524D1E006D31F5 /* Feed.swift */,
 				DD187183298427ED00E489D9 /* Photo.swift */,
+				DD511C9329B368290021D4AC /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				DD78C41729524D1E006D31F5 /* Feed.swift in Sources */,
 				DD78C3FD2950FD6D006D31F5 /* AppDelegate.swift in Sources */,
 				DD78C41129510667006D31F5 /* FeedViewController.swift in Sources */,
+				DD511C9429B368290021D4AC /* User.swift in Sources */,
 				DD187184298427ED00E489D9 /* Photo.swift in Sources */,
 				DD78C4192952535F006D31F5 /* InfoViewController.swift in Sources */,
 				DD78C3FF2950FD6D006D31F5 /* SceneDelegate.swift in Sources */,

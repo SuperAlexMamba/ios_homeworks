@@ -12,7 +12,7 @@ import StorageService
 class ProfileViewController: UIViewController{
     
     let posts: [Post] = [postOne,postTwo,postThree,postFour]
-    
+        
     let profileHeader = ProfileHeaderView()
     let profilePhoto = ProfileHeaderView().profilePhoto
     
@@ -41,6 +41,7 @@ class ProfileViewController: UIViewController{
         setupView()
         self.cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         self.cancelButton.addTarget(nil, action: #selector(cancelProfilePhotoPressed), for: .touchUpInside)
+                
     }
     
     override func viewWillLayoutSubviews() {
@@ -52,12 +53,7 @@ class ProfileViewController: UIViewController{
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         view.addSubview(profileHeader)
-        
-        #if DEBUG
-        view.backgroundColor = .lightGray
-        #else
-        view.backgroundColor = .red
-        #endif
+            
         title = "Profile"
 
         tableView.delegate = self
