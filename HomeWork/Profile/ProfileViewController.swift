@@ -12,10 +12,7 @@ import StorageService
 class ProfileViewController: UIViewController{
     
     let posts: [Post] = [postOne,postTwo,postThree,postFour]
-    
-    let user = CurrentUserService()
-    let testUser = TestUserService()
-    
+        
     let profileHeader = ProfileHeaderView()
     let profilePhoto = ProfileHeaderView().profilePhoto
     
@@ -57,17 +54,6 @@ class ProfileViewController: UIViewController{
         view.addSubview(tableView)
         view.addSubview(profileHeader)
             
-        #if DEBUG
-        view.backgroundColor = .lightGray
-        profileHeader.profilePhoto.image = testUser.user.image
-        profileHeader.profileStatus.text = testUser.user.status
-        profileHeader.profileName.text = testUser.user.login
-        #else
-        view.backgroundColor = .red
-        profileHeader.profilePhoto.image = user.user.image
-        profileHeader.profileStatus.text = user.user.status
-        profileHeader.profileName.text = user.user.login
-        #endif
         title = "Profile"
 
         tableView.delegate = self

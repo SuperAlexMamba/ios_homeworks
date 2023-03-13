@@ -135,6 +135,10 @@ class LoginViewController: UIViewController {
         
         #if DEBUG
         if (testUser.checkLogin(login: login)) != nil{
+            profileViewController.profileHeader.profilePhoto.image = testUser.testUser.image
+            profileViewController.profileHeader.profileName.text = testUser.testUser.login
+            profileViewController.profileHeader.profileStatus.text = testUser.testUser.status
+            profileViewController.view.backgroundColor = .blue
             self.navigationController?.pushViewController(profileViewController, animated: true)
             print("Успешная авторизация ")
         }
@@ -143,6 +147,10 @@ class LoginViewController: UIViewController {
         }
         #else
         if (currentUser.checkLogin(login: login)) != nil{
+            profileViewController.profileHeader.profilePhoto.image = currentUser.user.image
+            profileViewController.profileHeader.profileName.text = currentUser.user.login
+            profileViewController.profileHeader.profileStatus.text = currentUser.user.status
+            profileViewController.view.backgroundColor = .lightGray
             self.navigationController?.pushViewController(profileViewController, animated: true)
             print("Успешная авторизация ")
         }

@@ -39,11 +39,11 @@ class CurrentUserService: UserService {
 }
 
 class TestUserService: UserService {
-    var user = User(login: "Test Cat", password: "1234", status: "TEST", image: UIImage(named: "space")!)
+    var testUser = User(login: "Test Cat", password: "1234", status: "TEST", image: UIImage(named: "space")!)
     
     func checkLogin(login: String) -> User? {
-        if login == user.login {
-            return user
+        if login == testUser.login {
+            return testUser
         }
         else{return nil}
     }
