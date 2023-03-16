@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol UserService {
-    func checkLogin(login: String) -> User?
-}
-
 class User {
     
     var login: String
@@ -25,27 +21,4 @@ class User {
         self.status = status
         self.image = image
     }
-}
-
-class CurrentUserService: UserService {
-    var user = User(login: "Hipster Cat", password: "1234", status: "i am super Cat!", image: UIImage(named: "hipsterCat")!)
-    
-    func checkLogin(login: String) -> User? {
-        if login == user.login {
-            return user
-        }
-        else{return nil}
-    }
-}
-
-class TestUserService: UserService {
-    var testUser = User(login: "Test Cat", password: "1234", status: "TEST", image: UIImage(named: "space")!)
-    
-    func checkLogin(login: String) -> User? {
-        if login == testUser.login {
-            return testUser
-        }
-        else{return nil}
-    }
-    
 }

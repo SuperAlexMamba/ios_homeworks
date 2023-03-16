@@ -43,7 +43,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        profileNavigationController.tabBarItem.image = UIImage(systemName: "person.crop.circle")
         
         postViewController.navigationItem.rightBarButtonItem?.title = "INFO"
-        
+    
+        loginViewController.loginDelegate = MyLoginFactory().makeLoginInspector()
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()

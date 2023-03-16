@@ -14,7 +14,9 @@ class LoginViewController: UIViewController {
     
     var currentUser = CurrentUserService()
     var testUser = TestUserService()
-            
+    
+    var loginDelegate: LoginViewControllerDelegate?
+    
     var stackView: UIStackView = {
        let stackView = UIStackView()
         
@@ -114,6 +116,7 @@ class LoginViewController: UIViewController {
         setupScrollView()
 
         loginButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        
 
     }
     
@@ -132,9 +135,12 @@ class LoginViewController: UIViewController {
         let profileViewController = ProfileViewController()
         
         guard let login = loginTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
         
         #if DEBUG
-        if (testUser.checkLogin(login: login)) != nil{
+        
+        if loginDelegate?.check(login: login, password: password) == true {
+            
             profileViewController.profileHeader.profilePhoto.image = testUser.testUser.image
             profileViewController.profileHeader.profileName.text = testUser.testUser.login
             profileViewController.profileHeader.profileStatus.text = testUser.testUser.status
@@ -146,7 +152,7 @@ class LoginViewController: UIViewController {
             errorLoginAlert()
         }
         #else
-        if (currentUser.checkLogin(login: login)) != nil{
+        if loginDelegate?.check(login: login, password: password) == true {
             profileViewController.profileHeader.profilePhoto.image = currentUser.user.image
             profileViewController.profileHeader.profileName.text = currentUser.user.login
             profileViewController.profileHeader.profileStatus.text = currentUser.user.status
@@ -248,7 +254,7 @@ class LoginViewController: UIViewController {
     
     private func errorLoginAlert(){
         
-        let alert = UIAlertController(title: "Error", message: "invalid Login. Enter valid login", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: "invalid Login or Password. Enter valid data", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "Ok", style: .default)
         
