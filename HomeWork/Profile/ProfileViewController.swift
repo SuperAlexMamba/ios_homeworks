@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class ProfileViewController: UIViewController{
     
@@ -126,6 +127,12 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         cell.viewsLabel.text = "Views: \(items.views)"
         cell.likesLabel.text = "Likes: \(items.likes)"
         cell.postImage.image = UIImage(named: items.image)
+        
+        let processor = ImageProcessor()
+        
+        processor.processImage(sourceImage: cell.postImage.image!, filter: .chrome) { image in
+            cell.postImage.image = image
+        }
         
         return cell
     }

@@ -34,14 +34,7 @@ class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, U
         let layout = UICollectionViewFlowLayout()
         let collection = UICollectionView(frame: .zero,collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
-        
-        // В таком случае не отображаются первые 4 фото, а 3 и не работает corner radius
-
-//        let width = UIScreen.main.bounds.width / 4
-//        let height = UIScreen.main.bounds.height / 4
-//        layout.itemSize = CGSize(width: width, height: height)
-        
-        
+    
         layout.minimumLineSpacing = 8
         layout.scrollDirection = .horizontal
         collection.backgroundColor = .white

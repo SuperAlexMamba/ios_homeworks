@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UIView{
         
@@ -120,38 +121,44 @@ class ProfileHeaderView: UIView{
     
     private func setConstraints(){
         
-        NSLayoutConstraint.activate([
-            
-            profilePhoto.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
-            profilePhoto.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            profilePhoto.widthAnchor.constraint(equalToConstant: 100),
-            profilePhoto.heightAnchor.constraint(equalToConstant: 100),
-            
-            photoView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
-            photoView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            photoView.widthAnchor.constraint(equalToConstant: 100),
-            photoView.heightAnchor.constraint(equalToConstant: 100),
-            
-            profileName.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0),
-            profileName.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-            profileName.widthAnchor.constraint(equalToConstant: 100),
-            profileName.heightAnchor.constraint(equalToConstant: 100),
-            
-            showStatusButton.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 16),
-            showStatusButton.widthAnchor.constraint(equalToConstant: 355),
-            showStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            showStatusButton.topAnchor.constraint(equalTo: profilePhoto.bottomAnchor, constant: 32),
-            showStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
-            
-            profileStatus.centerXAnchor.constraint(equalTo: showStatusButton.centerXAnchor, constant: 30),
-            profileStatus.centerYAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -70),
-            profileStatus.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
-            profileStatus.heightAnchor.constraint(equalToConstant: 100),
-            
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            statusTextField.widthAnchor.constraint(equalToConstant: 228),
-            statusTextField.topAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -55),
-            statusTextField.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: -20)
-        ])
+        let safeArea = safeAreaLayoutGuide
+        
+        profilePhoto.snp.makeConstraints {
+            $0.left.equalTo(safeArea.snp.left).offset(16)
+            $0.top.equalTo(safeArea.snp.top).offset(16)
+            $0.width.equalTo(100)
+            $0.height.equalTo(100)
+        }
+        photoView.snp.makeConstraints {
+            $0.left.equalTo(safeArea.snp.left).offset(16)
+            $0.top.equalTo(safeArea.snp.top).offset(16)
+            $0.width.equalTo(100)
+            $0.height.equalTo(100)
+        }
+        profileName.snp.makeConstraints {
+            $0.centerX.equalTo(safeArea.snp.centerX).offset(0)
+            $0.centerY.equalTo(safeArea.snp.top).offset(27)
+            $0.width.equalTo(100)
+            $0.height.equalTo(100)
+        }
+        showStatusButton.snp.makeConstraints {
+            $0.left.equalTo(safeArea.snp.left).offset(16)
+            $0.right.equalTo(safeArea.snp.right).offset(-16)
+            $0.width.equalTo(355)
+            $0.height.equalTo(50)
+            $0.top.equalTo(profilePhoto.snp.bottom).offset(32)
+        }
+        profileStatus.snp.makeConstraints {
+            $0.centerX.equalTo(showStatusButton.snp.centerX).offset(30)
+            $0.centerY.equalTo(showStatusButton.snp.top).offset(-70)
+            $0.width.equalTo(160)
+            $0.height.equalTo(100)
+        }
+        statusTextField.snp.makeConstraints {
+            $0.height.equalTo(40)
+            $0.width.equalTo(228)
+            $0.top.equalTo(showStatusButton.snp.top).offset(-55)
+            $0.right.equalTo(safeArea.snp.right).offset(-20)
+        }
     }
 }
