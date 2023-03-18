@@ -6,16 +6,21 @@
 //
 
 import UIKit
+import iOSIntPackage
 
-class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, ImageLibrarySubscriber {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         view.addSubview(navBar)
     }
     
+    var imagePublisherFacade = ImagePublisherFacade()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
                 
         view.backgroundColor = .white
         view.addSubview(collectionView)
@@ -24,6 +29,7 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
         collectionView.delegate = self
         
         setupConstraints()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -65,20 +71,22 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
     
     @objc func backButton(){
         self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+        imagePublisherFacade.removeSubscription(for: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotosCollectionViewCell
-        let data = photos
+        let data = photosArray
         let item = data[indexPath.row]
+                
+        cell.photosImage.image = item.image
         
-        cell.photosImage.image = UIImage(named: item.image)
-        
+        receive(images: [item.image])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let photos = photos.count
+        let photos = photosArray.count
         return photos
     }
     
@@ -101,4 +109,15 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
         return CGSize(width: wight, height: heigh)
     }
         
+}
+
+extension PhotosViewController {
+    
+    func receive(images: [UIImage]) {
+        
+        imagePublisherFacade.subscribe(self)
+        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: 20)
+        
+    }
+
 }

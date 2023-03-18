@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
 struct Photo {
-    var image: String
+    var image: UIImage
 }
 
-let photos: [Photo] = [image1,
+let photosArray: [Photo] = [image1,
                         image2,
                         image3,
                         image4,
@@ -32,23 +33,23 @@ let photos: [Photo] = [image1,
                         image19,
                         image20]
 
-var image1 = Photo(image: "1")
-var image2 = Photo(image: "2")
-var image3 = Photo(image: "3")
-var image4 = Photo(image: "4")
-var image5 = Photo(image: "5")
-var image6 = Photo(image: "6")
-var image7 = Photo(image: "7")
-var image8 = Photo(image: "8")
-var image9 = Photo(image: "9")
-var image10 = Photo(image: "10")
-var image11 = Photo(image: "11")
-var image12 = Photo(image: "12")
-var image13 = Photo(image: "13")
-var image14 = Photo(image: "14")
-var image15 = Photo(image: "15")
-var image16 = Photo(image: "16")
-var image17 = Photo(image: "17")
-var image18 = Photo(image: "18")
-var image19 = Photo(image: "19")
-var image20 = Photo(image: "20")
+var image1 = Photo(image: UIImage(named: "1")!)
+var image2 = Photo(image: UIImage(named: "2")!)
+var image3 = Photo(image: UIImage(named: "3")!)
+var image4 = Photo(image: UIImage(named: "4")!)
+var image5 = Photo(image: UIImage(named: "5")!)
+var image6 = Photo(image: UIImage(named: "6")!)
+var image7 = Photo(image: UIImage(named: "7")!)
+var image8 = Photo(image: UIImage(named: "8")!)
+var image9 = Photo(image: UIImage(named: "9")!)
+var image10 = Photo(image: UIImage(named: "10")!)
+var image11 = Photo(image: UIImage(named: "11")!)
+var image12 = Photo(image: UIImage(named: "12")!)
+var image13 = Photo(image: UIImage(named: "13")!)
+var image14 = Photo(image: UIImage(named: "14")!)
+var image15 = Photo(image: UIImage(named: "15")!)
+var image16 = Photo(image: UIImage(named: "16")!)
+var image17 = Photo(image: UIImage(named: "17")!)
+var image18 = Photo(image: UIImage(named: "18")!)
+var image19 = Photo(image: UIImage(named: "19")!)
+var image20 = Photo(image: UIImage(named: "20")!)
