@@ -15,19 +15,24 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
         view.addSubview(navBar)
     }
     
-    var imagePublisherFacade = ImagePublisherFacade()
+    var photosArray = PhotosArray.shared.photosArray
     
+    var images: [UIImage] = []
+    
+    var imagePublisherFacade = ImagePublisherFacade()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-                
+        imagePublisherFacade.subscribe(self)
+        
         view.backgroundColor = .white
         view.addSubview(collectionView)
                 
         collectionView.dataSource = self
         collectionView.delegate = self
-        
+        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: 20)
+
         setupConstraints()
         
     }
@@ -76,12 +81,9 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotosCollectionViewCell
-        let data = photosArray
-        let item = data[indexPath.row]
-                
-        cell.photosImage.image = item.image
         
-        receive(images: [item.image])
+        cell.photosImage.image = photosArray[indexPath.row]
+        
         return cell
     }
     
@@ -115,9 +117,8 @@ extension PhotosViewController {
     
     func receive(images: [UIImage]) {
         
-        imagePublisherFacade.subscribe(self)
-        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: 20)
-        
+        photosArray = images
+        collectionView.reloadData()
     }
 
 }

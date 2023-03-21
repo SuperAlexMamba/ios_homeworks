@@ -9,6 +9,8 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
+    var photosArray = PhotosArray.shared.photosArray
+    
     var titleLabel: UILabel = {
         let label = UILabel()
         
@@ -101,7 +103,7 @@ class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, U
         
         let item = data[indexPath.row]
         
-        cell.photosImage.image = item.image
+        cell.photosImage.image = item
         
         return cell
     }
