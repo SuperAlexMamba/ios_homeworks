@@ -84,9 +84,7 @@ class LoginViewController: UIViewController {
     }()
     
     var loginButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log in", for: .normal)
+        let button = CustomButton(title: "Log in", titleColor: .white, backColor: .white, mask: false)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         
         button.clipsToBounds = true

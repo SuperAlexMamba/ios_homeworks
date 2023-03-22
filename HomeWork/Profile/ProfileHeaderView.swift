@@ -72,13 +72,10 @@ class ProfileHeaderView: UIView{
     
     var showStatusButton: UIButton = {
        
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Show status", for: .normal)
+        let button = CustomButton(title: "Show status", titleColor: .black, backColor: .systemBlue, mask: false)
+
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
-        button.titleLabel?.textColor = .black
         button.contentMode = .center
-        button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 15
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
@@ -96,7 +93,7 @@ class ProfileHeaderView: UIView{
         self.addSubview(statusTextField)
         self.addSubview(profilePhoto)
         self.addSubview(photoView)
-
+        
         showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         statusTextField.addTarget(self, action: #selector(statusTextIsChanged), for: .editingChanged)
 
