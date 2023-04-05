@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-struct Photo {
-    var image: UIImage
-}
-
 class PhotosArray{
     
     static let shared = PhotosArray()
