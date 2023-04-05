@@ -11,7 +11,7 @@ import iOSIntPackage
 
 class ProfileViewController: UIViewController{
     
-    var profileViewModel: ProfileViewModel?
+    var profileViewModel = ProfileViewModel()
     var profileHeader = ProfileHeaderView()
     
     let screenWidth = UIScreen.main.bounds.width
@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.profileViewModel = ProfileViewModel()
+//        self.profileViewModel = ProfileViewModel()
         
         addGuestRecognizer()
         setupView()
@@ -102,10 +102,10 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         }
         else{
             
-            let posts = self.profileViewModel?.posts
+            let posts = self.profileViewModel.posts
 
             let data = posts
-            return data?.count ?? 0
+            return data.count
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -120,15 +120,15 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
         
-        let posts = self.profileViewModel?.posts
+        let posts = self.profileViewModel.posts
         
-        let items = posts?[indexPath.row]
+        let items = posts[indexPath.row]
         
-        cell.authorLabel.text = items?.author
-        cell.descriptionText.text = items?.description
-        cell.viewsLabel.text = "Views: \(String(describing: items?.views))"
-        cell.likesLabel.text = "Likes: \(String(describing: items?.likes))"
-        cell.postImage.image = UIImage(named: items?.image ?? "person")
+        cell.authorLabel.text = items.author
+        cell.descriptionText.text = items.description
+        cell.viewsLabel.text = "Views: \(String(describing: items.views))"
+        cell.likesLabel.text = "Likes: \(String(describing: items.likes))"
+        cell.postImage.image = UIImage(named: items.image )
         
         let processor = ImageProcessor()
         
@@ -163,14 +163,14 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
     
     @objc func cancelProfilePhotoPressed(){
         
-        let yPhotoPosition = profileViewModel?.yPhotoPosition
-        let _ = profileViewModel?.xPhotoPosition
+        let yPhotoPosition = profileViewModel.yPhotoPosition
+        let _ = profileViewModel.xPhotoPosition
         
         profileHeader.showStatusButton.isHidden = false
         profileHeader.profileStatus.isHidden = false
         profileHeader.statusTextField.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0.3) {
-            self.profileHeader.profilePhoto.center = CGPoint(x: yPhotoPosition ?? 0, y: yPhotoPosition ?? 0)
+            self.profileHeader.profilePhoto.center = CGPoint(x: yPhotoPosition , y: yPhotoPosition )
             self.profileHeader.profilePhoto.layer.bounds.size = CGSize(width: 100, height: 100)
             self.profileHeader.profilePhoto.layer.cornerRadius = 50
             self.profileHeader.profilePhoto.layer.borderWidth = 3
