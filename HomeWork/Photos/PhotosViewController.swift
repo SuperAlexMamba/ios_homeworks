@@ -8,30 +8,24 @@
 import UIKit
 import iOSIntPackage
 
-class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, ImageLibrarySubscriber {
+class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         view.addSubview(navBar)
     }
     
     var photosArray = PhotosArray.shared.photosArray
-    
-    var images: [UIImage] = []
-    
-    var imagePublisherFacade = ImagePublisherFacade()
-    
+                
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imagePublisherFacade.subscribe(self)
-        
+                
         view.backgroundColor = .white
         view.addSubview(collectionView)
                 
         collectionView.dataSource = self
         collectionView.delegate = self
-        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: 20)
 
         setupConstraints()
         
@@ -62,7 +56,7 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
         return collection
         }()
     
-    private func setupConstraints(){
+    private func setupConstraints() {
 
         let safeArea = view.safeAreaLayoutGuide
 
@@ -76,14 +70,27 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
     
     @objc func backButton(){
         self.navigationController?.pushViewController(ProfileViewController(), animated: true)
-        imagePublisherFacade.removeSubscription(for: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotosCollectionViewCell
         
-        cell.photosImage.image = photosArray[indexPath.row]
+        let item = photosArray[indexPath.row]
+                    
+        let imageProcessor = ImageProcessor()
         
+        imageProcessor.processImagesOnThread(sourceImages: photosArray, filter: .chrome, qos: .background) { image in
+            
+            let item = image[indexPath.row]
+            
+            self.photosArray.append(UIImage(cgImage: item!))
+            
+        }
+        
+        collectionView.reloadData()
+
+        cell.photosImage.image = item
+
         return cell
     }
     
@@ -113,12 +120,3 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
         
 }
 
-extension PhotosViewController {
-    
-    func receive(images: [UIImage]) {
-        
-        photosArray = images
-        collectionView.reloadData()
-    }
-
-}

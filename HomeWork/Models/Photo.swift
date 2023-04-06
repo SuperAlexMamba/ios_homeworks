@@ -8,29 +8,37 @@
 import Foundation
 import UIKit
 
-class PhotosArray{
+class PhotosArray {
     
     static let shared = PhotosArray()
+        
+    var photosArray: [UIImage]
     
-    let photosArray: [UIImage?] = [UIImage(named: "1"),
-                                   UIImage(named: "2"),
-                                   UIImage(named: "3"),
-                                   UIImage(named: "4"),
-                                   UIImage(named: "5"),
-                                   UIImage(named: "6"),
-                                   UIImage(named: "7"),
-                                   UIImage(named: "8"),
-                                   UIImage(named: "9"),
-                                   UIImage(named: "10"),
-                                   UIImage(named: "11"),
-                                   UIImage(named: "12"),
-                                   UIImage(named: "13"),
-                                   UIImage(named: "14"),
-                                   UIImage(named: "15"),
-                                   UIImage(named: "16"),
-                                   UIImage(named: "17"),
-                                   UIImage(named: "18"),
-                                   UIImage(named: "19"),
-                                   UIImage(named: "20")]
+    init() {
+        self.photosArray = [UIImage]()
+        
+        photosArray.append(UIImage(named: "1")!)
+        photosArray.append(UIImage(named: "2")!)
+        photosArray.append(UIImage(named: "3")!)
+        photosArray.append(UIImage(named: "4")!)
+        photosArray.append(UIImage(named: "5")!)
+        photosArray.append(UIImage(named: "6")!)
+        photosArray.append(UIImage(named: "7")!)
+        photosArray.append(UIImage(named: "8")!)
+        photosArray.append(UIImage(named: "9")!)
+        photosArray.append(UIImage(named: "10")!)
+        photosArray.append(UIImage(named: "11")!)
+        photosArray.append(UIImage(named: "12")!)
+        photosArray.append(UIImage(named: "13")!)
+        photosArray.append(UIImage(named: "14")!)
+        photosArray.append(UIImage(named: "15")!)
+        photosArray.append(UIImage(named: "16")!)
+        photosArray.append(UIImage(named: "17")!)
+        photosArray.append(UIImage(named: "18")!)
+        photosArray.append(UIImage(named: "19")!)
+        photosArray.append(UIImage(named: "20")!)
+
+    }
+
 }
 

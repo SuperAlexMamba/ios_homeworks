@@ -32,7 +32,7 @@ class CustomButton: UIButton {
     
 
     
-    @objc private func buttonTapped(){
+    @objc private func buttonTapped() {
         tapAction?()
     }
     
