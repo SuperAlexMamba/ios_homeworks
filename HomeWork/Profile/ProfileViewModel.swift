@@ -15,4 +15,7 @@ class ProfileViewModel {
     let xPhotoPosition = ProfileHeaderView().profilePhoto.bounds.origin.x
     let yPhotoPosition = ProfileHeaderView().profilePhoto.bounds.origin.y
     
+    let currentUser = CurrentUserService()
+    let testUser = TestUserService()
+    
 }

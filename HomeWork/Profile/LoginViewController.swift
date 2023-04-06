@@ -12,10 +12,7 @@ class LoginViewController: UIViewController {
     let scrollView = UIScrollView()
     let contentView = UIView()
     
-    var currentUser = CurrentUserService()
-    var testUser = TestUserService()
-    
-    var loginDelegate: LoginViewControllerDelegate?
+    var goToProfile: () -> () = { }
     
     var stackView: UIStackView = {
        let stackView = UIStackView()
@@ -114,7 +111,6 @@ class LoginViewController: UIViewController {
         setupScrollView()
 
         loginButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
-        
 
     }
     
@@ -129,42 +125,13 @@ class LoginViewController: UIViewController {
     }
     
     
-    @objc private func buttonIsPressed(){
-        let profileViewController = ProfileViewController()
+    @objc private func buttonIsPressed() {
         
-        guard let login = loginTextField.text else {return}
-        guard let password = passwordTextField.text else {return}
+        goToProfile()
         
-        #if DEBUG
-        
-        if loginDelegate?.check(login: login, password: password) == true {
-            
-            profileViewController.profileHeader.profilePhoto.image = testUser.testUser.image
-            profileViewController.profileHeader.profileName.text = testUser.testUser.login
-            profileViewController.profileHeader.profileStatus.text = testUser.testUser.status
-            profileViewController.view.backgroundColor = .blue
-            self.navigationController?.pushViewController(profileViewController, animated: true)
-            print("Успешная авторизация ")
-        }
-        else{
-            errorLoginAlert()
-        }
-        #else
-        if loginDelegate?.check(login: login, password: password) == true {
-            profileViewController.profileHeader.profilePhoto.image = currentUser.user.image
-            profileViewController.profileHeader.profileName.text = currentUser.user.login
-            profileViewController.profileHeader.profileStatus.text = currentUser.user.status
-            profileViewController.view.backgroundColor = .lightGray
-            self.navigationController?.pushViewController(profileViewController, animated: true)
-            print("Успешная авторизация ")
-        }
-        else{
-            errorLoginAlert()
-        }
-        #endif
     }
     
-    @objc func willShowKeyboard(_ notification: NSNotification){
+    @objc func willShowKeyboard(_ notification: NSNotification) {
         
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
         scrollView.contentInset.bottom += keyboardHeight ?? 0.0
@@ -177,7 +144,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    private func setupScrollView(){
+    private func setupScrollView() {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -207,7 +174,7 @@ class LoginViewController: UIViewController {
         setupConstraints()
     }
     
-    private func setupConstraints(){
+    private func setupConstraints() {
         
         NSLayoutConstraint.activate([
         
@@ -232,7 +199,7 @@ class LoginViewController: UIViewController {
         ])
     }
     
-    private func setupKeyboardObservers(){
+    private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         
         notificationCenter.addObserver(self,
@@ -245,12 +212,12 @@ class LoginViewController: UIViewController {
                                        object: nil)
     }
     
-    private func removeKeyboardObservers(){
+    private func removeKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
     
-    private func errorLoginAlert(){
+    func errorLoginAlert() {
         
         let alert = UIAlertController(title: "Error", message: "invalid Login or Password. Enter valid data", preferredStyle: .alert)
         
@@ -261,10 +228,9 @@ class LoginViewController: UIViewController {
         present(alert, animated: true)
         
     }
-    
 }
 
-extension LoginViewController: UITextFieldDelegate{
+extension LoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
