@@ -14,6 +14,7 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         view.addSubview(navBar)
+ 
     }
     
     var photosArray = PhotosArray.shared.photosArray
@@ -75,22 +76,22 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotosCollectionViewCell
         
-        let item = photosArray[indexPath.row]
-                    
+                
         let imageProcessor = ImageProcessor()
-        
-        imageProcessor.processImagesOnThread(sourceImages: photosArray, filter: .chrome, qos: .background) { image in
+
+        imageProcessor.processImagesOnThread(sourceImages: photosArray, filter: .bloom(intensity: 10), qos: .default) { image in
             
-            let item = image[indexPath.row]
-            
-            self.photosArray.append(UIImage(cgImage: item!))
-            
+            let items = image[indexPath.row]
+            self.photosArray.append(UIImage(cgImage: image[indexPath.row]!))
         }
         
-        collectionView.reloadData()
+        let images = photosArray[indexPath.row]
 
-        cell.photosImage.image = item
-
+        cell.photosImage.image = images
+        
+        
+//        print(photosArray.count)
+        
         return cell
     }
     
