@@ -49,10 +49,10 @@ class LoginCoordinator: Coordinator {
         
         if loginDelegate?.check(login: login, password: password) == true {
             
-            profileViewController.profileHeader.profilePhoto.image = testUser.testUser.image
-            profileViewController.profileHeader.profileName.text = testUser.testUser.login
-            profileViewController.profileHeader.profileStatus.text = testUser.testUser.status
-            profileViewController.view.backgroundColor = .blue
+            profileViewController.profileHeader.profilePhoto.image = currentUser.user.image
+            profileViewController.profileHeader.profileName.text = currentUser.user.login
+            profileViewController.profileHeader.profileStatus.text = currentUser.user.status
+            profileViewController.view.backgroundColor = .lightGray
             rootViewController.pushViewController(profileViewController, animated: true)
             print("Успешная авторизация ")
         }
@@ -61,9 +61,9 @@ class LoginCoordinator: Coordinator {
         }
 #else
         if loginDelegate?.check(login: login, password: password) == true {
-            profileViewController.profileHeader.profilePhoto.image = currentUser.user.image
-            profileViewController.profileHeader.profileName.text = currentUser.user.login
-            profileViewController.profileHeader.profileStatus.text = currentUser.user.status
+            profileViewController.profileHeader.profilePhoto.image = testUser.user.image
+            profileViewController.profileHeader.profileName.text = testUser.user.login
+            profileViewController.profileHeader.profileStatus.text = testUser.user.status
             profileViewController.view.backgroundColor = .lightGray
             rootViewController.pushViewController(profileViewController, animated: true)
             print("Успешная авторизация ")
