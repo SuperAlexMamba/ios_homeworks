@@ -8,15 +8,15 @@
 import UIKit
 
 class FeedViewController: UIViewController {
+    
+    var showPost: () -> () = { }
+    
+    var feedViewModel: FeedViewModel?
 
     var firstButton = CustomButton(title: "Go to Post", titleColor: .white, backColor: .gray, mask: false)
     var secondButton = CustomButton(title: "Go to Post", titleColor: .white, backColor: .gray, mask: false)
     
     var stackView = UIStackView()
-    
-    var post = Feed(title: "Netology")
-    
-    let secretword = FeedModel()
     
     var textField: UITextField = {
         var textField = UITextField()
@@ -44,13 +44,15 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        feedViewModel = FeedViewModel()
+        
         setupView()
         
         checkButton.tapAction = {
             
             guard let text = self.textField.text else {return}
             
-            if self.secretword.check(inputWord: text) == true{
+            if self.feedViewModel?.secretword.check(inputWord: text) == true{
                 self.resultLabel.textColor = .green
             }
             else{
@@ -60,7 +62,7 @@ class FeedViewController: UIViewController {
 
     }
     
-    private func setupView(){
+    private func setupView() {
         title = "Feed"
         view.backgroundColor = .white
         
@@ -86,17 +88,11 @@ class FeedViewController: UIViewController {
         
     }
     
-    @objc private func buttonIsPressed(){
-        
-        let postViewController = PostViewController()
-        
-        self.navigationController?.pushViewController(postViewController, animated: true)
-        
-        postViewController.titleString = post.title
-    
+    @objc private func buttonIsPressed() {
+        showPost()
     }
     
-    private func setupConstrains(){
+    private func setupConstrains() {
         
         let safeAreaGuide = view.safeAreaLayoutGuide
         
