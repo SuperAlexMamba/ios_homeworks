@@ -6,49 +6,38 @@
 //
 
 import Foundation
+import UIKit
 
-struct Photo {
-    var image: String
+class PhotosArray {
+    
+    static let shared = PhotosArray()
+        
+    var photosArray: [UIImage]
+    
+    init() {
+        self.photosArray = [UIImage]()
+        
+        photosArray.append(UIImage(named: "1")!)
+        photosArray.append(UIImage(named: "2")!)
+        photosArray.append(UIImage(named: "3")!)
+        photosArray.append(UIImage(named: "4")!)
+        photosArray.append(UIImage(named: "5")!)
+        photosArray.append(UIImage(named: "6")!)
+        photosArray.append(UIImage(named: "7")!)
+        photosArray.append(UIImage(named: "8")!)
+        photosArray.append(UIImage(named: "9")!)
+        photosArray.append(UIImage(named: "10")!)
+        photosArray.append(UIImage(named: "11")!)
+        photosArray.append(UIImage(named: "12")!)
+        photosArray.append(UIImage(named: "13")!)
+        photosArray.append(UIImage(named: "14")!)
+        photosArray.append(UIImage(named: "15")!)
+        photosArray.append(UIImage(named: "16")!)
+        photosArray.append(UIImage(named: "17")!)
+        photosArray.append(UIImage(named: "18")!)
+        photosArray.append(UIImage(named: "19")!)
+        photosArray.append(UIImage(named: "20")!)
+
+    }
+
 }
-
-let photos: [Photo] = [image1,
-                        image2,
-                        image3,
-                        image4,
-                        image5,
-                        image6,
-                        image7,
-                        image8,
-                        image9,
-                        image10,
-                        image11,
-                        image12,
-                        image13,
-                        image14,
-                        image15,
-                        image16,
-                        image17,
-                        image18,
-                        image19,
-                        image20]
-
-var image1 = Photo(image: "1")
-var image2 = Photo(image: "2")
-var image3 = Photo(image: "3")
-var image4 = Photo(image: "4")
-var image5 = Photo(image: "5")
-var image6 = Photo(image: "6")
-var image7 = Photo(image: "7")
-var image8 = Photo(image: "8")
-var image9 = Photo(image: "9")
-var image10 = Photo(image: "10")
-var image11 = Photo(image: "11")
-var image12 = Photo(image: "12")
-var image13 = Photo(image: "13")
-var image14 = Photo(image: "14")
-var image15 = Photo(image: "15")
-var image16 = Photo(image: "16")
-var image17 = Photo(image: "17")
-var image18 = Photo(image: "18")
-var image19 = Photo(image: "19")
-var image20 = Photo(image: "20")

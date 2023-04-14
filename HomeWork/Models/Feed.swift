@@ -7,8 +7,17 @@
 
 import Foundation
 
-struct Feed{
+class FeedModel {
+
+    let secretWord = "Test"
     
-    var title: String
-    
+    func check(inputWord: String ) -> Bool {
+        
+        if inputWord == secretWord {
+            return true
+        }
+        else {
+            return false
+        }
+    }
 }

@@ -12,6 +12,8 @@ class LoginViewController: UIViewController {
     let scrollView = UIScrollView()
     let contentView = UIView()
     
+    var goToProfile: () -> () = { }
+    
     var stackView: UIStackView = {
        let stackView = UIStackView()
         
@@ -79,9 +81,7 @@ class LoginViewController: UIViewController {
     }()
     
     var loginButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log in", for: .normal)
+        let button = CustomButton(title: "Log in", titleColor: .white, backColor: .white, mask: false)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         
         button.clipsToBounds = true
@@ -125,12 +125,13 @@ class LoginViewController: UIViewController {
     }
     
     
-    @objc private func buttonIsPressed(){
-        let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
-        }
+    @objc private func buttonIsPressed() {
+        
+        goToProfile()
+        
+    }
     
-    @objc func willShowKeyboard(_ notification: NSNotification){
+    @objc func willShowKeyboard(_ notification: NSNotification) {
         
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
         scrollView.contentInset.bottom += keyboardHeight ?? 0.0
@@ -143,7 +144,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    private func setupScrollView(){
+    private func setupScrollView() {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -173,7 +174,7 @@ class LoginViewController: UIViewController {
         setupConstraints()
     }
     
-    private func setupConstraints(){
+    private func setupConstraints() {
         
         NSLayoutConstraint.activate([
         
@@ -198,7 +199,7 @@ class LoginViewController: UIViewController {
         ])
     }
     
-    private func setupKeyboardObservers(){
+    private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         
         notificationCenter.addObserver(self,
@@ -211,13 +212,25 @@ class LoginViewController: UIViewController {
                                        object: nil)
     }
     
-    private func removeKeyboardObservers(){
+    private func removeKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
+    
+    func errorLoginAlert() {
+        
+        let alert = UIAlertController(title: "Error", message: "invalid Login or Password. Enter valid data", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+        
+    }
 }
 
-extension LoginViewController: UITextFieldDelegate{
+extension LoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

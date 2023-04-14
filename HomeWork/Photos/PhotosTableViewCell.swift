@@ -9,6 +9,8 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
+    var photosArray = PhotosArray.shared.photosArray
+    
     var titleLabel: UILabel = {
         let label = UILabel()
         
@@ -90,19 +92,19 @@ class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, U
         ])
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return photosArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotosCell", for: indexPath) as! PreviewPhotosCollectionViewCell
         
-        let data = photos
+        let data = photosArray
         
         let item = data[indexPath.row]
-                
-        cell.photosImage.image = UIImage(named: item.image)
-    
+        
+        cell.photosImage.image = item
+        
         return cell
     }
     

@@ -9,17 +9,16 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    var titleString: String = ""
+    var titleString: String = "Netology"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let barButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(itemAction))
-        
-        self.navigationItem.rightBarButtonItem = barButtonItem
-    
         view.backgroundColor = .white
         title = titleString
+        
+        let barButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(itemAction))
+        self.navigationItem.rightBarButtonItem = barButtonItem
+
     }
     
     @objc private func itemAction(){
@@ -29,6 +28,4 @@ class PostViewController: UIViewController {
         self.navigationController?.pushViewController(infoViewController, animated: true)
         
     }
-    
-
 }

@@ -7,18 +7,12 @@
 
 import Foundation
 import UIKit
-import StorageService
 import iOSIntPackage
 
 class ProfileViewController: UIViewController{
     
-    let posts: [Post] = [postOne,postTwo,postThree,postFour]
-    
-    let profileHeader = ProfileHeaderView()
-    let profilePhoto = ProfileHeaderView().profilePhoto
-    
-    let xPhotoPosition = ProfileHeaderView().profilePhoto.bounds.origin.x
-    let yPhotoPosition = ProfileHeaderView().profilePhoto.bounds.origin.y
+    var profileViewModel = ProfileViewModel()
+    var profileHeader = ProfileHeaderView()
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
@@ -38,10 +32,14 @@ class ProfileViewController: UIViewController{
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.profileViewModel = ProfileViewModel()
+        
         addGuestRecognizer()
         setupView()
         self.cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         self.cancelButton.addTarget(nil, action: #selector(cancelProfilePhotoPressed), for: .touchUpInside)
+                
     }
     
     override func viewWillLayoutSubviews() {
@@ -53,12 +51,7 @@ class ProfileViewController: UIViewController{
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         view.addSubview(profileHeader)
-        
-        #if DEBUG
-        view.backgroundColor = .lightGray
-        #else
-        view.backgroundColor = .red
-        #endif
+            
         title = "Profile"
 
         tableView.delegate = self
@@ -108,7 +101,10 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
             return 1
         }
         else{
-            let data = [postOne,postTwo,postThree,postFour]
+            
+            let posts = self.profileViewModel.posts
+
+            let data = posts
             return data.count
         }
     }
@@ -124,17 +120,19 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
         
-        let items = self.posts[indexPath.row]
+        let posts = self.profileViewModel.posts
+        
+        let items = posts[indexPath.row]
         
         cell.authorLabel.text = items.author
         cell.descriptionText.text = items.description
-        cell.viewsLabel.text = "Views: \(items.views)"
-        cell.likesLabel.text = "Likes: \(items.likes)"
-        cell.postImage.image = UIImage(named: items.image)
+        cell.viewsLabel.text = "Views: \(String(describing: items.views))"
+        cell.likesLabel.text = "Likes: \(String(describing: items.likes))"
+        cell.postImage.image = UIImage(named: items.image )
         
         let processor = ImageProcessor()
         
-        processor.processImage(sourceImage: cell.postImage.image!, filter: .chrome) { image in
+        processor.processImage(sourceImage: cell.postImage.image!, filter: .fade) { image in
             cell.postImage.image = image
         }
         
@@ -165,11 +163,14 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
     
     @objc func cancelProfilePhotoPressed(){
         
+        let yPhotoPosition = profileViewModel.yPhotoPosition
+        let _ = profileViewModel.xPhotoPosition
+        
         profileHeader.showStatusButton.isHidden = false
         profileHeader.profileStatus.isHidden = false
         profileHeader.statusTextField.isHidden = false
         UIView.animate(withDuration: 0.3, delay: 0.3) {
-            self.profileHeader.profilePhoto.center = CGPoint(x: self.yPhotoPosition, y: self.yPhotoPosition)
+            self.profileHeader.profilePhoto.center = CGPoint(x: yPhotoPosition , y: yPhotoPosition )
             self.profileHeader.profilePhoto.layer.bounds.size = CGSize(width: 100, height: 100)
             self.profileHeader.profilePhoto.layer.cornerRadius = 50
             self.profileHeader.profilePhoto.layer.borderWidth = 3
