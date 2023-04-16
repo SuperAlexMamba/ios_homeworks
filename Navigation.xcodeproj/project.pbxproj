@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DD179C2829E97F9900222732 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD179C2729E97F9900222732 /* NetworkService.swift */; };
+		DD179C2A29E9C57A00222732 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD179C2929E9C57A00222732 /* JSONModel.swift */; };
 		DD18717D297F070100E489D9 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD18717C297F070100E489D9 /* PostTableViewCell.swift */; };
 		DD187184298427ED00E489D9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD187183298427ED00E489D9 /* Photo.swift */; };
 		DD2C6DC129DEBC48009E9B14 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C6DC029DEBC47009E9B14 /* ProfileCoordinator.swift */; };
@@ -86,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		DD179C2729E97F9900222732 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		DD179C2929E9C57A00222732 /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
 		DD18717C297F070100E489D9 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DD18717E2982B6F000E489D9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		DD187183298427ED00E489D9 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				DD4A722E29C327B600D73702 /* UserService.swift */,
 				DD2E31E429CB682500735DCD /* Button.swift */,
 				DD179C2729E97F9900222732 /* NetworkService.swift */,
+				DD179C2929E9C57A00222732 /* JSONModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				DDE6ABED29DD9344004856B4 /* FeedCoordinator.swift in Sources */,
 				DDE6ABEF29DD9CE7004856B4 /* PostCoordinator.swift in Sources */,
 				DD66823C298837A6009368F3 /* PhotosCollectionViewCell.swift in Sources */,
+				DD179C2A29E9C57A00222732 /* JSONModel.swift in Sources */,
 				DD66823829859776009368F3 /* PreviewPhotosCollectionViewCell.swift in Sources */,
 				DDEB965A295B9D7D0066CA14 /* ProfileHeaderView.swift in Sources */,
 			);
