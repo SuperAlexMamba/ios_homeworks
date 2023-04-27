@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class ProfileHeaderView: UIView{
+class ProfileHeaderView: UIView {
         
     private var statusText: String!
     
