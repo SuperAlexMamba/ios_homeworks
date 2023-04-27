@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
         
     let scrollView = UIScrollView()
     let contentView = UIView()
     
-    var goToProfile: () -> () = { }
+    var loginUser: () -> () = { }
+    
+    var registerUser: () -> () = { }
     
     var stackView: UIStackView = {
        let stackView = UIStackView()
@@ -80,9 +83,35 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-    var loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let button = CustomButton(title: "Log in", titleColor: .white, backColor: .white, mask: false)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        
+        button.tapAction = { [self] in
+            loginUser()
+        }
+        
+        switch button.state{
+            
+        case .normal: button.alpha = 1
+        case .selected: button.alpha = 0.8
+        case .highlighted: button.alpha = 0.8
+        case .disabled: button.alpha = 0.8
+        default: button.alpha = 1
+        }
+        
+        return button
+    }()
+    
+    lazy var registerButton: UIButton = {
+        let button = CustomButton(title: "Register", titleColor: .white, backColor: .black, mask: false)
+        
+        button.tapAction = { [self] in
+            registerUser()
+        }
         
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
@@ -94,6 +123,8 @@ class LoginViewController: UIViewController {
         case .disabled: button.alpha = 0.8
         default: button.alpha = 1
         }
+        let color = #colorLiteral(red: 0.2820000052, green: 0.5220000148, blue: 0.8000000119, alpha: 1)
+        button.setTitleColor( color , for: .normal)
     
        return button
     }()
@@ -109,11 +140,10 @@ class LoginViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         setupScrollView()
-
-        loginButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        
 
     }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupKeyboardObservers()
@@ -124,13 +154,6 @@ class LoginViewController: UIViewController {
         removeKeyboardObservers()
     }
     
-    
-    @objc private func buttonIsPressed() {
-        
-        goToProfile()
-        
-    }
-    
     @objc func willShowKeyboard(_ notification: NSNotification) {
         
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
@@ -139,9 +162,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func willHideKeyboard(_ notification: NSNotification){
-        
         scrollView.contentInset.bottom = 0.0
-        
     }
     
     private func setupScrollView() {
@@ -151,10 +172,11 @@ class LoginViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
+        view.addSubview(registerButton)
         contentView.addSubview(loginButton)
         contentView.addSubview(logoImage)
         contentView.addSubview(stackView)
-        
+                
         let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
@@ -195,7 +217,13 @@ class LoginViewController: UIViewController {
             loginButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            registerButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 120),
+            registerButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -120),
+            registerButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            registerButton.heightAnchor.constraint(equalToConstant: 35),
+            registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10),
         ])
     }
     
