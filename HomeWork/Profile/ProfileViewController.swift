@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController{
     var profileViewModel = ProfileViewModel()
     var profileHeader = ProfileHeaderView()
     
+    var post: Post?
+    
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     var backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
@@ -90,9 +92,12 @@ class ProfileViewController: UIViewController{
     
     @objc func likePost() {
         
-        let indexPath = self.tableView.indexPathForSelectedRow?.row
+        guard let indexPath = self.tableView.indexPathForSelectedRow?.row else {
+            print("Error! IndexPath == nil")
+            return
+        }
         
-        CoreDataManager.shared.savePost(post: self.profileViewModel.posts, at: indexPath!)
+        CoreDataManager.shared.savePost(post: profileViewModel.posts[indexPath])
         
         print("SAVED")
     }

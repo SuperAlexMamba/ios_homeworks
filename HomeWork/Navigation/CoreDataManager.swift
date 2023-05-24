@@ -27,15 +27,15 @@ class CoreDataManager {
         return container
     }()
     
-    func savePost(post: [Post], at indexPath: Int) {
+    func savePost(post: Post) {
                 
         let likedPost = LikedPost(context: persistendContainer.viewContext)
         
-        likedPost.author = post[indexPath].author
-        likedPost.image = post[indexPath].image
-        likedPost.likes = Int64(post[indexPath].likes)
-        likedPost.text = post[indexPath].text
-        likedPost.views = Int64(post[indexPath].views)
+        likedPost.author = post.author
+        likedPost.image = post.image
+        likedPost.likes = Int64(post.likes)
+        likedPost.text = post.text
+        likedPost.views = Int64(post.views)
                 
         try? persistendContainer.viewContext.save()
                 
