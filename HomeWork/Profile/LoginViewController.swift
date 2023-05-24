@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class LoginViewController: UIViewController {
         
@@ -52,7 +51,7 @@ class LoginViewController: UIViewController {
     var loginTextField: UITextField = {
         
         let textField = UITextField()
-        textField.placeholder = "  Email or phone"
+        textField.placeholder = "Email or phone"
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
@@ -69,7 +68,7 @@ class LoginViewController: UIViewController {
     var passwordTextField: UITextField = {
         
         let textField = UITextField()
-        textField.placeholder = "  Password"
+        textField.placeholder = "Password"
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)

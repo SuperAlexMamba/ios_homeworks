@@ -39,7 +39,18 @@ class MainCoordinator: Coordinator {
                  image: "paperplane",
                  selectedImage: "paperplane.fill")
         
-        self.rootViewController.viewControllers = [loginCoordinator.rootViewController , feedCoordinator.rootViewController]
+        let likedPostsCoordinator = LikedPostsCoordinator()
+        likedPostsCoordinator.start()
+        self.childCoordinators.append(likedPostsCoordinator)
+        let likedPostsViewController = likedPostsCoordinator.rootViewController
+        setupBar(vc: likedPostsViewController,
+                 title: "Liked Posts",
+                 image: "hand.thumbsup",
+                 selectedImage: "hand.thumbsup.fill")
+        
+        self.rootViewController.viewControllers = [loginCoordinator.rootViewController,
+                                                   feedCoordinator.rootViewController,
+                                                   likedPostsCoordinator.rootViewController]
     }
         
     func setupBar(vc: UIViewController, title: String , image: String , selectedImage: String) {
