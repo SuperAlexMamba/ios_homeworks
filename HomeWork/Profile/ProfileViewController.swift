@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController{
     var profileViewModel = ProfileViewModel()
     var profileHeader = ProfileHeaderView()
     
+    var post: Post?
+    
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     var backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
@@ -33,7 +35,7 @@ class ProfileViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.profileViewModel = ProfileViewModel()
+        self.profileViewModel = ProfileViewModel()
         
         addGuestRecognizer()
         setupView()
@@ -87,6 +89,19 @@ class ProfileViewController: UIViewController{
         let photosVC = PhotosViewController()
         self.navigationController?.pushViewController(photosVC, animated: true)
     }
+    
+    @objc func likePost() {
+        
+        guard let indexPath = self.tableView.indexPathForSelectedRow?.row else {
+            print("Error! IndexPath == nil")
+            return
+        }
+        
+        CoreDataManager.shared.savePost(post: profileViewModel.posts[indexPath])
+        
+        print("SAVED")
+    }
+    
 }
 
 extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
@@ -125,10 +140,17 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         let items = posts[indexPath.row]
         
         cell.authorLabel.text = items.author
-        cell.descriptionText.text = items.description
+        cell.descriptionText.text = items.text
         cell.viewsLabel.text = "Views: \(String(describing: items.views))"
         cell.likesLabel.text = "Likes: \(String(describing: items.likes))"
         cell.postImage.image = UIImage(named: items.image )
+        
+        
+        let likePostGuest = UITapGestureRecognizer(target: self, action: #selector(likePost))
+        
+        likePostGuest.numberOfTapsRequired = 2
+        
+        cell.addGestureRecognizer(likePostGuest)
         
         let processor = ImageProcessor()
         

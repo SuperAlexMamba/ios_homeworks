@@ -130,7 +130,7 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
     }
     
     @objc func backButton(){
-        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

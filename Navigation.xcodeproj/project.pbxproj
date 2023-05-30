@@ -22,12 +22,16 @@
 		DD511C8129AFA4460021D4AC /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = DD511C7129AFA4460021D4AC /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD511C8429AFA4460021D4AC /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD511C6F29AFA4460021D4AC /* StorageService.framework */; };
 		DD511C8529AFA4460021D4AC /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD511C6F29AFA4460021D4AC /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DD511C8D29AFA4A70021D4AC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD18717E2982B6F000E489D9 /* Post.swift */; };
 		DD511C9429B368290021D4AC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD511C9329B368290021D4AC /* User.swift */; };
 		DD6682362985832F009368F3 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6682352985832F009368F3 /* PhotosTableViewCell.swift */; };
 		DD66823829859776009368F3 /* PreviewPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66823729859776009368F3 /* PreviewPhotosCollectionViewCell.swift */; };
 		DD66823A29882E10009368F3 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66823929882E10009368F3 /* PhotosViewController.swift */; };
 		DD66823C298837A6009368F3 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD66823B298837A6009368F3 /* PhotosCollectionViewCell.swift */; };
+		DD72DA602A1DDD1F006563A9 /* LikedPostsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72DA5F2A1DDD1F006563A9 /* LikedPostsCoordinator.swift */; };
+		DD72DA632A1DDD4A006563A9 /* LikedPosts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD72DA612A1DDD4A006563A9 /* LikedPosts.xcdatamodeld */; };
+		DD72DA652A1DDD4E006563A9 /* LikedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72DA642A1DDD4E006563A9 /* LikedPostsViewController.swift */; };
+		DD72DA672A1DDD84006563A9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72DA662A1DDD84006563A9 /* CoreDataManager.swift */; };
+		DD72DA682A1DDD9D006563A9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD18717E2982B6F000E489D9 /* Post.swift */; };
 		DD78C3FD2950FD6D006D31F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C3FC2950FD6D006D31F5 /* AppDelegate.swift */; };
 		DD78C3FF2950FD6D006D31F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C3FE2950FD6D006D31F5 /* SceneDelegate.swift */; };
 		DD78C4062950FD6E006D31F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD78C4052950FD6E006D31F5 /* Assets.xcassets */; };
@@ -118,6 +122,10 @@
 		DD66823729859776009368F3 /* PreviewPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD66823929882E10009368F3 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		DD66823B298837A6009368F3 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		DD72DA5F2A1DDD1F006563A9 /* LikedPostsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedPostsCoordinator.swift; sourceTree = "<group>"; };
+		DD72DA622A1DDD4A006563A9 /* LikedPosts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LikedPosts.xcdatamodel; sourceTree = "<group>"; };
+		DD72DA642A1DDD4E006563A9 /* LikedPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikedPostsViewController.swift; sourceTree = "<group>"; };
+		DD72DA662A1DDD84006563A9 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DD78C3F92950FD6D006D31F5 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD78C3FC2950FD6D006D31F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD78C3FE2950FD6D006D31F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -260,9 +268,12 @@
 			isa = PBXGroup;
 			children = (
 				DD78C3FC2950FD6D006D31F5 /* AppDelegate.swift */,
+				DD72DA642A1DDD4E006563A9 /* LikedPostsViewController.swift */,
 				DD78C3FE2950FD6D006D31F5 /* SceneDelegate.swift */,
+				DD72DA662A1DDD84006563A9 /* CoreDataManager.swift */,
 				DD78C41429510685006D31F5 /* PostViewController.swift */,
 				DD18717C297F070100E489D9 /* PostTableViewCell.swift */,
+				DD72DA612A1DDD4A006563A9 /* LikedPosts.xcdatamodeld */,
 				DD78C4182952535F006D31F5 /* InfoViewController.swift */,
 				DD78C4052950FD6E006D31F5 /* Assets.xcassets */,
 				DD78C40A2950FD6E006D31F5 /* Info.plist */,
@@ -286,6 +297,7 @@
 				DDE6ABE529DD921F004856B4 /* AppCoordinator.swift */,
 				DDE6ABE829DD931A004856B4 /* MainCoordinator.swift */,
 				DDE6ABEA29DD9336004856B4 /* LoginCoordinator.swift */,
+				DD72DA5F2A1DDD1F006563A9 /* LikedPostsCoordinator.swift */,
 				DDE6ABEC29DD9344004856B4 /* FeedCoordinator.swift */,
 				DDE6ABEE29DD9CE7004856B4 /* PostCoordinator.swift */,
 				DD2C6DC029DEBC47009E9B14 /* ProfileCoordinator.swift */,
@@ -470,7 +482,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD511C7329AFA4460021D4AC /* StorageService.docc in Sources */,
-				DD511C8D29AFA4A70021D4AC /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,9 +505,14 @@
 				DD511C9429B368290021D4AC /* User.swift in Sources */,
 				DD187184298427ED00E489D9 /* Photo.swift in Sources */,
 				DDA4787329DDC49300689E86 /* ProfileViewModel.swift in Sources */,
+				DD72DA652A1DDD4E006563A9 /* LikedPostsViewController.swift in Sources */,
 				DD2C6DC129DEBC48009E9B14 /* ProfileCoordinator.swift in Sources */,
+				DD72DA632A1DDD4A006563A9 /* LikedPosts.xcdatamodeld in Sources */,
 				DD4A722F29C327B600D73702 /* UserService.swift in Sources */,
+				DD72DA682A1DDD9D006563A9 /* Post.swift in Sources */,
+				DD72DA602A1DDD1F006563A9 /* LikedPostsCoordinator.swift in Sources */,
 				DD2E31E529CB682500735DCD /* Button.swift in Sources */,
+				DD72DA672A1DDD84006563A9 /* CoreDataManager.swift in Sources */,
 				DD78C4192952535F006D31F5 /* InfoViewController.swift in Sources */,
 				DDE6ABEB29DD9336004856B4 /* LoginCoordinator.swift in Sources */,
 				DD179C2829E97F9900222732 /* NetworkService.swift in Sources */,
@@ -605,7 +621,6 @@
 		DD511C8929AFA4460021D4AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B8NB6YD92C;
@@ -624,7 +639,6 @@
 		DD511C8A29AFA4460021D4AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B8NB6YD92C;
@@ -757,7 +771,6 @@
 		DD78C40E2950FD6E006D31F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -787,7 +800,6 @@
 		DD78C40F2950FD6E006D31F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -949,6 +961,19 @@
 			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		DD72DA612A1DDD4A006563A9 /* LikedPosts.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DD72DA622A1DDD4A006563A9 /* LikedPosts.xcdatamodel */,
+			);
+			currentVersion = DD72DA622A1DDD4A006563A9 /* LikedPosts.xcdatamodel */;
+			path = LikedPosts.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DD78C3F12950FD6D006D31F5 /* Project object */;
 }
