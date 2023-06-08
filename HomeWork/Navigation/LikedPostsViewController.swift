@@ -8,31 +8,30 @@
 import UIKit
 
 class LikedPostsViewController: UITableViewController {
+        
+    var manager = CoreDataManager()
     
-    var likedPosts: [LikedPost] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        likedPosts = CoreDataManager.shared.fetchPost()
+        setupView()
         
-        print(likedPosts)
-
-        title = "Liked Posts"
+        manager.fetchPost()
+        
     }
-
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return likedPosts.count
+        return manager.filteredPosts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = PostTableViewCell()
         
-        let item = likedPosts[indexPath.row]
+        let item = manager.filteredPosts[indexPath.row]
         
         cell.authorLabel.text = item.author
         cell.descriptionText.text = item.text
@@ -43,51 +42,80 @@ class LikedPostsViewController: UITableViewController {
         
         return cell
     }
+        
+    @objc func resetFilter() {
+        manager.fetchPost()
+        tableView.reloadData()
     
+    }
+    
+    @objc func searchPost() {
+        
+        let alert = UIAlertController(title: "Filter", message: "Enter the author of the post", preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "author"
+        }
+        
+        let searchAction = UIAlertAction(title: "Search", style: .default) { [weak alert] _ in
+            
+            guard let textField = alert?.textFields?.first else { return }
+            
+            if let text = textField.text , text != "" {
+                self.manager.searchPost(author: text)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        alert.addAction(searchAction)
+        
+        self.present(alert, animated: true)
+        
+    }
+    
+    private func setupView() {
+                
+        let searchNavigationButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchPost))
+        
+        let resetFilterButton = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetFilter))
+        
+        self.navigationItem.leftBarButtonItem = searchNavigationButton
+        
+        self.navigationItem.rightBarButtonItem = resetFilterButton
+        
+        title = "Liked Posts"
+        
+    }
 
-    /*
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completion) in
+            self?.manager.deletePost(at: indexPath.row)
+            
+            DispatchQueue.main.async {
+                self?.manager.fetchPost()
+                tableView.reloadData()
+            }
+            completion(true)
+        }
+        deleteAction.backgroundColor = .systemRed
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        return configuration
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+}
 
+extension LikedPostsViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

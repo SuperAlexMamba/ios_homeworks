@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 import iOSIntPackage
 
-class ProfileViewController: UIViewController{
-    
+class ProfileViewController: UIViewController {
+
     var profileViewModel = ProfileViewModel()
     var profileHeader = ProfileHeaderView()
-    
-    var post: Post?
+    var manager = CoreDataManager()
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
@@ -36,7 +35,7 @@ class ProfileViewController: UIViewController{
         super.viewDidLoad()
         
         self.profileViewModel = ProfileViewModel()
-        
+
         addGuestRecognizer()
         setupView()
         self.cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -48,8 +47,7 @@ class ProfileViewController: UIViewController{
         super.viewWillLayoutSubviews()
       
     }
-    
-    private func setupView(){
+    private func setupView() {
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         view.addSubview(profileHeader)
@@ -62,12 +60,12 @@ class ProfileViewController: UIViewController{
         setupConstrains()
     }
     
-    func addGuestRecognizer(){
+    func addGuestRecognizer() {
         let guest = UITapGestureRecognizer(target: self, action: #selector (animateProfilePhoto))
         profileHeader.photoView.addGestureRecognizer(guest)
     }
     
-    private func setupConstrains(){
+    private func setupConstrains() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
@@ -85,7 +83,7 @@ class ProfileViewController: UIViewController{
         ])
     }
         
-    @objc func buttonIsPressed(){
+    @objc func buttonIsPressed() {
         let photosVC = PhotosViewController()
         self.navigationController?.pushViewController(photosVC, animated: true)
     }
@@ -93,18 +91,17 @@ class ProfileViewController: UIViewController{
     @objc func likePost() {
         
         guard let indexPath = self.tableView.indexPathForSelectedRow?.row else {
-            print("Error! IndexPath == nil")
+            print("Error! IndexPath is nil")
             return
         }
         
-        CoreDataManager.shared.savePost(post: profileViewModel.posts[indexPath])
-        
-        print("SAVED")
+        manager.savePost(post: profileViewModel.posts[indexPath])
+
     }
     
 }
 
-extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
+extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -112,10 +109,10 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0{
+        if section == 0 {
             return 1
         }
-        else{
+        else {
             
             let posts = self.profileViewModel.posts
 
@@ -163,7 +160,7 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
     
     // MARK: - Animation
     
-    @objc func animateProfilePhoto(){
+    @objc func animateProfilePhoto() {
 
         view.addSubview(backgroundView)
         view.addSubview(cancelButton)
@@ -183,7 +180,7 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    @objc func cancelProfilePhotoPressed(){
+    @objc func cancelProfilePhotoPressed() {
         
         let yPhotoPosition = profileViewModel.yPhotoPosition
         let _ = profileViewModel.xPhotoPosition
