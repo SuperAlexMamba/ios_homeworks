@@ -59,9 +59,7 @@ class CoreDataManager {
     }
     
     func searchPost(author: String) {
-        
         filteredPosts = likedPosts.filter({$0.author?.contains(author) ?? false})
-        
     }
     
     lazy var persistendContainer: NSPersistentContainer = {

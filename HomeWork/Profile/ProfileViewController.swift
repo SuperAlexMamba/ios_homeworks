@@ -53,6 +53,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(profileHeader)
             
         title = "Profile"
+        view.backgroundColor = .white
 
         tableView.delegate = self
         tableView.dataSource = self

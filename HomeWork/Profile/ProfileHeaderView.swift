@@ -104,19 +104,19 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func buttonPressed(){
+    @objc func buttonPressed() {
         
-        guard statusText != nil && statusText != "" else {profileStatus.text = "Waiting for something..."; return}
+        guard statusText != nil && statusText != "" else { profileStatus.text = "Waiting for something..."; return }
         profileStatus.text = statusText
         print(profileStatus.text!)
     }
     
-    @objc func statusTextIsChanged(_ textField: UITextField){
+    @objc func statusTextIsChanged(_ textField: UITextField) {
         
         statusText = textField.text
     }
     
-    private func setConstraints(){
+    private func setConstraints() {
         
         let safeArea = safeAreaLayoutGuide
         
@@ -135,8 +135,8 @@ class ProfileHeaderView: UIView {
         profileName.snp.makeConstraints {
             $0.centerX.equalTo(safeArea.snp.centerX).offset(0)
             $0.centerY.equalTo(safeArea.snp.top).offset(27)
-            $0.width.equalTo(100)
-            $0.height.equalTo(100)
+            $0.width.equalTo(150)
+            $0.height.equalTo(50)
         }
         showStatusButton.snp.makeConstraints {
             $0.left.equalTo(safeArea.snp.left).offset(16)

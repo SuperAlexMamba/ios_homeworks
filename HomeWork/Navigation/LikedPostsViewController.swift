@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LikedPostsViewController: UITableViewController {
+class LikedPostsViewController: UITableViewController, UITabBarControllerDelegate {
         
     var manager = CoreDataManager()
     
@@ -108,6 +108,11 @@ class LikedPostsViewController: UITableViewController {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         
         return configuration
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        manager.fetchPost()
+        tableView.reloadData()
     }
 
 }
