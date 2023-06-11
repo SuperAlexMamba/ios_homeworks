@@ -106,14 +106,19 @@ class LoginViewController: UIViewController {
     }()
     
     lazy var registerButton: UIButton = {
-        let button = CustomButton(title: "Register", titleColor: .white, backColor: .black, mask: false)
+        let button = CustomButton(title: "Register", titleColor: .white, backColor: .white, mask: false)
         
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+
         button.tapAction = { [self] in
             registerUser()
         }
         
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
+        button.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        button.layer.borderWidth = 0.5
+        
         switch button.state{
             
         case .normal: button.alpha = 1
@@ -122,9 +127,7 @@ class LoginViewController: UIViewController {
         case .disabled: button.alpha = 0.8
         default: button.alpha = 1
         }
-        let color = #colorLiteral(red: 0.2820000052, green: 0.5220000148, blue: 0.8000000119, alpha: 1)
-        button.setTitleColor( color , for: .normal)
-    
+        
        return button
     }()
     

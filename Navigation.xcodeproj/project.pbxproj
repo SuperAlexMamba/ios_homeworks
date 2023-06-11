@@ -56,6 +56,7 @@
 		DDD9EF3429F922700072F36A /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = DDD9EF3329F922700072F36A /* FirebaseFunctions */; };
 		DDD9EF3629F922700072F36A /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = DDD9EF3529F922700072F36A /* FirebaseInstallations */; };
 		DDD9EF3829F922700072F36A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DDD9EF3729F922700072F36A /* FirebaseStorage */; };
+		DDE1F6402A31D3D900E91072 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1F63F2A31D3D900E91072 /* Picker.swift */; };
 		DDE6ABE629DD921F004856B4 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABE529DD921F004856B4 /* AppCoordinator.swift */; };
 		DDE6ABE929DD931A004856B4 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABE829DD931A004856B4 /* MainCoordinator.swift */; };
 		DDE6ABEB29DD9336004856B4 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABEA29DD9336004856B4 /* LoginCoordinator.swift */; };
@@ -139,6 +140,7 @@
 		DDA4787629DDC4CE00689E86 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		DDD02FF929757B0400D4E78A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DDE1F63F2A31D3D900E91072 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		DDE6ABE529DD921F004856B4 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		DDE6ABE829DD931A004856B4 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		DDE6ABEA29DD9336004856B4 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				DD2E31E429CB682500735DCD /* Button.swift */,
 				DD179C2729E97F9900222732 /* NetworkService.swift */,
 				DD179C2929E9C57A00222732 /* JSONModel.swift */,
+				DDE1F63F2A31D3D900E91072 /* Picker.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDA4787729DDC4CE00689E86 /* FeedViewModel.swift in Sources */,
+				DDE1F6402A31D3D900E91072 /* Picker.swift in Sources */,
 				DDD02FFA29757B0500D4E78A /* LoginViewController.swift in Sources */,
 				DD78C41729524D1E006D31F5 /* Feed.swift in Sources */,
 				DD78C3FD2950FD6D006D31F5 /* AppDelegate.swift in Sources */,
