@@ -51,8 +51,7 @@ class MainCoordinator: Coordinator {
         self.rootViewController.viewControllers = [loginCoordinator.rootViewController,
                                                    feedCoordinator.rootViewController,
                                                    likedPostsCoordinator.rootViewController]
-        
-        self.rootViewController.delegate = likedPostsCoordinator.likedPostsViewController 
+
     }
         
     func setupBar(vc: UIViewController, title: String , image: String , selectedImage: String) {

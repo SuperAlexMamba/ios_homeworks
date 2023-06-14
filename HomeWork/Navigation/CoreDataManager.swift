@@ -11,13 +11,23 @@ import UIKit
 
 class CoreDataManager {
         
-    private(set) var likedPosts: [LikedPost] = []
+    var likedPosts: [LikedPost] = []
     
-    private(set) var filteredPosts: [LikedPost] = []
+    lazy var persistendContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "LikedPosts")
+        container.loadPersistentStores { storeDescription, error in
+            
+            if let error = error as NSError? {
+                return
+            }
+        }
+        
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        return container
+    }()
     
-    init() {
-        fetchPost()
-    }
     
     func savePost(post: Post) {
                         
@@ -34,43 +44,16 @@ class CoreDataManager {
             likedPost.managedObjectContext?.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
             
             try? backgroundContext.save()
-            self.fetchPost()
         }
     }
-    
-    func fetchPost() {
         
-        let request = LikedPost.fetchRequest()
-        
-        likedPosts = (try? persistendContainer.viewContext.fetch(request)) ?? []
-        
-        filteredPosts = likedPosts
-
-    }
-    
-    func deletePost(at index: Int) {
+    func deletePost(post: LikedPost) {
         
         persistendContainer.performBackgroundTask { [weak self] backgroundContext in
             guard let self = self else { return }
-            let postForDelete = backgroundContext.object(with: self.likedPosts[index].objectID)
+            let postForDelete = backgroundContext.object(with: post.objectID)
             backgroundContext.delete(postForDelete)
             try? backgroundContext.save()
         }
     }
-    
-    func searchPost(author: String) {
-        filteredPosts = likedPosts.filter({$0.author?.contains(author) ?? false})
-    }
-    
-    lazy var persistendContainer: NSPersistentContainer = {
-        
-        let container = NSPersistentContainer(name: "LikedPosts")
-        container.loadPersistentStores { storeDescription, error in
-            
-            if let error = error as NSError? {
-                return
-            }
-        }
-        return container
-    }()
 }

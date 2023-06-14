@@ -6,17 +6,34 @@
 //
 
 import UIKit
+import CoreData
 
-class LikedPostsViewController: UITableViewController, UITabBarControllerDelegate {
+class LikedPostsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
         
     var manager = CoreDataManager()
+        
+    lazy var fetchResultController: NSFetchedResultsController = {
+        let fethRequest = LikedPost.fetchRequest()
+        
+        fethRequest.sortDescriptors = [NSSortDescriptor(key: "author", ascending: true)]
+        
+        let frc = NSFetchedResultsController(fetchRequest: fethRequest, managedObjectContext: manager.persistendContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+    
+        return frc
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupView()
+        if let items = fetchResultController.fetchedObjects {
+            manager.likedPosts = items
+        }
+                
+        try? fetchResultController.performFetch()
+
+        fetchResultController.delegate = self
         
-        manager.fetchPost()
+        setupView()
         
     }
     
@@ -24,14 +41,14 @@ class LikedPostsViewController: UITableViewController, UITabBarControllerDelegat
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return manager.filteredPosts.count
+        return manager.likedPosts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = PostTableViewCell()
         
-        let item = manager.filteredPosts[indexPath.row]
+        let item = manager.likedPosts[indexPath.row]
         
         cell.authorLabel.text = item.author
         cell.descriptionText.text = item.text
@@ -39,12 +56,12 @@ class LikedPostsViewController: UITableViewController, UITabBarControllerDelegat
         cell.likesLabel.text = "Likes: \(String(describing: item.likes))"
         cell.postImage.image = UIImage(named: item.image!)
         
-        
         return cell
     }
         
     @objc func resetFilter() {
-        manager.fetchPost()
+        manager.likedPosts = fetchResultController.fetchedObjects!
+        try? fetchResultController.performFetch()
         tableView.reloadData()
     
     }
@@ -57,14 +74,14 @@ class LikedPostsViewController: UITableViewController, UITabBarControllerDelegat
             textField.placeholder = "author"
         }
         
-        let searchAction = UIAlertAction(title: "Search", style: .default) { [weak alert] _ in
+        let searchAction = UIAlertAction(title: "Search", style: .default) { [weak alert , weak self] _ in
             
             guard let textField = alert?.textFields?.first else { return }
             
             if let text = textField.text , text != "" {
-                self.manager.searchPost(author: text)
+                self?.manager.likedPosts = (self?.manager.likedPosts.filter({$0.author?.contains(text) ?? false}))!
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 }
             }
         }
@@ -95,12 +112,8 @@ class LikedPostsViewController: UITableViewController, UITabBarControllerDelegat
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completion) in
-            self?.manager.deletePost(at: indexPath.row)
-            
-            DispatchQueue.main.async {
-                self?.manager.fetchPost()
-                tableView.reloadData()
-            }
+            self?.manager.deletePost(post: (self?.manager.likedPosts[indexPath.row])!)
+            try? self?.fetchResultController.performFetch()
             completion(true)
         }
         deleteAction.backgroundColor = .systemRed
@@ -109,12 +122,14 @@ class LikedPostsViewController: UITableViewController, UITabBarControllerDelegat
         
         return configuration
     }
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        manager.fetchPost()
-        tableView.reloadData()
+        
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        try? fetchResultController.performFetch()
+        
+        self.tableView.reloadData()
+        
     }
-
 }
 
 extension LikedPostsViewController: UITextFieldDelegate {
