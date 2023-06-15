@@ -91,8 +91,6 @@ class ProfileViewController: UIViewController {
     
     @objc func likePost() {
         
-        let lpvc = LikedPostsViewController()
-        
         guard let indexPath = self.tableView.indexPathForSelectedRow?.row else {
             print("Error! IndexPath is nil")
             return
@@ -100,10 +98,6 @@ class ProfileViewController: UIViewController {
         
         manager.savePost(post: profileViewModel.posts[indexPath])
         
-        try? lpvc.fetchResultController.performFetch()
-        
-        lpvc.tableView.reloadData()
-
     }
     
 }
