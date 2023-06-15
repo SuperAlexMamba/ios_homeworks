@@ -24,13 +24,7 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let items = fetchResultController.fetchedObjects {
-            manager.likedPosts = items
-        }
-                
-        try? fetchResultController.performFetch()
-
+    
         fetchResultController.delegate = self
         
         setupView()
@@ -41,14 +35,14 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return manager.likedPosts.count
+        return fetchResultController.fetchedObjects?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = PostTableViewCell()
         
-        let item = manager.likedPosts[indexPath.row]
+        let item = fetchResultController.object(at: indexPath)
         
         cell.authorLabel.text = item.author
         cell.descriptionText.text = item.text
@@ -60,8 +54,11 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
     }
         
     @objc func resetFilter() {
-        manager.likedPosts = fetchResultController.fetchedObjects!
+        
+        fetchResultController.fetchRequest.predicate = NSPredicate(value: true)
+                
         try? fetchResultController.performFetch()
+        
         tableView.reloadData()
     
     }
@@ -76,15 +73,22 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
         
         let searchAction = UIAlertAction(title: "Search", style: .default) { [weak alert , weak self] _ in
             
+            guard let fetchController = self?.fetchResultController else { return }
+            
             guard let textField = alert?.textFields?.first else { return }
             
             if let text = textField.text , text != "" {
-                self?.manager.likedPosts = (self?.manager.likedPosts.filter({$0.author?.contains(text) ?? false}))!
+                
+                fetchController.fetchRequest.predicate = NSPredicate(format: "(author contains[cd] %@)", text)
+                
+                try? fetchController.performFetch()
+                
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             }
         }
+        
         alert.addAction(searchAction)
         
         self.present(alert, animated: true)
@@ -103,6 +107,10 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
         
         title = "Liked Posts"
         
+        try? fetchResultController.performFetch()
+        
+        tableView.reloadData()
+        
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -112,8 +120,7 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completion) in
-            self?.manager.deletePost(post: (self?.manager.likedPosts[indexPath.row])!)
-            try? self?.fetchResultController.performFetch()
+            self?.manager.deletePost(post: (self?.fetchResultController.object(at: indexPath))!)
             completion(true)
         }
         deleteAction.backgroundColor = .systemRed
@@ -125,17 +132,42 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
         
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
-        try? fetchResultController.performFetch()
-        
-        self.tableView.reloadData()
-        
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .automatic)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .automatic)
+        case .move:
+            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+        case .update:
+            try? fetchResultController.performFetch()
+            tableView.reloadData()
+        @unknown default:
+            ()
+        }
     }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
 }
 
-extension LikedPostsViewController: UITextFieldDelegate {
+extension LikedPostsViewController: UITextFieldDelegate, UITabBarControllerDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        try? fetchResultController.performFetch()
+        tableView.reloadData()
+        
     }
     
 }

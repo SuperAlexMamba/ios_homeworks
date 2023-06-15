@@ -40,9 +40,7 @@ class CoreDataManager {
             likedPost.likes = Int64(post.likes)
             likedPost.text = post.text
             likedPost.views = Int64(post.views)
-            
-            likedPost.managedObjectContext?.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            
+        
             try? backgroundContext.save()
         }
     }
@@ -55,5 +53,11 @@ class CoreDataManager {
             backgroundContext.delete(postForDelete)
             try? backgroundContext.save()
         }
+    }
+    
+    func tete() {
+        
+        
+        
     }
 }
