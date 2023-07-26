@@ -39,6 +39,9 @@
 		DD78C41529510685006D31F5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C41429510685006D31F5 /* PostViewController.swift */; };
 		DD78C41729524D1E006D31F5 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C41629524D1E006D31F5 /* Feed.swift */; };
 		DD78C4192952535F006D31F5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C4182952535F006D31F5 /* InfoViewController.swift */; };
+		DD87FE1C2A6BB34200A6BA72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87FE1B2A6BB34200A6BA72 /* MapViewController.swift */; };
+		DD87FE1E2A6BB35E00A6BA72 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87FE1D2A6BB35E00A6BA72 /* MapCoordinator.swift */; };
+		DD87FE202A6E7B1C00A6BA72 /* MapControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87FE1F2A6E7B1C00A6BA72 /* MapControllerView.swift */; };
 		DDA4787329DDC49300689E86 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4787229DDC49300689E86 /* ProfileViewModel.swift */; };
 		DDA4787729DDC4CE00689E86 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4787629DDC4CE00689E86 /* FeedViewModel.swift */; };
 		DDD02FFA29757B0500D4E78A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD02FF929757B0400D4E78A /* LoginViewController.swift */; };
@@ -136,6 +139,9 @@
 		DD78C41429510685006D31F5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		DD78C41629524D1E006D31F5 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		DD78C4182952535F006D31F5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		DD87FE1B2A6BB34200A6BA72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		DD87FE1D2A6BB35E00A6BA72 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
+		DD87FE1F2A6E7B1C00A6BA72 /* MapControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapControllerView.swift; sourceTree = "<group>"; };
 		DDA4787229DDC49300689E86 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DDA4787629DDC4CE00689E86 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		DDD02FF929757B0400D4E78A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +199,7 @@
 		DD18715129774C8B00E489D9 /* HomeWork */ = {
 			isa = PBXGroup;
 			children = (
+				DD87FE1A2A6BB30000A6BA72 /* Map */,
 				DDA4787529DDC4B300689E86 /* Feed */,
 				DDE6ABE729DD930A004856B4 /* Coordinators */,
 				DD66823E29883C21009368F3 /* Photos */,
@@ -285,6 +292,15 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		DD87FE1A2A6BB30000A6BA72 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				DD87FE1B2A6BB34200A6BA72 /* MapViewController.swift */,
+				DD87FE1F2A6E7B1C00A6BA72 /* MapControllerView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		DDA4787529DDC4B300689E86 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +320,7 @@
 				DDE6ABEC29DD9344004856B4 /* FeedCoordinator.swift */,
 				DDE6ABEE29DD9CE7004856B4 /* PostCoordinator.swift */,
 				DD2C6DC029DEBC47009E9B14 /* ProfileCoordinator.swift */,
+				DD87FE1D2A6BB35E00A6BA72 /* MapCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -508,11 +525,14 @@
 				DD78C41129510667006D31F5 /* FeedViewController.swift in Sources */,
 				DD511C9429B368290021D4AC /* User.swift in Sources */,
 				DD187184298427ED00E489D9 /* Photo.swift in Sources */,
+				DD87FE202A6E7B1C00A6BA72 /* MapControllerView.swift in Sources */,
 				DDA4787329DDC49300689E86 /* ProfileViewModel.swift in Sources */,
+				DD87FE1E2A6BB35E00A6BA72 /* MapCoordinator.swift in Sources */,
 				DD72DA652A1DDD4E006563A9 /* LikedPostsViewController.swift in Sources */,
 				DD2C6DC129DEBC48009E9B14 /* ProfileCoordinator.swift in Sources */,
 				DD72DA632A1DDD4A006563A9 /* LikedPosts.xcdatamodeld in Sources */,
 				DD4A722F29C327B600D73702 /* UserService.swift in Sources */,
+				DD87FE1C2A6BB34200A6BA72 /* MapViewController.swift in Sources */,
 				DD72DA682A1DDD9D006563A9 /* Post.swift in Sources */,
 				DD72DA602A1DDD1F006563A9 /* LikedPostsCoordinator.swift in Sources */,
 				DD2E31E529CB682500735DCD /* Button.swift in Sources */,
@@ -783,6 +803,7 @@
 				DEVELOPMENT_TEAM = B8NB6YD92C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Homework/Navigation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Пожалуйста дайте доступ к геопозиции";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -812,6 +833,7 @@
 				DEVELOPMENT_TEAM = B8NB6YD92C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Homework/Navigation/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Пожалуйста дайте доступ к геопозиции";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

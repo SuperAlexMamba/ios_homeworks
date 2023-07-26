@@ -47,6 +47,7 @@ class ProfileViewController: UIViewController {
         super.viewWillLayoutSubviews()
       
     }
+    
     private func setupView() {
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
