@@ -17,13 +17,11 @@ class MapViewController: UIViewController {
         
         mapControllerView.locationManager.delegate = self
         mapControllerView.mapView.delegate = self
-        
-        mapControllerView.getDirection(sourceLocation: CLLocationCoordinate2D(latitude: 55.7522, longitude: 37.6156), destination: CLLocationCoordinate2D(latitude: 55.6411, longitude: 37.5045))
-        
-//        mapControllerView.locationManager.startUpdatingLocation() // обновление локации пользователя
                 
+//        mapControllerView.locationManager.startUpdatingLocation() // обновление локации пользователя
+                        
         setupView()
-        
+                
     }
     
     private func setupView() {
@@ -38,8 +36,19 @@ class MapViewController: UIViewController {
                 
         mapControllerView.addPin(title: "Hello!", lat: 59, lon: 0) // добавление пина
         
+        mapControllerView.centerButton.addTarget(self, action: #selector(navigator), for: .touchUpInside)
+        
+        
     }
     
+    @objc func navigator() {
+        
+        self.mapControllerView.navigate { alert in
+            self.present(alert, animated: true)
+        }
+        
+    }
+        
     private func setupConstraints() {
         
         let standartButton = mapControllerView.standartTypeButton
@@ -105,7 +114,7 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         
         render.strokeColor = .blue
         
-        render.lineWidth = 10
+        render.lineWidth = 6
         
         return render
     }
