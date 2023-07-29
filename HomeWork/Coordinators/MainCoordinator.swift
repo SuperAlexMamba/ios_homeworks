@@ -52,7 +52,8 @@ class MainCoordinator: Coordinator {
                                                    feedCoordinator.rootViewController,
                                                    likedPostsCoordinator.rootViewController]
         
-        self.rootViewController.delegate = likedPostsCoordinator.likedPostsViewController 
+        rootViewController.delegate = likedPostsCoordinator.likedPostsViewController as? any UITabBarControllerDelegate
+        
     }
         
     func setupBar(vc: UIViewController, title: String , image: String , selectedImage: String) {

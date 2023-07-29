@@ -97,7 +97,7 @@ class ProfileViewController: UIViewController {
         }
         
         manager.savePost(post: profileViewModel.posts[indexPath])
-
+        
     }
     
 }
