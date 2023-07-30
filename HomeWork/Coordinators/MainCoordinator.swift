@@ -48,11 +48,21 @@ class MainCoordinator: Coordinator {
                  image: "hand.thumbsup",
                  selectedImage: "hand.thumbsup.fill")
         
+        let mapCoordinator = MapCoordinator()
+        mapCoordinator.start()
+        self.childCoordinators.append(mapCoordinator)
+        let mapViewController = mapCoordinator.rootController
+        setupBar(vc: mapViewController,
+                 title: "Map",
+                 image: "globe.europe.africa",
+                 selectedImage: "globe.europe.africa.fill")
+        
         self.rootViewController.viewControllers = [loginCoordinator.rootViewController,
                                                    feedCoordinator.rootViewController,
-                                                   likedPostsCoordinator.rootViewController]
+                                                   likedPostsCoordinator.rootViewController,
+                                                   mapCoordinator.rootController]
         
-        rootViewController.delegate = likedPostsCoordinator.likedPostsViewController as? any UITabBarControllerDelegate
+        rootViewController.delegate = likedPostsCoordinator.likedPostsViewController as any UITabBarControllerDelegate
         
     }
         

@@ -48,7 +48,7 @@ class CoreDataManager {
     func deletePost(post: LikedPost) {
         
         persistendContainer.performBackgroundTask { [weak self] backgroundContext in
-            guard let self = self else { return }
+            guard self != nil else { return }
             let postForDelete = backgroundContext.object(with: post.objectID)
             backgroundContext.delete(postForDelete)
             try? backgroundContext.save()
