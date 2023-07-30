@@ -72,7 +72,7 @@ class ProfileHeaderView: UIView {
     
     var showStatusButton: UIButton = {
        
-        let button = CustomButton(title: "Show status", titleColor: .black, backColor: .systemBlue, mask: false)
+        let button = CustomButton(title: NSLocalizedString("show_status_button_key", comment: ""), titleColor: .black, backColor: .systemBlue, mask: false)
 
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
         button.contentMode = .center

@@ -17,7 +17,7 @@ class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, U
         label.translatesAutoresizingMaskIntoConstraints = false
         
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.text = "Photos"
+        label.text = NSLocalizedString("photos_title_key", comment: "")
         label.textColor = .black
         
         return label

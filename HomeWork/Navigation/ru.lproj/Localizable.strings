@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Слава Орлов on 30.07.2023.
+  
+*/
+
+"login_key" = "Вход";
+"register_key" = "Регистрация";
+"profile_key" = "Профиль";
+"show_status_button_key" = "Показать статус";
+"email_or_phone_placeholder" = "почта или номер телефона";
+"password_key" = "Пароль";
+"photos_title_key" = "Фото";
+"back_button_key" = "Назад";
+"photos_gallery_title_key" = "Фотогалерея";
+"likes_key" = "Понравилось:";
+"views_key" = "Просмотры:";
+"feed_title_key" = "Лента";
+"result_button_feed_key" = "Результат";
+"check_button_feed_key" = "Проверить";
+"go_to_post_button_key" = "Открыть пост";
+"post_title_key" = "Нетология";
+"info_button_key" = "Информация";
+"push_post_button_key" = "Опубликовать пост";
+"liked_posts_title_key" = "Понравившиеся посты";
+"reset_button_liked_posts_key" = "Сброс";
+"map_title_key" = "Карта";
+"standart_button_map_key" = "Стандарт";
+"navigate_button_map_key" = "Маршрут";
+"sattelite_button_map_key" = "Спутник";
+"map_alert_title_key" = "Здравствуйте!";
+"map_alert_message_key" = "Введите пожалуйста город назначения";
+"city_placeholder_key" = "город";
+"start_action_key" = "Старт";
+"map_key" = "Карта";
+"filter_key" = "Фильтр";
+"alert_filter_message" = "Введите автора поста";
+"author_key" = "автор";
+"search_key" = "Поиск";
+"delete_key" = "Удалить";
+"success_key" = "Успех!";
+"alert_post_message_key" = "Новый пост успешно опубликован!";
+"console_print_key" = "Отчёт в консоль";

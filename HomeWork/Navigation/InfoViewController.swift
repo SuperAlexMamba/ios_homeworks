@@ -11,7 +11,7 @@ class InfoViewController: UIViewController {
 
     lazy var button: UIButton = {
         let button = UIButton()
-        button.setTitle("Push Post", for: .normal)
+        button.setTitle(NSLocalizedString("push_post_button_key", comment: ""), for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         button.backgroundColor = .gray
         return button
@@ -39,7 +39,7 @@ class InfoViewController: UIViewController {
             }
         }
         
-        title = "Info"
+        title = NSLocalizedString("info_button_key", comment: "")
         view.backgroundColor = .white
         view.addSubview(button)
         view.addSubview(serializationLabel)
@@ -64,7 +64,7 @@ class InfoViewController: UIViewController {
             
             button.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
-            button.widthAnchor.constraint(equalToConstant: 95),
+            button.widthAnchor.constraint(equalToConstant: 165),
             button.heightAnchor.constraint(equalToConstant: 95),
             
             serializationLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
@@ -84,10 +84,10 @@ class InfoViewController: UIViewController {
     
     private func presentAlert() {
         
-        let alert = UIAlertController(title: "Успех!", message: "Новый пост успешно опубликован!", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("success_key", comment: ""), message: NSLocalizedString("alert_post_message_key", comment: ""), preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "OK", style: .cancel)
-        let printAction = UIAlertAction(title: "Отчёт в консоль", style: .default) { _ in
+        let printAction = UIAlertAction(title: NSLocalizedString("console_print_key", comment: ""), style: .default) { _ in
             print("NETOLOGY!!!")
         }
         

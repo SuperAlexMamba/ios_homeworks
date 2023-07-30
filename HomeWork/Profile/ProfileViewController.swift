@@ -53,7 +53,7 @@ class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(profileHeader)
             
-        title = "Profile"
+        title = NSLocalizedString("profile_key", comment: "")
         view.backgroundColor = .white
 
         tableView.delegate = self
@@ -140,8 +140,8 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
         
         cell.authorLabel.text = items.author
         cell.descriptionText.text = items.text
-        cell.viewsLabel.text = "Views: \(String(describing: items.views))"
-        cell.likesLabel.text = "Likes: \(String(describing: items.likes))"
+        cell.viewsLabel.text = "\(NSLocalizedString("views_key", comment: "")) \(String(describing: items.views))"
+        cell.likesLabel.text = "\(NSLocalizedString("likes_key", comment: "")) \(String(describing: items.likes))"
         cell.postImage.image = UIImage(named: items.image )
         
         

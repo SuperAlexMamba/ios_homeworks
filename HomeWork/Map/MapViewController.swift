@@ -28,7 +28,7 @@ class MapViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        title = "MAP"
+        title = NSLocalizedString("map_title_key", comment: "")
         
         addSubviewsForMe() // добавление сабвью
                   

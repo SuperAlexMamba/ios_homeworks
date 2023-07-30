@@ -60,7 +60,7 @@ class MapControllerView {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle("Satellite", for: .normal)
+        button.setTitle(NSLocalizedString("sattelite_button_map_key", comment: ""), for: .normal)
         
         button.backgroundColor = .gray
         
@@ -79,7 +79,7 @@ class MapControllerView {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle("Standart", for: .normal)
+        button.setTitle(NSLocalizedString("standart_button_map_key", comment: ""), for: .normal)
         
         button.backgroundColor = .gray
         
@@ -99,7 +99,7 @@ class MapControllerView {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle("Маршрут", for: .normal)
+        button.setTitle(NSLocalizedString("navigate_button_map_key", comment: ""), for: .normal)
         
         button.backgroundColor = .gray
         
@@ -146,13 +146,13 @@ class MapControllerView {
     
     func navigate(completion: (UIAlertController)->()) {
         
-        let alertController = UIAlertController(title: "Здравствуйте!", message: "Введите пожалуйста город назначения!", preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("map_alert_title_key", comment: ""), message: NSLocalizedString("map_alert_message_key", comment: ""), preferredStyle: .alert)
         
         alertController.addTextField { textField in
-            textField.placeholder = "город"
+            textField.placeholder = NSLocalizedString("city_placeholder_key", comment: "")
         }
         
-        let okButton = UIAlertAction(title: "Старт", style: .default) { _ in
+        let okButton = UIAlertAction(title: NSLocalizedString("start_action_key", comment: ""), style: .default) { _ in
             
             if let city = alertController.textFields?.first?.text {
                 

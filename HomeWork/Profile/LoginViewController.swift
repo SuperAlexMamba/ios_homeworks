@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
     var loginTextField: UITextField = {
         
         let textField = UITextField()
-        textField.placeholder = "Email or phone"
+        textField.placeholder = NSLocalizedString("email_or_phone_placeholder", comment: "")
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
     var passwordTextField: UITextField = {
         
         let textField = UITextField()
-        textField.placeholder = "Password"
+        textField.placeholder = NSLocalizedString("password_key", comment: "")
         textField.backgroundColor = .systemGray6
         textField.textColor = .black
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
@@ -83,7 +83,7 @@ class LoginViewController: UIViewController {
     }()
     
     lazy var loginButton: UIButton = {
-        let button = CustomButton(title: "Log in", titleColor: .white, backColor: .white, mask: false)
+        let button = CustomButton(title: NSLocalizedString("login_key", comment: ""), titleColor: .white, backColor: .white, mask: false)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         
         button.clipsToBounds = true
@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
     }()
     
     lazy var registerButton: UIButton = {
-        let button = CustomButton(title: "Register", titleColor: .white, backColor: .white, mask: false)
+        let button = CustomButton(title: NSLocalizedString("register_key", comment: ""), titleColor: .white, backColor: .white, mask: false)
         
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
 

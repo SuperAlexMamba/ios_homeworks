@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Слава Орлов on 30.07.2023.
+  
+*/
+
+"login_key" = "Login";
+"register_key" = "Register";
+"profile_key" = "Profile";
+"show_status_button_key" = "Show Status";
+"email_or_phone_placeholder" = "Email or phone";
+"password_key" = "password";
+"photos_title_key" = "Photos";
+"back_button_key" = "Back";
+"photos_gallery_title_key" = "Photos Gallery";
+"likes_key" = "Likes:";
+"views_key" = "Views:";
+"feed_title_key" = "Feed";
+"result_button_feed_key" = "Result";
+"check_button_feed_key" = "Check";
+"go_to_post_button_key" = "Go To Post";
+"post_title_key" = "Netology";
+"info_button_key" = "Info";
+"push_post_button_key" = "Push Post";
+"liked_posts_title_key" = "Liked Posts";
+"reset_button_liked_posts_key" = "Reset";
+"map_title_key" = "Map";
+"standart_button_map_key" = "Standart";
+"navigate_button_map_key" = "Navigate";
+"sattelite_button_map_key" = "Sattelite";
+"map_alert_title_key" = "Hello!";
+"map_alert_message_key" = "Please enter destination city";
+"city_placeholder_key" = "city";
+"start_action_key" = "Start";
+"map_key" = "Map";
+"filter_key" = "Filter";
+"alert_filter_message" = "Enter the author of the post";
+"author_key" = "author";
+"search_key" = "search";
+"delete_key" = "Delete";
+"success_key" = "Success!";
+"alert_post_message_key" = "New post successfuly published!";
+"console_print_key" = "Print in console";
