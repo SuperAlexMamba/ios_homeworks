@@ -36,7 +36,7 @@ class PostTableViewCell: UITableViewCell {
         let authorLabel = UILabel()
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
         authorLabel.font = .systemFont(ofSize: 20, weight: .bold)
-        authorLabel.textColor = .black
+        authorLabel.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         authorLabel.numberOfLines = 2
         return authorLabel
     }()
@@ -45,7 +45,7 @@ class PostTableViewCell: UITableViewCell {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.font = .systemFont(ofSize: 14, weight: .medium)
-        text.textColor = .systemGray
+        text.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         text.numberOfLines = 0
         return text
     }()
@@ -63,7 +63,7 @@ class PostTableViewCell: UITableViewCell {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.font = .systemFont(ofSize: 16, weight: .medium)
-        text.textColor = .black
+        text.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         return text
     }()
     
@@ -71,7 +71,7 @@ class PostTableViewCell: UITableViewCell {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.font = .systemFont(ofSize: 16, weight: .medium)
-        text.textColor = .black
+        text.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         return text
     }()
     

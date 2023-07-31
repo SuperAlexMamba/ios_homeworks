@@ -10,6 +10,10 @@ import UIKit
 import iOSIntPackage
 
 class ProfileViewController: UIViewController {
+    
+    let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
+    
+    let labelsColor = UIColor.createColor(lightMode: .black, darkMode: .white)
 
     var profileViewModel = ProfileViewModel()
     var profileHeader = ProfileHeaderView()
@@ -54,8 +58,11 @@ class ProfileViewController: UIViewController {
         view.addSubview(profileHeader)
             
         title = "profile_key".localized
-        view.backgroundColor = .white
-
+        view.backgroundColor = backgroundColor
+        
+        tableView.tintColor = backgroundColor
+        tableView.separatorColor = backgroundColor
+        
         tableView.delegate = self
         tableView.dataSource = self
         self.tableView.headerView(forSection: 0)
@@ -129,6 +136,8 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
             
             cell.navigationButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
             
+            cell.backgroundColor = self.backgroundColor
+            
             return cell
         }
         
@@ -144,6 +153,7 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
         cell.likesLabel.text = "\("likes_key".localized) \(String(describing: items.likes))"
         cell.postImage.image = UIImage(named: items.image )
         
+        cell.backgroundColor = self.backgroundColor
         
         let likePostGuest = UITapGestureRecognizer(target: self, action: #selector(likePost))
         

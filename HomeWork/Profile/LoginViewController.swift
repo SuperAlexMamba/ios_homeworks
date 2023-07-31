@@ -8,6 +8,8 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
         
     let scrollView = UIScrollView()
     let contentView = UIView()
@@ -53,7 +55,7 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "email_or_phone_placeholder".localized
         textField.backgroundColor = .systemGray6
-        textField.textColor = .black
+        textField.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
         textField.tintColor = .tintColor
         textField.autocapitalizationType = .none
@@ -70,7 +72,7 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "password_key".localized
         textField.backgroundColor = .systemGray6
-        textField.textColor = .black
+        textField.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
@@ -138,7 +140,7 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(uiView)
         stackView.addArrangedSubview(passwordTextField)
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = self.backgroundColor
         navigationController?.navigationBar.isHidden = true
         
         setupScrollView()
@@ -168,7 +170,7 @@ class LoginViewController: UIViewController {
     }
     
     private func setupScrollView() {
-        
+                
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)

@@ -45,8 +45,6 @@
 		DDA4787329DDC49300689E86 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4787229DDC49300689E86 /* ProfileViewModel.swift */; };
 		DDA4787729DDC4CE00689E86 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4787629DDC4CE00689E86 /* FeedViewModel.swift */; };
 		DDAB7C402A77B30F0039A56C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB7C3F2A77B30F0039A56C /* Extensions.swift */; };
-		DDAB7C412A77B30F0039A56C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB7C3F2A77B30F0039A56C /* Extensions.swift */; };
-		DDAB7C422A77B30F0039A56C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB7C3F2A77B30F0039A56C /* Extensions.swift */; };
 		DDD02FFA29757B0500D4E78A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD02FF929757B0400D4E78A /* LoginViewController.swift */; };
 		DDD9EF1F29F920540072F36A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */; };
 		DDD9EF2029F920810072F36A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */; };
@@ -206,12 +204,15 @@
 		DD18715129774C8B00E489D9 /* HomeWork */ = {
 			isa = PBXGroup;
 			children = (
+				DDE6ABE729DD930A004856B4 /* Coordinators */,
 				DD87FE1A2A6BB30000A6BA72 /* Map */,
 				DDA4787529DDC4B300689E86 /* Feed */,
-				DDE6ABE729DD930A004856B4 /* Coordinators */,
 				DD66823E29883C21009368F3 /* Photos */,
-				DD1871802982EE4C00E489D9 /* Models */,
 				DDEB9658295B98740066CA14 /* Profile */,
+				DDAB7C442A77D8DD0039A56C /* LikedPosts */,
+				DDAB7C462A77D9010039A56C /* Posts */,
+				DD1871802982EE4C00E489D9 /* Models */,
+				DDAB7C472A77D9210039A56C /* Managers */,
 				DD78C3FB2950FD6D006D31F5 /* Navigation */,
 			);
 			path = HomeWork;
@@ -220,12 +221,11 @@
 		DD1871802982EE4C00E489D9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DD72DA612A1DDD4A006563A9 /* LikedPosts.xcdatamodeld */,
 				DD78C41629524D1E006D31F5 /* Feed.swift */,
 				DD187183298427ED00E489D9 /* Photo.swift */,
 				DD511C9329B368290021D4AC /* User.swift */,
-				DD4A722E29C327B600D73702 /* UserService.swift */,
 				DD2E31E429CB682500735DCD /* Button.swift */,
-				DD179C2729E97F9900222732 /* NetworkService.swift */,
 				DD179C2929E9C57A00222732 /* JSONModel.swift */,
 				DDE1F63F2A31D3D900E91072 /* Picker.swift */,
 			);
@@ -265,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				DD18715129774C8B00E489D9 /* HomeWork */,
+				DDAB7C432A77D8B40039A56C /* Extensions */,
 				DD511C7029AFA4460021D4AC /* StorageService */,
 				DD511C7E29AFA4460021D4AC /* StorageServiceTests */,
 				DD78C3FA2950FD6D006D31F5 /* Products */,
@@ -285,18 +286,11 @@
 			isa = PBXGroup;
 			children = (
 				DD78C3FC2950FD6D006D31F5 /* AppDelegate.swift */,
-				DD72DA642A1DDD4E006563A9 /* LikedPostsViewController.swift */,
 				DD78C3FE2950FD6D006D31F5 /* SceneDelegate.swift */,
-				DD72DA662A1DDD84006563A9 /* CoreDataManager.swift */,
-				DD78C41429510685006D31F5 /* PostViewController.swift */,
-				DD18717C297F070100E489D9 /* PostTableViewCell.swift */,
-				DD72DA612A1DDD4A006563A9 /* LikedPosts.xcdatamodeld */,
-				DD78C4182952535F006D31F5 /* InfoViewController.swift */,
 				DD78C4052950FD6E006D31F5 /* Assets.xcassets */,
 				DD78C40A2950FD6E006D31F5 /* Info.plist */,
 				DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */,
 				DDF3FAAF2A7657D4001C9225 /* Localizable.strings */,
-				DDAB7C3F2A77B30F0039A56C /* Extensions.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -315,8 +309,44 @@
 			children = (
 				DD78C41029510667006D31F5 /* FeedViewController.swift */,
 				DDA4787629DDC4CE00689E86 /* FeedViewModel.swift */,
+				DD78C4182952535F006D31F5 /* InfoViewController.swift */,
 			);
 			path = Feed;
+			sourceTree = "<group>";
+		};
+		DDAB7C432A77D8B40039A56C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DDAB7C3F2A77B30F0039A56C /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DDAB7C442A77D8DD0039A56C /* LikedPosts */ = {
+			isa = PBXGroup;
+			children = (
+				DD72DA642A1DDD4E006563A9 /* LikedPostsViewController.swift */,
+			);
+			path = LikedPosts;
+			sourceTree = "<group>";
+		};
+		DDAB7C462A77D9010039A56C /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				DD78C41429510685006D31F5 /* PostViewController.swift */,
+				DD18717C297F070100E489D9 /* PostTableViewCell.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
+		DDAB7C472A77D9210039A56C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DD179C2729E97F9900222732 /* NetworkService.swift */,
+				DD4A722E29C327B600D73702 /* UserService.swift */,
+				DD72DA662A1DDD84006563A9 /* CoreDataManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		DDE6ABE729DD930A004856B4 /* Coordinators */ = {
@@ -513,7 +543,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD511C7329AFA4460021D4AC /* StorageService.docc in Sources */,
-				DDAB7C412A77B30F0039A56C /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +551,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD511C8029AFA4460021D4AC /* StorageServiceTests.swift in Sources */,
-				DDAB7C422A77B30F0039A56C /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,7 +699,6 @@
 		DD511C8929AFA4460021D4AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B8NB6YD92C;
@@ -690,7 +717,6 @@
 		DD511C8A29AFA4460021D4AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B8NB6YD92C;
@@ -825,7 +851,6 @@
 		DD78C40E2950FD6E006D31F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -856,7 +881,6 @@
 		DD78C40F2950FD6E006D31F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";

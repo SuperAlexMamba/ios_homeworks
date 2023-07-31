@@ -10,6 +10,7 @@ import UIKit
 class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     var photosArray = PhotosArray.shared.photosArray
+
     
     var titleLabel: UILabel = {
         let label = UILabel()
@@ -18,7 +19,7 @@ class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, U
         
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.text = "photos_title_key".localized
-        label.textColor = .black
+        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         
         return label
     }()
@@ -27,7 +28,7 @@ class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, U
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: "arrow.right"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         
         return button
     }()
@@ -48,6 +49,8 @@ class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, U
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "PhotosCell")
         
+        let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
+        
         self.addSubview(contentView)
         
         collectionView.dataSource = self
@@ -55,6 +58,8 @@ class PhotosTableViewCell: UITableViewCell,UICollectionViewDelegateFlowLayout, U
         
         setupView()
         setupConstraints()
+        
+        collectionView.backgroundColor = backgroundColor
         
     }
     
