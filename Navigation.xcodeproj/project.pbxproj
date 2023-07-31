@@ -44,6 +44,9 @@
 		DD87FE202A6E7B1C00A6BA72 /* MapControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87FE1F2A6E7B1C00A6BA72 /* MapControllerView.swift */; };
 		DDA4787329DDC49300689E86 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4787229DDC49300689E86 /* ProfileViewModel.swift */; };
 		DDA4787729DDC4CE00689E86 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA4787629DDC4CE00689E86 /* FeedViewModel.swift */; };
+		DDAB7C402A77B30F0039A56C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB7C3F2A77B30F0039A56C /* Extensions.swift */; };
+		DDAB7C412A77B30F0039A56C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB7C3F2A77B30F0039A56C /* Extensions.swift */; };
+		DDAB7C422A77B30F0039A56C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB7C3F2A77B30F0039A56C /* Extensions.swift */; };
 		DDD02FFA29757B0500D4E78A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD02FF929757B0400D4E78A /* LoginViewController.swift */; };
 		DDD9EF1F29F920540072F36A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */; };
 		DDD9EF2029F920810072F36A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */; };
@@ -67,6 +70,7 @@
 		DDE6ABEF29DD9CE7004856B4 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABEE29DD9CE7004856B4 /* PostCoordinator.swift */; };
 		DDEB965A295B9D7D0066CA14 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB9659295B9D7D0066CA14 /* ProfileHeaderView.swift */; };
 		DDEB965C295B9DB20066CA14 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB965B295B9DB20066CA14 /* ProfileViewController.swift */; };
+		DDF3FAAD2A7657D4001C9225 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDF3FAAF2A7657D4001C9225 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +148,7 @@
 		DD87FE1F2A6E7B1C00A6BA72 /* MapControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapControllerView.swift; sourceTree = "<group>"; };
 		DDA4787229DDC49300689E86 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DDA4787629DDC4CE00689E86 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		DDAB7C3F2A77B30F0039A56C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DDD02FF929757B0400D4E78A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DDE1F63F2A31D3D900E91072 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
@@ -154,6 +159,8 @@
 		DDE6ABEE29DD9CE7004856B4 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		DDEB9659295B9D7D0066CA14 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		DDEB965B295B9DB20066CA14 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DDF3FAAE2A7657D4001C9225 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DDF3FAB02A76580F001C9225 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +295,8 @@
 				DD78C4052950FD6E006D31F5 /* Assets.xcassets */,
 				DD78C40A2950FD6E006D31F5 /* Info.plist */,
 				DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */,
+				DDF3FAAF2A7657D4001C9225 /* Localizable.strings */,
+				DDAB7C3F2A77B30F0039A56C /* Extensions.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -450,6 +459,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = DD78C3F02950FD6D006D31F5;
 			packageReferences = (
@@ -490,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD78C4062950FD6E006D31F5 /* Assets.xcassets in Resources */,
+				DDF3FAAD2A7657D4001C9225 /* Localizable.strings in Resources */,
 				DDD9EF1F29F920540072F36A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD511C7329AFA4460021D4AC /* StorageService.docc in Sources */,
+				DDAB7C412A77B30F0039A56C /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD511C8029AFA4460021D4AC /* StorageServiceTests.swift in Sources */,
+				DDAB7C422A77B30F0039A56C /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +537,7 @@
 				DD78C3FD2950FD6D006D31F5 /* AppDelegate.swift in Sources */,
 				DD78C41129510667006D31F5 /* FeedViewController.swift in Sources */,
 				DD511C9429B368290021D4AC /* User.swift in Sources */,
+				DDAB7C402A77B30F0039A56C /* Extensions.swift in Sources */,
 				DD187184298427ED00E489D9 /* Photo.swift in Sources */,
 				DD87FE202A6E7B1C00A6BA72 /* MapControllerView.swift in Sources */,
 				DDA4787329DDC49300689E86 /* ProfileViewModel.swift in Sources */,
@@ -576,6 +590,18 @@
 			targetProxy = DD511C8229AFA4460021D4AC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DDF3FAAF2A7657D4001C9225 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDF3FAAE2A7657D4001C9225 /* en */,
+				DDF3FAB02A76580F001C9225 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DD511C8729AFA4460021D4AC /* Debug */ = {
@@ -645,6 +671,7 @@
 		DD511C8929AFA4460021D4AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B8NB6YD92C;
@@ -663,6 +690,7 @@
 		DD511C8A29AFA4460021D4AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B8NB6YD92C;
@@ -682,6 +710,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -742,6 +771,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -795,6 +825,7 @@
 		DD78C40E2950FD6E006D31F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -825,6 +856,7 @@
 		DD78C40F2950FD6E006D31F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";

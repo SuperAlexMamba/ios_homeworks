@@ -9,14 +9,14 @@ import UIKit
 
 class PostViewController: UIViewController {
     
-    var titleString: String = "Netology"
+    var titleString: String = "post_title_key".localized
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = titleString
         
-        let barButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(itemAction))
+        let barButtonItem = UIBarButtonItem(title: "info_button_key".localized, style: .plain, target: self, action: #selector(itemAction))
         self.navigationItem.rightBarButtonItem = barButtonItem
 
     }

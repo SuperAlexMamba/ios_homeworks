@@ -46,8 +46,8 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
         
         cell.authorLabel.text = item.author
         cell.descriptionText.text = item.text
-        cell.viewsLabel.text = "Views: \(String(describing: item.views))"
-        cell.likesLabel.text = "Likes: \(String(describing: item.likes))"
+        cell.viewsLabel.text = "\("views_key".localized) \(String(describing: item.views))"
+        cell.likesLabel.text = "\("likes_key".localized) \(String(describing: item.likes))"
         cell.postImage.image = UIImage(named: item.image!)
         
         return cell
@@ -65,13 +65,13 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
     
     @objc func searchPost() {
         
-        let alert = UIAlertController(title: "Filter", message: "Enter the author of the post", preferredStyle: .alert)
+        let alert = UIAlertController(title: "filter_key".localized, message: "alert_filter_message".localized, preferredStyle: .alert)
         
         alert.addTextField { textField in
-            textField.placeholder = "author"
+            textField.placeholder = "author_key".localized
         }
         
-        let searchAction = UIAlertAction(title: "Search", style: .default) { [weak alert , weak self] _ in
+        let searchAction = UIAlertAction(title: "search_key".localized, style: .default) { [weak alert , weak self] _ in
             
             guard let fetchController = self?.fetchResultController else { return }
             
@@ -99,13 +99,13 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
                 
         let searchNavigationButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchPost))
         
-        let resetFilterButton = UIBarButtonItem(title: "Reset", style: .done, target: self, action: #selector(resetFilter))
+        let resetFilterButton = UIBarButtonItem(title: "reset_button_liked_posts_key".localized, style: .done, target: self, action: #selector(resetFilter))
         
         self.navigationItem.leftBarButtonItem = searchNavigationButton
         
         self.navigationItem.rightBarButtonItem = resetFilterButton
         
-        title = "Liked Posts"
+        title = "liked_posts_title_key".localized
         
         try? fetchResultController.performFetch()
         
@@ -119,7 +119,7 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completion) in
+        let deleteAction = UIContextualAction(style: .normal, title: "delete_key".localized) { [weak self] (action, view, completion) in
             self?.manager.deletePost(post: (self?.fetchResultController.object(at: indexPath))!)
             completion(true)
         }
