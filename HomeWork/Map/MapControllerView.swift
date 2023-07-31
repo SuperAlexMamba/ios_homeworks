@@ -60,7 +60,7 @@ class MapControllerView {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("sattelite_button_map_key", comment: ""), for: .normal)
+        button.setTitle("sattelite_button_map_key".localized, for: .normal)
         
         button.backgroundColor = .gray
         
@@ -79,7 +79,7 @@ class MapControllerView {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("standart_button_map_key", comment: ""), for: .normal)
+        button.setTitle("standart_button_map_key".localized, for: .normal)
         
         button.backgroundColor = .gray
         
@@ -99,7 +99,7 @@ class MapControllerView {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle(NSLocalizedString("navigate_button_map_key", comment: ""), for: .normal)
+        button.setTitle("navigate_button_map_key".localized, for: .normal)
         
         button.backgroundColor = .gray
         
@@ -146,13 +146,13 @@ class MapControllerView {
     
     func navigate(completion: (UIAlertController)->()) {
         
-        let alertController = UIAlertController(title: NSLocalizedString("map_alert_title_key", comment: ""), message: NSLocalizedString("map_alert_message_key", comment: ""), preferredStyle: .alert)
+        let alertController = UIAlertController(title: "map_alert_title_key".localized, message: "map_alert_message_key".localized, preferredStyle: .alert)
         
         alertController.addTextField { textField in
-            textField.placeholder = NSLocalizedString("city_placeholder_key", comment: "")
+            textField.placeholder = "city_placeholder_key".localized
         }
         
-        let okButton = UIAlertAction(title: NSLocalizedString("start_action_key", comment: ""), style: .default) { _ in
+        let okButton = UIAlertAction(title: "start_action_key".localized, style: .default) { _ in
             
             if let city = alertController.textFields?.first?.text {
                 

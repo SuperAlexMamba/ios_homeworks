@@ -97,7 +97,7 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
     
     lazy var navBar: UINavigationBar = {
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 44, width: self.view.frame.size.width, height: 44))
-        let navigationItem = UINavigationItem(title: NSLocalizedString("photos_gallery_title_key", comment: ""))
+        let navigationItem = UINavigationItem(title: "photos_gallery_title_key".localized)
         let navigationButton = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: #selector(backButton))
         navigationItem.leftBarButtonItems = [navigationButton]
         navBar.setItems([navigationItem], animated: true)

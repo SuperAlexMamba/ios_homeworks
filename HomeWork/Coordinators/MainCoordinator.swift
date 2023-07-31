@@ -26,7 +26,7 @@ class MainCoordinator: Coordinator {
         self.childCoordinators.append(loginCoordinator)
         let loginViewController = loginCoordinator.rootViewController
         setupBar(vc: loginViewController,
-                 title: NSLocalizedString("profile_key", comment: ""),
+                 title: "profile_key".localized,
                  image: "bell",
                  selectedImage: "bell.fill")
         
@@ -35,7 +35,7 @@ class MainCoordinator: Coordinator {
         self.childCoordinators.append(feedCoordinator)
         let feedViewController = feedCoordinator.rootViewController
         setupBar(vc: feedViewController,
-                 title: NSLocalizedString("feed_title_key", comment: ""),
+                 title: "feed_title_key".localized,
                  image: "paperplane",
                  selectedImage: "paperplane.fill")
         
@@ -44,7 +44,7 @@ class MainCoordinator: Coordinator {
         self.childCoordinators.append(likedPostsCoordinator)
         let likedPostsViewController = likedPostsCoordinator.rootViewController
         setupBar(vc: likedPostsViewController,
-                 title: NSLocalizedString("liked_posts_title_key", comment: ""),
+                 title: "liked_posts_title_key".localized,
                  image: "hand.thumbsup",
                  selectedImage: "hand.thumbsup.fill")
         
@@ -53,7 +53,7 @@ class MainCoordinator: Coordinator {
         self.childCoordinators.append(mapCoordinator)
         let mapViewController = mapCoordinator.rootController
         setupBar(vc: mapViewController,
-                 title: NSLocalizedString("map_key", comment: ""),
+                 title: "map_key".localized,
                  image: "globe.europe.africa",
                  selectedImage: "globe.europe.africa.fill")
         

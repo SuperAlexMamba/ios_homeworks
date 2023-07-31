@@ -13,8 +13,8 @@ class FeedViewController: UIViewController {
     
     var feedViewModel: FeedViewModel?
 
-    var firstButton = CustomButton(title: NSLocalizedString("go_to_post_button_key", comment: ""), titleColor: .white, backColor: .gray, mask: false)
-    var secondButton = CustomButton(title: NSLocalizedString("go_to_post_button_key", comment: ""), titleColor: .white, backColor: .gray, mask: false)
+    var firstButton = CustomButton(title: "go_to_post_button_key".localized, titleColor: .white, backColor: .gray, mask: false)
+    var secondButton = CustomButton(title: "go_to_post_button_key".localized, titleColor: .white, backColor: .gray, mask: false)
     
     var stackView = UIStackView()
     
@@ -34,12 +34,12 @@ class FeedViewController: UIViewController {
     var resultLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = NSLocalizedString("result_button_feed_key", comment: "")
+        label.text = "result_button_feed_key".localized
         label.textColor = .black
         return label
     }()
     
-    var checkButton = CustomButton(title: NSLocalizedString("check_button_feed_key", comment: ""), titleColor: .white, backColor: .black, mask: false)
+    var checkButton = CustomButton(title: "check_button_feed_key".localized, titleColor: .white, backColor: .black, mask: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +63,7 @@ class FeedViewController: UIViewController {
     }
     
     private func setupView() {
-        title = NSLocalizedString("feed_title_key", comment: "")
+        title = "feed_title_key".localized
         view.backgroundColor = .white
         
         firstButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
