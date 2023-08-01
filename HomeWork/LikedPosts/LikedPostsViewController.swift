@@ -9,6 +9,8 @@ import UIKit
 import CoreData
 
 class LikedPostsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
         
     var manager = CoreDataManager()
         
@@ -104,6 +106,8 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
         self.navigationItem.leftBarButtonItem = searchNavigationButton
         
         self.navigationItem.rightBarButtonItem = resetFilterButton
+        
+        view.backgroundColor = self.backgroundColor
         
         title = "liked_posts_title_key".localized
         

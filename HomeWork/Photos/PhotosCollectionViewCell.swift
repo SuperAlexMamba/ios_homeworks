@@ -9,6 +9,7 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
+    
     lazy var photosImage: UIImageView = {
         let image = UIImageView()
         
@@ -20,7 +21,11 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
+        
         self.addSubview(contentView)
+        
+        contentView.backgroundColor = self.backgroundColor
         
         contentView.addSubview(photosImage)
         

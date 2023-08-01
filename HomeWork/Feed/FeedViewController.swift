@@ -12,6 +12,8 @@ class FeedViewController: UIViewController {
     var showPost: () -> () = { }
     
     var feedViewModel: FeedViewModel?
+    
+    let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
 
     var firstButton = CustomButton(title: "go_to_post_button_key".localized, titleColor: .white, backColor: .gray, mask: false)
     var secondButton = CustomButton(title: "go_to_post_button_key".localized, titleColor: .white, backColor: .gray, mask: false)
@@ -64,7 +66,7 @@ class FeedViewController: UIViewController {
     
     private func setupView() {
         title = "feed_title_key".localized
-        view.backgroundColor = .white
+        view.backgroundColor = self.backgroundColor
         
         firstButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
         secondButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
