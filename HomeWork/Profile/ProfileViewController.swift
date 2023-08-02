@@ -11,6 +11,7 @@ import iOSIntPackage
 
 class ProfileViewController: UIViewController {
     
+        
     let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
     
     let labelsColor = UIColor.createColor(lightMode: .black, darkMode: .white)
@@ -63,8 +64,14 @@ class ProfileViewController: UIViewController {
         tableView.tintColor = backgroundColor
         tableView.separatorColor = backgroundColor
         
+        tableView.dragInteractionEnabled = true
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        
         self.tableView.headerView(forSection: 0)
         setupConstrains()
     }
@@ -110,7 +117,67 @@ class ProfileViewController: UIViewController {
     
 }
 
-extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
+extension ProfileViewController : UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
+        let destinationIndexPath: IndexPath
+            if let indexPath = coordinator.destinationIndexPath {
+                destinationIndexPath = indexPath
+            } else {
+                let row = tableView.numberOfRows(inSection: 0)
+                destinationIndexPath = IndexPath(row: row, section: 0)
+            }
+            
+            coordinator.session.loadObjects(ofClass: UIImage.self) { (items) in
+                guard let images = items as? [UIImage] else { return }
+                
+                coordinator.session.loadObjects(ofClass: NSString.self) { (items) in
+                    guard let descriptions = items as? [NSString] else { return }
+                    
+                    for (index, image) in images.enumerated() {
+                        let description = descriptions[index]
+                        
+                        let post = Post(author: "Drag&Drop", text: description as String, image: image, likes: 0, views: 0)
+                        
+                        self.profileViewModel.posts.insert(post, at: destinationIndexPath.row + index)
+                    }
+                    
+                    tableView.insertRows(at: [destinationIndexPath], with: .automatic)
+                }
+            }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: UIImage.self) || session.canLoadObjects(ofClass: NSString.self)
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        
+        if tableView.hasActiveDrag {
+            return UITableViewDropProposal(operation: .move , intent: .insertAtDestinationIndexPath)
+        }
+        else {
+            return UITableViewDropProposal(operation: .copy, intent: .automatic)
+        }
+        
+    }
+        
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        let post = profileViewModel.posts[indexPath.row]
+        
+        let image = UIDragItem(itemProvider: NSItemProvider(object: post.image))
+        
+        let descriptionProvider = NSItemProvider(object: post.text as NSString)
+        
+        let descriptionDragItem = UIDragItem(itemProvider: descriptionProvider)
+        
+        descriptionDragItem.localObject = post
+        
+        return [image, descriptionDragItem]
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -151,7 +218,7 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
         cell.descriptionText.text = items.text
         cell.viewsLabel.text = "\("views_key".localized) \(String(describing: items.views))"
         cell.likesLabel.text = "\("likes_key".localized) \(String(describing: items.likes))"
-        cell.postImage.image = UIImage(named: items.image )
+        cell.postImage.image = items.image
         
         cell.backgroundColor = self.backgroundColor
         
