@@ -10,7 +10,7 @@ import StorageService
 
 class ProfileViewModel {
     
-    let posts: [Post] = [postOne,postTwo,postThree,postFour]
+    var posts: [Post] = [postOne,postTwo,postThree,postFour]
             
     let xPhotoPosition = ProfileHeaderView().profilePhoto.bounds.origin.x
     let yPhotoPosition = ProfileHeaderView().profilePhoto.bounds.origin.y

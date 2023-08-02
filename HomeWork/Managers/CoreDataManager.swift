@@ -36,7 +36,7 @@ class CoreDataManager {
             let likedPost = LikedPost(context: backgroundContext)
             
             likedPost.author = post.author
-            likedPost.image = post.image
+            likedPost.image = post.image.pngData()
             likedPost.likes = Int64(post.likes)
             likedPost.text = post.text
             likedPost.views = Int64(post.views)
