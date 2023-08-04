@@ -11,6 +11,7 @@
 		DD179C2A29E9C57A00222732 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD179C2929E9C57A00222732 /* JSONModel.swift */; };
 		DD18717D297F070100E489D9 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD18717C297F070100E489D9 /* PostTableViewCell.swift */; };
 		DD187184298427ED00E489D9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD187183298427ED00E489D9 /* Photo.swift */; };
+		DD2B32072A7BAE59005375B2 /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2B32062A7BAE59005375B2 /* LocalNotificationService.swift */; };
 		DD2C6DC129DEBC48009E9B14 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2C6DC029DEBC47009E9B14 /* ProfileCoordinator.swift */; };
 		DD2E31E529CB682500735DCD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2E31E429CB682500735DCD /* Button.swift */; };
 		DD4A722F29C327B600D73702 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4A722E29C327B600D73702 /* UserService.swift */; };
@@ -115,6 +116,7 @@
 		DD18717C297F070100E489D9 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DD18717E2982B6F000E489D9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		DD187183298427ED00E489D9 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		DD2B32062A7BAE59005375B2 /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
 		DD2C6DC029DEBC47009E9B14 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		DD2E31E429CB682500735DCD /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		DD4A722E29C327B600D73702 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				DD179C2729E97F9900222732 /* NetworkService.swift */,
 				DD4A722E29C327B600D73702 /* UserService.swift */,
 				DD72DA662A1DDD84006563A9 /* CoreDataManager.swift */,
+				DD2B32062A7BAE59005375B2 /* LocalNotificationService.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				DD87FE1C2A6BB34200A6BA72 /* MapViewController.swift in Sources */,
 				DD72DA682A1DDD9D006563A9 /* Post.swift in Sources */,
 				DD72DA602A1DDD1F006563A9 /* LikedPostsCoordinator.swift in Sources */,
+				DD2B32072A7BAE59005375B2 /* LocalNotificationService.swift in Sources */,
 				DD2E31E529CB682500735DCD /* Button.swift in Sources */,
 				DD72DA672A1DDD84006563A9 /* CoreDataManager.swift in Sources */,
 				DD78C4192952535F006D31F5 /* InfoViewController.swift in Sources */,
