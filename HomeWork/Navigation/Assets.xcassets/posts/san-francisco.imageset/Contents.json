@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "1650672260_2-sportishka-com-p-ssha-san-frantsisko-krasivo-foto-2.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,122 +1,95 @@
 //
-//  FeedViewController.swift
+//  FeedableViewController.swift
 //  Navigation
 //
-//  Created by Слава Орлов on 19.12.2022.
+//  Created by Слава Орлов on 20.09.2023.
 //
 
 import UIKit
 
-class FeedViewController: UIViewController {
-    
-    var showPost: () -> () = { }
-    
-    var feedViewModel: FeedViewModel?
+class FeedViewController: UITableViewController {
     
     let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
 
-    var firstButton = CustomButton(title: "go_to_post_button_key".localized, titleColor: .white, backColor: .gray, mask: false)
-    var secondButton = CustomButton(title: "go_to_post_button_key".localized, titleColor: .white, backColor: .gray, mask: false)
-    
-    var stackView = UIStackView()
-    
-    var textField: UITextField = {
-        var textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = .white
-        textField.font = .systemFont(ofSize: 15, weight: .regular)
-        textField.textColor = .black
-
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-        
-        return textField
-    }()
-    
-    var resultLabel: UILabel = {
-        var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "result_button_feed_key".localized
-        label.textColor = .black
-        return label
-    }()
-    
-    var checkButton = CustomButton(title: "check_button_feed_key".localized, titleColor: .white, backColor: .black, mask: false)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        feedViewModel = FeedViewModel()
-        
         setupView()
         
-        checkButton.tapAction = {
-            
-            guard let text = self.textField.text else {return}
-            
-            if self.feedViewModel?.secretword.check(inputWord: text) == true{
-                self.resultLabel.textColor = .green
-            }
-            else{
-                self.resultLabel.textColor = .red
-            }
-        }
-
     }
     
     private func setupView() {
-        title = "feed_title_key".localized
-        view.backgroundColor = self.backgroundColor
         
-        firstButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
-        secondButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        self.title = "feed_title_key".localized
+        self.view.backgroundColor = backgroundColor
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.addArrangedSubview(firstButton)
-        stackView.addArrangedSubview(secondButton)
-        
-        stackView.spacing = 10
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        
-        view.addSubview(stackView)
-        view.addSubview(resultLabel)
-        view.addSubview(textField)
-        view.addSubview(checkButton)
+    }
 
-        setupConstrains()
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
+        return 0
     }
-    
-    @objc private func buttonIsPressed() {
-        showPost()
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 0
     }
-    
-    private func setupConstrains() {
-        
-        let safeAreaGuide = view.safeAreaLayoutGuide
-        
-        NSLayoutConstraint.activate([
-        
-            stackView.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: safeAreaGuide.centerYAnchor),
-            
-            textField.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 30),
-            textField.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 30),
-            textField.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: -30),
-            textField.heightAnchor.constraint(equalToConstant: 30),
-            
-            checkButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 15),
-            checkButton.centerXAnchor.constraint(equalTo: textField.centerXAnchor),
-            checkButton.heightAnchor.constraint(equalToConstant: 50),
-            checkButton.widthAnchor.constraint(equalToConstant: 100),
-            
-            resultLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 5),
-            resultLabel.centerXAnchor.constraint(equalTo: textField.centerXAnchor),
-            resultLabel.widthAnchor.constraint(equalToConstant: 80),
-            resultLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
+
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
+
+        return cell
     }
+    */
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

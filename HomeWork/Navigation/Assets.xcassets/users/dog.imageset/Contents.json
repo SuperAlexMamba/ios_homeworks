@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "994964c2f0df5ab7024148c79ce8122b--retriever-dog-golden-retriever-puppies.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
