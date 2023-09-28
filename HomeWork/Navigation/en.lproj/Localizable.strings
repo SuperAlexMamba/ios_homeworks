@@ -9,7 +9,7 @@
 "login_key" = "Login";
 "register_key" = "Register";
 "profile_key" = "Profile";
-"show_status_button_key" = "Show Status";
+"show_status_button_key" = "Edit Profile Info";
 "email_or_phone_placeholder" = "Email or phone";
 "password_key" = "password";
 "photos_title_key" = "Photos";
@@ -36,10 +36,14 @@
 "start_action_key" = "Start";
 "map_key" = "Map";
 "filter_key" = "Filter";
-"alert_filter_message" = "Enter the author of the post";
-"author_key" = "author";
-"search_key" = "search";
+"alert_filter_message" = "Enter the source of the post";
+"author_key" = "Enter";
+"search_key" = "Search";
 "delete_key" = "Delete";
 "success_key" = "Success!";
 "alert_post_message_key" = "New post successfuly published!";
 "console_print_key" = "Print in console";
+"source_key" = "Source:";
+"enter_new_nick_placeholder_key" = "Enter new nickname here";
+"error_key" = "Error!";
+"enter_new_status_placeholder_key" = "Enter new status here";

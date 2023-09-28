@@ -31,25 +31,25 @@ protocol CheckerServiceProtocol {
 
 class CurrentUserService: UserService {
     
-    var user = User(login: "Hipster Cat", password: "1234", status: "i am super Cat!", image: UIImage(named: "hipsterCat")!)
+    var user = User(login: "Hipster Cat", password: "1234", status: "i am super Cat!", image: UIImage(named: "hipsterCat")!, post: [])
     
     func checkLogin(login: String) -> User? {
         if login == user.login {
             return user
         }
-        else{return nil}
+        else { return nil }
     }
 }
 
 class TestUserService: UserService {
-    var testUser = User(login: "Test Cat", password: "1234", status: "TEST", image: UIImage(named: "space")!)
+    var testUser = User(login: "Test Cat", password: "1234", status: "TEST", image: UIImage(named: "space")!, post: [Post]())
     
     func checkLogin(login: String) -> User? {
         
         if login == testUser.login {
             return testUser
         }
-        else{return nil}
+        else { return nil }
     }
 }
 

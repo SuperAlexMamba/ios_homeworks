@@ -25,7 +25,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         
         self.addSubview(contentView)
         
-        contentView.backgroundColor = self.backgroundColor
+        contentView.backgroundColor = backgroundColor
         
         contentView.addSubview(photosImage)
         

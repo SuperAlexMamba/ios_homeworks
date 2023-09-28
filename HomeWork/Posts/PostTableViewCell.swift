@@ -14,7 +14,6 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCell()
-
     }
     
     required init?(coder: NSCoder) {
@@ -31,14 +30,52 @@ class PostTableViewCell: UITableViewCell {
         isSelected = false
         isHighlighted = false
     }
+        
+    var userPhoto: UIImageView = {
+        
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleToFill
+        
+        image.layer.shadowOffset = CGSize(width: 4, height: 4)
+        image.layer.shadowRadius = 8
+        image.layer.shadowColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        image.layer.shadowOpacity = 1
+        
+        image.layer.cornerRadius = 38
+        image.layer.borderColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        image.layer.borderWidth = 3
+            
+        image.clipsToBounds = true
+
+        return image
+    }()
+    
+    var stackView: UIStackView = {
+        
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .vertical
+        view.spacing = 20
+        
+        return view
+    }()
     
     var authorLabel: UILabel = {
-        let authorLabel = UILabel()
-        authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.font = .systemFont(ofSize: 20, weight: .bold)
-        authorLabel.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
-        authorLabel.numberOfLines = 2
-        return authorLabel
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 20, weight: .light)
+        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    var userLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        return label
     }()
     
     var descriptionText: UILabel = {
@@ -74,51 +111,56 @@ class PostTableViewCell: UITableViewCell {
         text.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         return text
     }()
-    
+        
     func setupCell(){
         
         self.addSubview(contentView)
-        
-        self.contentView.addSubview(authorLabel)
         self.contentView.addSubview(postImage)
         self.contentView.addSubview(viewsLabel)
         self.contentView.addSubview(likesLabel)
         self.contentView.addSubview(descriptionText)
+        self.contentView.addSubview(userPhoto)
+        self.contentView.addSubview(stackView)
         
+        stackView.addArrangedSubview(userLabel)
+        stackView.addArrangedSubview(authorLabel)
+
         setupConstraints()
         
         func setupConstraints(){
-            let safeAreaGuide = contentView.safeAreaLayoutGuide
+            let safeArea = contentView.safeAreaLayoutGuide
             NSLayoutConstraint.activate([
                 
-                authorLabel.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 16),
-                authorLabel.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: 16),
-                authorLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16),
-                authorLabel.heightAnchor.constraint(equalToConstant: 40),
-                
-                postImage.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 0),
-                postImage.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 0),
-                postImage.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: 0),
+                postImage.topAnchor.constraint(equalTo: userPhoto.bottomAnchor, constant: 0),
+                postImage.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 0),
+                postImage.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 0),
                 postImage.heightAnchor.constraint(equalToConstant: 200),
                 
                 descriptionText.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: 10),
-                descriptionText.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 16),
-                descriptionText.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: 16),
+                descriptionText.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 16),
+                descriptionText.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 16),
                 
-                likesLabel.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 16),
+                likesLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 16),
                 likesLabel.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
-                likesLabel.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor, constant: -16),
+                likesLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -16),
                 likesLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),
                 
-                viewsLabel.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: -16),
+                viewsLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: -16),
                 viewsLabel.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
-                viewsLabel.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor, constant: -16),
-                viewsLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 20)
-                    
+                viewsLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -16),
+                viewsLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 20),
+                
+                userPhoto.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 10),
+                userPhoto.widthAnchor.constraint(equalToConstant: 75),
+                userPhoto.heightAnchor.constraint(equalToConstant: 75),
+                userPhoto.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 5),
+                
+                stackView.leftAnchor.constraint(equalTo: userPhoto.rightAnchor, constant: 5),
+                stackView.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 0),
+                stackView.bottomAnchor.constraint(equalTo: postImage.topAnchor),
+                stackView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
+
             ])
         }
     }
 }
-
-
-

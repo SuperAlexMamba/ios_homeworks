@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol LoginCoordinatorDelegate: AnyObject {
+    func didCompleteLogin(coordinator: LoginCoordinator)
+}
+
 class LoginCoordinator: Coordinator {
     
     var rootViewController = UINavigationController()
@@ -14,6 +18,8 @@ class LoginCoordinator: Coordinator {
     var loginDelegate: LoginViewControllerDelegate?
     
     var checkerService: CheckerServiceProtocol?
+    
+    weak var delegate: LoginCoordinatorDelegate?
     
     init() {
         rootViewController = UINavigationController()
@@ -58,60 +64,17 @@ class LoginCoordinator: Coordinator {
     
     func loginUser() {
         
-        let delegate = checkerService
         let profileModel = ProfileViewModel()
         let currentUser = profileModel.currentUser
 
-        
         guard let login = loginViewController.loginTextField.text else { return }
-        guard let password = loginViewController.passwordTextField.text else { return }
-        
-        delegate?.checkCredentials(login: login, password: password, loginVC: self.loginViewController, profileVC: self.profileViewController)
-                
+        guard loginViewController.passwordTextField.text != nil else { return }
+
         profileViewController.profileHeader.profileName.text = "\(login)"
         profileViewController.profileHeader.profilePhoto.image = currentUser.user.image
         profileViewController.profileHeader.backgroundColor = .darkGray
         
+        delegate?.didCompleteLogin(coordinator: self)
+                
     }
-    
-//    func goToProfile() {
-//
-//        let profileCoordinator = ProfileCoordinator()
-//        let profileViewController = profileCoordinator.profileViewController
-//        let profileModel = ProfileViewModel()
-//        let testUser = profileModel.testUser
-//        let currentUser = profileModel.currentUser
-//        let loginDelegate = loginDelegate
-//
-//        guard let login = loginViewController.loginTextField.text else {return}
-//        guard let password = loginViewController.passwordTextField.text else {return}
-//
-//#if DEBUG
-//
-//        if loginDelegate?.check(login: login, password: password) == true {
-//
-//            profileViewController.profileHeader.profilePhoto.image = currentUser.user.image
-//            profileViewController.profileHeader.profileName.text = currentUser.user.login
-//            profileViewController.profileHeader.profileStatus.text = currentUser.user.status
-//            profileViewController.view.backgroundColor = .lightGray
-//            rootViewController.pushViewController(profileViewController, animated: true)
-//            print("Успешная авторизация ")
-//        }
-//        else{
-//            loginViewController.errorLoginAlert()
-//        }
-//#else
-//        if loginDelegate?.check(login: login, password: password) == true {
-//            profileViewController.profileHeader.profilePhoto.image = testUser.user.image
-//            profileViewController.profileHeader.profileName.text = testUser.user.login
-//            profileViewController.profileHeader.profileStatus.text = testUser.user.status
-//            profileViewController.view.backgroundColor = .lightGray
-//            rootViewController.pushViewController(profileViewController, animated: true)
-//            print("Успешная авторизация ")
-//        }
-//        else{
-//            loginViewController.errorLoginAlert()
-//        }
-//#endif
-//    }
 }

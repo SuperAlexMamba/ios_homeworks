@@ -51,6 +51,10 @@ class LikedPostsViewController: UITableViewController, NSFetchedResultsControlle
         cell.viewsLabel.text = "\("views_key".localized) \(String(describing: item.views))"
         cell.likesLabel.text = "\("likes_key".localized) \(String(describing: item.likes))"
         cell.postImage.image = UIImage(data: item.image!)
+        cell.userPhoto.image = UIImage(data: item.userPhoto!)
+        cell.userLabel.text = item.nickName
+        
+        cell.makeBorders()
         
         return cell
     }

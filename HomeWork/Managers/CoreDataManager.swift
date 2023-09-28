@@ -29,7 +29,7 @@ class CoreDataManager {
     }()
     
     
-    func savePost(post: Post) {
+    func savePost(post: Post, user: User) {
                         
         persistendContainer.performBackgroundTask { backgroundContext in
             
@@ -40,7 +40,9 @@ class CoreDataManager {
             likedPost.likes = Int64(post.likes)
             likedPost.text = post.text
             likedPost.views = Int64(post.views)
-        
+            likedPost.userPhoto = user.image.pngData()
+            likedPost.nickName = user.login
+            
             try? backgroundContext.save()
         }
     }
@@ -53,11 +55,5 @@ class CoreDataManager {
             backgroundContext.delete(postForDelete)
             try? backgroundContext.save()
         }
-    }
-    
-    func tete() {
-        
-        
-        
     }
 }

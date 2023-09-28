@@ -7,6 +7,7 @@
 
 import Foundation
 import StorageService
+import UIKit
 
 class ProfileViewModel {
     
@@ -17,5 +18,8 @@ class ProfileViewModel {
     
     let currentUser = CurrentUserService()
     let testUser = TestUserService()
+    
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
     
 }

@@ -27,3 +27,16 @@ extension UIColor {
         }
     }
 }
+
+extension UITableViewCell {
+    
+    func makeBorders() {
+        
+        self.layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
+        self.layer.borderWidth = 0.7
+        self.layer.cornerRadius = 10
+        self.clipsToBounds = true
+
+    }
+    
+}

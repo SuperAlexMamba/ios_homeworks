@@ -14,21 +14,20 @@ class MainCoordinator: Coordinator {
     var rootViewController = UITabBarController()
     
     init() {
-        self.rootViewController = UITabBarController()
         self.rootViewController.tabBar.isTranslucent = true
         self.rootViewController.tabBar.backgroundColor = .lightGray
     }
     
     func start() {
         
-        let loginCoordinator = LoginCoordinator()
-        loginCoordinator.start()
-        self.childCoordinators.append(loginCoordinator)
-        let loginViewController = loginCoordinator.rootViewController
-        setupBar(vc: loginViewController,
+        let profileCoordinator = ProfileCoordinator()
+        profileCoordinator.start()
+        self.childCoordinators.append(profileCoordinator)
+        let profileViewController = profileCoordinator.rootViewController
+        setupBar(vc: profileViewController,
                  title: "profile_key".localized,
-                 image: "bell",
-                 selectedImage: "bell.fill")
+                 image: "person.crop.circle",
+                 selectedImage: "person.crop.circle.fill")
         
         let feedCoordinator = FeedCoordinator()
         feedCoordinator.start()
@@ -36,8 +35,8 @@ class MainCoordinator: Coordinator {
         let feedViewController = feedCoordinator.rootViewController
         setupBar(vc: feedViewController,
                  title: "feed_title_key".localized,
-                 image: "paperplane",
-                 selectedImage: "paperplane.fill")
+                 image: "newspaper",
+                 selectedImage: "newspaper.fill")
         
         let likedPostsCoordinator = LikedPostsCoordinator()
         likedPostsCoordinator.start()
@@ -57,10 +56,10 @@ class MainCoordinator: Coordinator {
                  image: "globe.europe.africa",
                  selectedImage: "globe.europe.africa.fill")
         
-        self.rootViewController.viewControllers = [loginCoordinator.rootViewController,
+        self.rootViewController.viewControllers = [profileCoordinator.rootViewController,
                                                    feedCoordinator.rootViewController,
                                                    likedPostsCoordinator.rootViewController,
-                                                   mapCoordinator.rootController]
+                                                   /*mapCoordinator.rootController*/]
         
         rootViewController.delegate = likedPostsCoordinator.likedPostsViewController as any UITabBarControllerDelegate
         

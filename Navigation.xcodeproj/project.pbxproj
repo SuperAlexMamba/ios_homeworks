@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD179C2829E97F9900222732 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD179C2729E97F9900222732 /* NetworkService.swift */; };
-		DD179C2A29E9C57A00222732 /* JSONModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD179C2929E9C57A00222732 /* JSONModel.swift */; };
 		DD18717D297F070100E489D9 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD18717C297F070100E489D9 /* PostTableViewCell.swift */; };
 		DD187184298427ED00E489D9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD187183298427ED00E489D9 /* Photo.swift */; };
 		DD2B32072A7BAE59005375B2 /* LocalNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2B32062A7BAE59005375B2 /* LocalNotificationService.swift */; };
@@ -32,14 +30,9 @@
 		DD72DA632A1DDD4A006563A9 /* LikedPosts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD72DA612A1DDD4A006563A9 /* LikedPosts.xcdatamodeld */; };
 		DD72DA652A1DDD4E006563A9 /* LikedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72DA642A1DDD4E006563A9 /* LikedPostsViewController.swift */; };
 		DD72DA672A1DDD84006563A9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD72DA662A1DDD84006563A9 /* CoreDataManager.swift */; };
-		DD72DA682A1DDD9D006563A9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD18717E2982B6F000E489D9 /* Post.swift */; };
 		DD78C3FD2950FD6D006D31F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C3FC2950FD6D006D31F5 /* AppDelegate.swift */; };
 		DD78C3FF2950FD6D006D31F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C3FE2950FD6D006D31F5 /* SceneDelegate.swift */; };
 		DD78C4062950FD6E006D31F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD78C4052950FD6E006D31F5 /* Assets.xcassets */; };
-		DD78C41129510667006D31F5 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C41029510667006D31F5 /* FeedViewController.swift */; };
-		DD78C41529510685006D31F5 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C41429510685006D31F5 /* PostViewController.swift */; };
-		DD78C41729524D1E006D31F5 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C41629524D1E006D31F5 /* Feed.swift */; };
-		DD78C4192952535F006D31F5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD78C4182952535F006D31F5 /* InfoViewController.swift */; };
 		DD87FE1C2A6BB34200A6BA72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87FE1B2A6BB34200A6BA72 /* MapViewController.swift */; };
 		DD87FE1E2A6BB35E00A6BA72 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87FE1D2A6BB35E00A6BA72 /* MapCoordinator.swift */; };
 		DD87FE202A6E7B1C00A6BA72 /* MapControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD87FE1F2A6E7B1C00A6BA72 /* MapControllerView.swift */; };
@@ -61,12 +54,12 @@
 		DDD9EF3429F922700072F36A /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = DDD9EF3329F922700072F36A /* FirebaseFunctions */; };
 		DDD9EF3629F922700072F36A /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = DDD9EF3529F922700072F36A /* FirebaseInstallations */; };
 		DDD9EF3829F922700072F36A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DDD9EF3729F922700072F36A /* FirebaseStorage */; };
+		DDDB2F852ABB485A00BE60AD /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB2F842ABB485A00BE60AD /* FeedViewController.swift */; };
 		DDE1F6402A31D3D900E91072 /* Picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1F63F2A31D3D900E91072 /* Picker.swift */; };
 		DDE6ABE629DD921F004856B4 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABE529DD921F004856B4 /* AppCoordinator.swift */; };
 		DDE6ABE929DD931A004856B4 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABE829DD931A004856B4 /* MainCoordinator.swift */; };
 		DDE6ABEB29DD9336004856B4 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABEA29DD9336004856B4 /* LoginCoordinator.swift */; };
 		DDE6ABED29DD9344004856B4 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABEC29DD9344004856B4 /* FeedCoordinator.swift */; };
-		DDE6ABEF29DD9CE7004856B4 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE6ABEE29DD9CE7004856B4 /* PostCoordinator.swift */; };
 		DDEB965A295B9D7D0066CA14 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB9659295B9D7D0066CA14 /* ProfileHeaderView.swift */; };
 		DDEB965C295B9DB20066CA14 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB965B295B9DB20066CA14 /* ProfileViewController.swift */; };
 		DDF3FAAD2A7657D4001C9225 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDF3FAAF2A7657D4001C9225 /* Localizable.strings */; };
@@ -111,10 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DD179C2729E97F9900222732 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		DD179C2929E9C57A00222732 /* JSONModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONModel.swift; sourceTree = "<group>"; };
 		DD18717C297F070100E489D9 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
-		DD18717E2982B6F000E489D9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		DD187183298427ED00E489D9 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DD2B32062A7BAE59005375B2 /* LocalNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationService.swift; sourceTree = "<group>"; };
 		DD2C6DC029DEBC47009E9B14 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -139,10 +129,6 @@
 		DD78C3FE2950FD6D006D31F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DD78C4052950FD6E006D31F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD78C40A2950FD6E006D31F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD78C41029510667006D31F5 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		DD78C41429510685006D31F5 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		DD78C41629524D1E006D31F5 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
-		DD78C4182952535F006D31F5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DD87FE1B2A6BB34200A6BA72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DD87FE1D2A6BB35E00A6BA72 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		DD87FE1F2A6E7B1C00A6BA72 /* MapControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapControllerView.swift; sourceTree = "<group>"; };
@@ -151,12 +137,12 @@
 		DDAB7C3F2A77B30F0039A56C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DDD02FF929757B0400D4E78A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DDD9EF1E29F920540072F36A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DDDB2F842ABB485A00BE60AD /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		DDE1F63F2A31D3D900E91072 /* Picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picker.swift; sourceTree = "<group>"; };
 		DDE6ABE529DD921F004856B4 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		DDE6ABE829DD931A004856B4 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		DDE6ABEA29DD9336004856B4 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		DDE6ABEC29DD9344004856B4 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
-		DDE6ABEE29DD9CE7004856B4 /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		DDEB9659295B9D7D0066CA14 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		DDEB965B295B9DB20066CA14 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DDF3FAAE2A7657D4001C9225 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -206,6 +192,7 @@
 		DD18715129774C8B00E489D9 /* HomeWork */ = {
 			isa = PBXGroup;
 			children = (
+				DD6E01032AB8B442007B59DF /* Login */,
 				DDE6ABE729DD930A004856B4 /* Coordinators */,
 				DD87FE1A2A6BB30000A6BA72 /* Map */,
 				DDA4787529DDC4B300689E86 /* Feed */,
@@ -224,11 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				DD72DA612A1DDD4A006563A9 /* LikedPosts.xcdatamodeld */,
-				DD78C41629524D1E006D31F5 /* Feed.swift */,
 				DD187183298427ED00E489D9 /* Photo.swift */,
 				DD511C9329B368290021D4AC /* User.swift */,
 				DD2E31E429CB682500735DCD /* Button.swift */,
-				DD179C2929E9C57A00222732 /* JSONModel.swift */,
 				DDE1F63F2A31D3D900E91072 /* Picker.swift */,
 			);
 			path = Models;
@@ -237,7 +222,6 @@
 		DD511C7029AFA4460021D4AC /* StorageService */ = {
 			isa = PBXGroup;
 			children = (
-				DD18717E2982B6F000E489D9 /* Post.swift */,
 				DD511C7129AFA4460021D4AC /* StorageService.h */,
 				DD511C7229AFA4460021D4AC /* StorageService.docc */,
 			);
@@ -261,6 +245,14 @@
 				DD66823729859776009368F3 /* PreviewPhotosCollectionViewCell.swift */,
 			);
 			path = Photos;
+			sourceTree = "<group>";
+		};
+		DD6E01032AB8B442007B59DF /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DDD02FF929757B0400D4E78A /* LoginViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		DD78C3F02950FD6D006D31F5 = {
@@ -309,9 +301,8 @@
 		DDA4787529DDC4B300689E86 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				DD78C41029510667006D31F5 /* FeedViewController.swift */,
+				DDDB2F842ABB485A00BE60AD /* FeedViewController.swift */,
 				DDA4787629DDC4CE00689E86 /* FeedViewModel.swift */,
-				DD78C4182952535F006D31F5 /* InfoViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -335,7 +326,6 @@
 		DDAB7C462A77D9010039A56C /* Posts */ = {
 			isa = PBXGroup;
 			children = (
-				DD78C41429510685006D31F5 /* PostViewController.swift */,
 				DD18717C297F070100E489D9 /* PostTableViewCell.swift */,
 			);
 			path = Posts;
@@ -344,7 +334,6 @@
 		DDAB7C472A77D9210039A56C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				DD179C2729E97F9900222732 /* NetworkService.swift */,
 				DD4A722E29C327B600D73702 /* UserService.swift */,
 				DD72DA662A1DDD84006563A9 /* CoreDataManager.swift */,
 				DD2B32062A7BAE59005375B2 /* LocalNotificationService.swift */,
@@ -360,7 +349,6 @@
 				DDE6ABEA29DD9336004856B4 /* LoginCoordinator.swift */,
 				DD72DA5F2A1DDD1F006563A9 /* LikedPostsCoordinator.swift */,
 				DDE6ABEC29DD9344004856B4 /* FeedCoordinator.swift */,
-				DDE6ABEE29DD9CE7004856B4 /* PostCoordinator.swift */,
 				DD2C6DC029DEBC47009E9B14 /* ProfileCoordinator.swift */,
 				DD87FE1D2A6BB35E00A6BA72 /* MapCoordinator.swift */,
 			);
@@ -371,7 +359,6 @@
 			isa = PBXGroup;
 			children = (
 				DDEB9659295B9D7D0066CA14 /* ProfileHeaderView.swift */,
-				DDD02FF929757B0400D4E78A /* LoginViewController.swift */,
 				DDEB965B295B9DB20066CA14 /* ProfileViewController.swift */,
 				DDA4787229DDC49300689E86 /* ProfileViewModel.swift */,
 			);
@@ -564,9 +551,7 @@
 				DDA4787729DDC4CE00689E86 /* FeedViewModel.swift in Sources */,
 				DDE1F6402A31D3D900E91072 /* Picker.swift in Sources */,
 				DDD02FFA29757B0500D4E78A /* LoginViewController.swift in Sources */,
-				DD78C41729524D1E006D31F5 /* Feed.swift in Sources */,
 				DD78C3FD2950FD6D006D31F5 /* AppDelegate.swift in Sources */,
-				DD78C41129510667006D31F5 /* FeedViewController.swift in Sources */,
 				DD511C9429B368290021D4AC /* User.swift in Sources */,
 				DDAB7C402A77B30F0039A56C /* Extensions.swift in Sources */,
 				DD187184298427ED00E489D9 /* Photo.swift in Sources */,
@@ -575,29 +560,24 @@
 				DD87FE1E2A6BB35E00A6BA72 /* MapCoordinator.swift in Sources */,
 				DD72DA652A1DDD4E006563A9 /* LikedPostsViewController.swift in Sources */,
 				DD2C6DC129DEBC48009E9B14 /* ProfileCoordinator.swift in Sources */,
+				DDDB2F852ABB485A00BE60AD /* FeedViewController.swift in Sources */,
 				DD72DA632A1DDD4A006563A9 /* LikedPosts.xcdatamodeld in Sources */,
 				DD4A722F29C327B600D73702 /* UserService.swift in Sources */,
 				DD87FE1C2A6BB34200A6BA72 /* MapViewController.swift in Sources */,
-				DD72DA682A1DDD9D006563A9 /* Post.swift in Sources */,
 				DD72DA602A1DDD1F006563A9 /* LikedPostsCoordinator.swift in Sources */,
 				DD2B32072A7BAE59005375B2 /* LocalNotificationService.swift in Sources */,
 				DD2E31E529CB682500735DCD /* Button.swift in Sources */,
 				DD72DA672A1DDD84006563A9 /* CoreDataManager.swift in Sources */,
-				DD78C4192952535F006D31F5 /* InfoViewController.swift in Sources */,
 				DDE6ABEB29DD9336004856B4 /* LoginCoordinator.swift in Sources */,
-				DD179C2829E97F9900222732 /* NetworkService.swift in Sources */,
 				DD78C3FF2950FD6D006D31F5 /* SceneDelegate.swift in Sources */,
 				DDEB965C295B9DB20066CA14 /* ProfileViewController.swift in Sources */,
 				DD66823A29882E10009368F3 /* PhotosViewController.swift in Sources */,
 				DD6682362985832F009368F3 /* PhotosTableViewCell.swift in Sources */,
 				DDE6ABE929DD931A004856B4 /* MainCoordinator.swift in Sources */,
 				DD18717D297F070100E489D9 /* PostTableViewCell.swift in Sources */,
-				DD78C41529510685006D31F5 /* PostViewController.swift in Sources */,
 				DDE6ABE629DD921F004856B4 /* AppCoordinator.swift in Sources */,
 				DDE6ABED29DD9344004856B4 /* FeedCoordinator.swift in Sources */,
-				DDE6ABEF29DD9CE7004856B4 /* PostCoordinator.swift in Sources */,
 				DD66823C298837A6009368F3 /* PhotosCollectionViewCell.swift in Sources */,
-				DD179C2A29E9C57A00222732 /* JSONModel.swift in Sources */,
 				DD66823829859776009368F3 /* PreviewPhotosCollectionViewCell.swift in Sources */,
 				DDEB965A295B9D7D0066CA14 /* ProfileHeaderView.swift in Sources */,
 			);
