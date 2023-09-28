@@ -8,11 +8,15 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
         
     let scrollView = UIScrollView()
     let contentView = UIView()
     
-    var goToProfile: () -> () = { }
+    var loginUser: () -> () = { }
+    
+    var registerUser: () -> () = { }
     
     var stackView: UIStackView = {
        let stackView = UIStackView()
@@ -49,9 +53,9 @@ class LoginViewController: UIViewController {
     var loginTextField: UITextField = {
         
         let textField = UITextField()
-        textField.placeholder = "  Email or phone"
+        textField.placeholder = "email_or_phone_placeholder".localized
         textField.backgroundColor = .systemGray6
-        textField.textColor = .black
+        textField.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
         textField.tintColor = .tintColor
         textField.autocapitalizationType = .none
@@ -66,9 +70,9 @@ class LoginViewController: UIViewController {
     var passwordTextField: UITextField = {
         
         let textField = UITextField()
-        textField.placeholder = "  Password"
+        textField.placeholder = "password_key".localized
         textField.backgroundColor = .systemGray6
-        textField.textColor = .black
+        textField.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         textField.font = .systemFont(ofSize: 16, weight: .light, width: .standard)
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
@@ -80,12 +84,17 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
-    var loginButton: UIButton = {
-        let button = CustomButton(title: "Log in", titleColor: .white, backColor: .white, mask: false)
+    lazy var loginButton: UIButton = {
+        let button = CustomButton(title: "login_key".localized, titleColor: .white, backColor: .white, mask: false)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
         
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
+        
+        button.tapAction = { [self] in
+            loginUser()
+        }
+        
         switch button.state{
             
         case .normal: button.alpha = 1
@@ -94,7 +103,33 @@ class LoginViewController: UIViewController {
         case .disabled: button.alpha = 0.8
         default: button.alpha = 1
         }
+        
+        return button
+    }()
     
+    lazy var registerButton: UIButton = {
+        let button = CustomButton(title: "register_key".localized, titleColor: .white, backColor: .white, mask: false)
+        
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+
+        button.tapAction = { [self] in
+            registerUser()
+        }
+        
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        button.layer.borderWidth = 0.5
+        
+        switch button.state{
+            
+        case .normal: button.alpha = 1
+        case .selected: button.alpha = 0.8
+        case .highlighted: button.alpha = 0.8
+        case .disabled: button.alpha = 0.8
+        default: button.alpha = 1
+        }
+        
        return button
     }()
     
@@ -105,15 +140,14 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(uiView)
         stackView.addArrangedSubview(passwordTextField)
         
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = self.backgroundColor
         navigationController?.navigationBar.isHidden = true
         
         setupScrollView()
-
-        loginButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        
 
     }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupKeyboardObservers()
@@ -124,13 +158,6 @@ class LoginViewController: UIViewController {
         removeKeyboardObservers()
     }
     
-    
-    @objc private func buttonIsPressed() {
-        
-        goToProfile()
-        
-    }
-    
     @objc func willShowKeyboard(_ notification: NSNotification) {
         
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
@@ -139,22 +166,21 @@ class LoginViewController: UIViewController {
     }
     
     @objc func willHideKeyboard(_ notification: NSNotification){
-        
         scrollView.contentInset.bottom = 0.0
-        
     }
     
     private func setupScrollView() {
-        
+                
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
+        view.addSubview(registerButton)
         contentView.addSubview(loginButton)
         contentView.addSubview(logoImage)
         contentView.addSubview(stackView)
-        
+                
         let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
@@ -195,7 +221,13 @@ class LoginViewController: UIViewController {
             loginButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            registerButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 120),
+            registerButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -120),
+            registerButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            registerButton.heightAnchor.constraint(equalToConstant: 35),
+            registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 10),
         ])
     }
     

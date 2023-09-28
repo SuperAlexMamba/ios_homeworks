@@ -18,10 +18,6 @@ class FeedCoordinator: Coordinator {
     lazy var feedViewController: FeedViewController = {
         let vc = FeedViewController()
         
-        vc.showPost = { [weak self] in
-            self?.goToPost()
-        }
-        
         return vc
     }()
     
@@ -29,8 +25,4 @@ class FeedCoordinator: Coordinator {
         rootViewController.setViewControllers([feedViewController], animated: false)
     }
     
-    func goToPost() {
-        let postViewController = PostViewController()
-        rootViewController.pushViewController(postViewController, animated: true)
-    }
 }

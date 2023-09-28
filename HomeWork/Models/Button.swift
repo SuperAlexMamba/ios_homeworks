@@ -17,7 +17,7 @@ class CustomButton: UIButton {
         
         translatesAutoresizingMaskIntoConstraints = mask
         setTitle(title, for: .normal)
-        titleLabel?.textColor = titleColor
+        titleLabel?.tintColor = titleColor
         backgroundColor = backColor
         
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
@@ -29,10 +29,7 @@ class CustomButton: UIButton {
     }
     
     
-    
-
-    
-    @objc private func buttonTapped(){
+    @objc private func buttonTapped() {
         tapAction?()
     }
     

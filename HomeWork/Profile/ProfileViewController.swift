@@ -9,17 +9,26 @@ import Foundation
 import UIKit
 import iOSIntPackage
 
-class ProfileViewController: UIViewController{
+class ProfileViewController: UIViewController {
+    
+    let backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .systemGray4)
+    
+    let labelsColor = UIColor.createColor(lightMode: .black, darkMode: .white)
     
     var profileViewModel = ProfileViewModel()
     var profileHeader = ProfileHeaderView()
+    var manager = CoreDataManager()
     
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
-    var backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-    var cancelButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width / 1.1 , y: UIScreen.main.bounds.height / 4, width: 40, height: 40))
-
-    lazy var tableView: UITableView = {
+    
+    let backgroundView = UIView(frame: UIScreen.main.bounds)
+    let closeButton = UIButton(type: .system)
+    var originalFrame: CGRect!
+    
+    var feedViewModel = FeedViewModel()
+    
+    var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
@@ -29,47 +38,60 @@ class ProfileViewController: UIViewController{
         
         return tableView
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.profileViewModel = ProfileViewModel()
-        
-        addGuestRecognizer()
-        setupView()
-        self.cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        self.cancelButton.addTarget(nil, action: #selector(cancelProfilePhotoPressed), for: .touchUpInside)
+        self.profileHeader.delegate = self
                 
+        self.profileViewModel = ProfileViewModel()
+        
+        self.originalFrame = profileHeader.profilePhoto.frame
+
+        setupView()
+        
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-      
+        
     }
     
-    private func setupView(){
+    private func setupView() {
+        
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
+        profileHeader.backgroundColor = .systemGray4
+        
         view.addSubview(tableView)
         view.addSubview(profileHeader)
-            
-        title = "Profile"
-
+                    
+        title = "profile_key".localized
+        view.backgroundColor = backgroundColor
+        
+        tableView.tintColor = backgroundColor
+        tableView.separatorColor = backgroundColor
+        
+        tableView.dragInteractionEnabled = true
+        
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        
         self.tableView.headerView(forSection: 0)
+        
+        profileHeader.photoView.addTarget(self, action: #selector(animateProfilePhoto), for: .touchUpInside)
+                
         setupConstrains()
+        
     }
     
-    func addGuestRecognizer(){
-        let guest = UITapGestureRecognizer(target: self, action: #selector (animateProfilePhoto))
-        profileHeader.photoView.addGestureRecognizer(guest)
-    }
-    
-    private func setupConstrains(){
+    private func setupConstrains() {
         let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-        
+            
             profileHeader.leftAnchor.constraint(equalTo: safeAreaGuide.leftAnchor, constant: 0),
             profileHeader.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: 0),
             profileHeader.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
@@ -79,17 +101,92 @@ class ProfileViewController: UIViewController{
             tableView.rightAnchor.constraint(equalTo: safeAreaGuide.rightAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor, constant: 0),
             tableView.topAnchor.constraint(equalTo: profileHeader.bottomAnchor, constant: 0),
-
+            
         ])
     }
         
-    @objc func buttonIsPressed(){
+    @objc func buttonIsPressed() {
         let photosVC = PhotosViewController()
         self.navigationController?.pushViewController(photosVC, animated: true)
     }
+    
+    @objc func likePost() {
+        
+        guard let indexPath = self.tableView.indexPathForSelectedRow?.row else {
+            print("Error! IndexPath is nil")
+            return
+        }
+        
+        let post = profileViewModel.posts[indexPath]
+        
+        manager.savePost(post: post, user: superUser)
+        
+        feedViewModel.didLikedImage(self.view)
+        
+    }
 }
 
-extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
+extension ProfileViewController : UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
+        let destinationIndexPath: IndexPath
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            let row = tableView.numberOfRows(inSection: 0)
+            destinationIndexPath = IndexPath(row: row, section: 0)
+        }
+        
+        coordinator.session.loadObjects(ofClass: UIImage.self) { (items) in
+            guard let images = items as? [UIImage] else { return }
+            
+            coordinator.session.loadObjects(ofClass: NSString.self) { (items) in
+                guard let descriptions = items as? [NSString] else { return }
+                
+                for (index, image) in images.enumerated() {
+                    let description = descriptions[index]
+                    
+                    let post = Post(author: "Drag&Drop", text: description as String, image: image, likes: 0, views: 0)
+                    
+                    self.profileViewModel.posts.insert(post, at: destinationIndexPath.row + index)
+                }
+                
+                tableView.insertRows(at: [destinationIndexPath], with: .automatic)
+            }
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: UIImage.self) || session.canLoadObjects(ofClass: NSString.self)
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        
+        if tableView.hasActiveDrag {
+            return UITableViewDropProposal(operation: .move , intent: .insertAtDestinationIndexPath)
+        }
+        else {
+            return UITableViewDropProposal(operation: .copy, intent: .automatic)
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        let post = profileViewModel.posts[indexPath.row]
+        
+        let image = UIDragItem(itemProvider: NSItemProvider(object: post.image))
+        
+        let descriptionProvider = NSItemProvider(object: post.text as NSString)
+        
+        let descriptionDragItem = UIDragItem(itemProvider: descriptionProvider)
+        
+        descriptionDragItem.localObject = post
+        
+        return [image, descriptionDragItem]
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -97,10 +194,11 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0{
+        if section == 0 {
+            
             return 1
         }
-        else{
+        else {
             
             let posts = self.profileViewModel.posts
 
@@ -108,12 +206,17 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
             return data.count
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosCell", for: indexPath) as! PhotosTableViewCell
             
             cell.navigationButton.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+            
+            cell.makeBorders()
+            
+            cell.backgroundColor = self.backgroundColor
             
             return cell
         }
@@ -124,15 +227,35 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         
         let items = posts[indexPath.row]
         
-        cell.authorLabel.text = items.author
-        cell.descriptionText.text = items.description
-        cell.viewsLabel.text = "Views: \(String(describing: items.views))"
-        cell.likesLabel.text = "Likes: \(String(describing: items.likes))"
-        cell.postImage.image = UIImage(named: items.image )
+        cell.layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
+        cell.layer.borderWidth = 0.5
+        
+        cell.layer.cornerRadius = 10
+        
+        cell.clipsToBounds = true
+        
+        cell.authorLabel.text = "\("source_key".localized) \(items.author)"
+        cell.descriptionText.text = items.text
+        
+        cell.viewsLabel.text = "\("views_key".localized) \(String(describing: items.views))"
+        cell.likesLabel.text = "\("likes_key".localized) \(String(describing: items.likes))"
+        cell.postImage.image = items.image
+        
+        cell.userLabel.text = profileHeader.profileName.text
+        
+        cell.userPhoto.image = profileHeader.profilePhoto.image
+        
+        cell.backgroundColor = self.backgroundColor
+        
+        let likePostGuest = UITapGestureRecognizer(target: self, action: #selector(likePost))
+        
+        likePostGuest.numberOfTapsRequired = 2
+        
+        cell.addGestureRecognizer(likePostGuest)
         
         let processor = ImageProcessor()
         
-        processor.processImage(sourceImage: cell.postImage.image!, filter: .chrome) { image in
+        processor.processImage(sourceImage: cell.postImage.image!, filter: .fade) { image in
             cell.postImage.image = image
         }
         
@@ -141,41 +264,55 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
     
     // MARK: - Animation
     
-    @objc func animateProfilePhoto(){
-
-        view.addSubview(backgroundView)
-        view.addSubview(cancelButton)
-        profileHeader.showStatusButton.isHidden = true
-        profileHeader.profileStatus.isHidden = true
-        profileHeader.statusTextField.isHidden = true
-        view.insertSubview(backgroundView, at: 1)
+    @objc func animateProfilePhoto() {
+        
+        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         backgroundView.backgroundColor = .black
+        view.addSubview(backgroundView)
+        
+        closeButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        closeButton.tintColor = .white
+        closeButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        closeButton.addTarget(self, action: #selector(cancelProfilePhotoPressed), for: .touchUpInside)
+        
+        backgroundView.addSubview(closeButton)
+
+        
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        closeButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+        
+        closeButton.bottomAnchor.constraint(equalTo: profileHeader.profilePhoto.topAnchor, constant: 10).isActive = true
+        
         backgroundView.alpha = 0.0
+        view.bringSubviewToFront(closeButton)
+        
         UIView.animate(withDuration: 0.3, delay: 0.3) {
+            
             self.backgroundView.alpha = 0.5
-            self.profileHeader.profilePhoto.center = CGPoint(x: self.screenWidth / 2 , y: self.screenHeight / 2)
+            self.profileHeader.profilePhoto.center = CGPoint(x: self.screenWidth / 2 , y: self.screenHeight / 2.5)
             self.profileHeader.profilePhoto.layer.bounds.size = CGSize(width:self.screenWidth, height: self.screenHeight / 2)
             self.profileHeader.profilePhoto.layer.cornerRadius = 0
             self.profileHeader.profilePhoto.layer.borderWidth = 0
             
         }
+        
     }
     
-    @objc func cancelProfilePhotoPressed(){
-        
-        let yPhotoPosition = profileViewModel.yPhotoPosition
-        let _ = profileViewModel.xPhotoPosition
-        
-        profileHeader.showStatusButton.isHidden = false
+    @objc func cancelProfilePhotoPressed() {
+                
+        let targetFrame = CGRect(x: 0, y: 0, width: originalFrame.width, height: originalFrame.height)
+                
+        profileHeader.editProfileButton.isHidden = false
         profileHeader.profileStatus.isHidden = false
         profileHeader.statusTextField.isHidden = false
-        UIView.animate(withDuration: 0.3, delay: 0.3) {
-            self.profileHeader.profilePhoto.center = CGPoint(x: yPhotoPosition , y: yPhotoPosition )
-            self.profileHeader.profilePhoto.layer.bounds.size = CGSize(width: 100, height: 100)
+        UIView.animate(withDuration: 0.3, delay: 0.1) {
+            
             self.profileHeader.profilePhoto.layer.cornerRadius = 50
             self.profileHeader.profilePhoto.layer.borderWidth = 3
+            self.profileHeader.profilePhoto.frame = targetFrame
             self.backgroundView.removeFromSuperview()
-            self.cancelButton.removeFromSuperview()
+            self.closeButton.removeFromSuperview()
         }
     }
 }

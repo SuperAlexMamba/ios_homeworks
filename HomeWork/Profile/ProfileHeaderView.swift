@@ -9,10 +9,12 @@ import Foundation
 import UIKit
 import SnapKit
 
-class ProfileHeaderView: UIView{
-        
+class ProfileHeaderView: UIView {
+    
     private var statusText: String!
     
+    var delegate: ProfileViewController?
+        
     var profilePhoto: UIImageView = {
         
         let image = UIImageView()
@@ -49,7 +51,7 @@ class ProfileHeaderView: UIView{
         
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
+        textField.placeholder = "enter_new_status_placeholder_key".localized
         textField.backgroundColor = .white
         textField.font = .systemFont(ofSize: 15, weight: .regular)
         textField.textColor = .black
@@ -70,33 +72,36 @@ class ProfileHeaderView: UIView{
         return status
     }()
     
-    var showStatusButton: UIButton = {
-       
-        let button = CustomButton(title: "Show status", titleColor: .black, backColor: .systemBlue, mask: false)
-
+    var editProfileButton: UIButton = {
+        
+        let button = CustomButton(title: "show_status_button_key".localized, titleColor: .black, backColor: .gray, mask: false)
+        
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
+        button.layer.borderColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
+        button.layer.borderWidth = 1
         button.contentMode = .center
         button.layer.cornerRadius = 15
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
+        button.layer.shadowRadius = 2
         button.layer.shadowColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
-        button.layer.shadowOpacity = 0.7
-       return button
+        button.layer.shadowOpacity = 0.5
+        return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        statusTextField.delegate = self
+                
         self.addSubview(profileName)
         self.addSubview(profileStatus)
-        self.addSubview(showStatusButton)
+        self.addSubview(editProfileButton)
         self.addSubview(statusTextField)
         self.addSubview(profilePhoto)
         self.addSubview(photoView)
         
-        showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        statusTextField.addTarget(self, action: #selector(statusTextIsChanged), for: .editingChanged)
-
+        editProfileButton.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
+                
         setConstraints()
     }
     
@@ -104,19 +109,53 @@ class ProfileHeaderView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func buttonPressed(){
+    @objc private func editProfile() {
         
-        guard statusText != nil && statusText != "" else {profileStatus.text = "Waiting for something..."; return}
-        profileStatus.text = statusText
-        print(profileStatus.text!)
+        
+        let alert = UIAlertController(title: "show_status_button_key".localized, message: "", preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "enter_new_nick_placeholder_key".localized
+        }
+        
+        let textField = alert.textFields?.first
+        
+        let action = UIAlertAction(title: "OK", style: .default) { [weak self] action in
+            
+            if ((textField?.text) != nil) && textField?.text != "" {
+                
+                DispatchQueue.main.async {
+                    
+                    self?.profileName.text = textField?.text
+                    superUser.login = (textField?.text)!
+                    self?.delegate?.tableView.reloadData()
+                                        
+                }
+            }
+            else {
+                Picker.shared.showAlert(title: "error_key".localized, message: "Введите логин!", style: .alert, in: (self?.delegate)!)
+            }
+        }
+        
+        alert.addAction(action)
+        
+        delegate?.present(alert, animated: true)
+        
+        
     }
     
-    @objc func statusTextIsChanged(_ textField: UITextField){
+    private func buttonPressed() {
+        
+        guard statusText != nil && statusText != "" else { profileStatus.text = "Waiting for something..."; return }
+        profileStatus.text = statusText
+    }
+    
+    private func statusTextIsChanged(_ textField: UITextField) {
         
         statusText = textField.text
     }
-    
-    private func setConstraints(){
+        
+    private func setConstraints() {
         
         let safeArea = safeAreaLayoutGuide
         
@@ -135,27 +174,42 @@ class ProfileHeaderView: UIView{
         profileName.snp.makeConstraints {
             $0.centerX.equalTo(safeArea.snp.centerX).offset(0)
             $0.centerY.equalTo(safeArea.snp.top).offset(27)
-            $0.width.equalTo(100)
-            $0.height.equalTo(100)
+            $0.width.equalTo(150)
+            $0.height.equalTo(50)
         }
-        showStatusButton.snp.makeConstraints {
+        editProfileButton.snp.makeConstraints {
             $0.left.equalTo(safeArea.snp.left).offset(16)
             $0.right.equalTo(safeArea.snp.right).offset(-16)
-            $0.width.equalTo(355)
-            $0.height.equalTo(50)
             $0.top.equalTo(profilePhoto.snp.bottom).offset(32)
+            $0.height.equalTo(40)
         }
         profileStatus.snp.makeConstraints {
-            $0.centerX.equalTo(showStatusButton.snp.centerX).offset(30)
-            $0.centerY.equalTo(showStatusButton.snp.top).offset(-70)
+            $0.right.equalTo(safeArea.snp.right).offset(-90)
+            $0.centerY.equalTo(editProfileButton.snp.top).offset(-70)
             $0.width.equalTo(160)
             $0.height.equalTo(100)
         }
         statusTextField.snp.makeConstraints {
             $0.height.equalTo(40)
             $0.width.equalTo(228)
-            $0.top.equalTo(showStatusButton.snp.top).offset(-55)
+            $0.top.equalTo(editProfileButton.snp.top).offset(-55)
             $0.right.equalTo(safeArea.snp.right).offset(-20)
         }
     }
 }
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        statusTextIsChanged(textField)
+        
+        buttonPressed()
+                
+        return textField.resignFirstResponder()
+        
+    }
+    
+    
+}
+
