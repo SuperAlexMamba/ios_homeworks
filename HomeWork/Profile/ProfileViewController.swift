@@ -132,7 +132,7 @@ extension ProfileViewController : UITableViewDelegate, UITableViewDataSource{
         
         let processor = ImageProcessor()
         
-        processor.processImage(sourceImage: cell.postImage.image!, filter: .chrome) { image in
+        processor.processImage(sourceImage: cell.postImage.image!, filter: .fade) { image in
             cell.postImage.image = image
         }
         

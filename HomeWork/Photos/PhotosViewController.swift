@@ -8,33 +8,87 @@
 import UIKit
 import iOSIntPackage
 
-class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, ImageLibrarySubscriber {
-    
+class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         view.addSubview(navBar)
+        
     }
     
+    let imageProcessor = ImageProcessor()
     var photosArray = PhotosArray.shared.photosArray
-    
-    var images: [UIImage] = []
-    
-    var imagePublisherFacade = ImagePublisherFacade()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        imagePublisherFacade.subscribe(self)
-        
+
         view.backgroundColor = .white
         view.addSubview(collectionView)
-                
         collectionView.dataSource = self
         collectionView.delegate = self
-        imagePublisherFacade.addImagesWithTimer(time: 0.5, repeat: 20)
-
         setupConstraints()
         
+        DispatchQueue.main.async {
+            self.processorImageOne()
+            self.processorImageTwo()
+            self.processorImageThree()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(8), execute: {
+            self.collectionView.reloadData()
+        })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    
+    }
+    
+    func processorImageOne() {
+        
+        let start = DispatchTime.now()
+        self.imageProcessor.processImagesOnThread(sourceImages: photosArray, filter: .sepia(intensity: 10), qos: .default) { image in
+            
+            for items in image {
+                self.photosArray.append(UIImage(cgImage: items!))
+            }
+            let end = DispatchTime.now()
+            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nanoTime) / 1_000_000_000
+            print("Time to processOne \(timeInterval)")
+        }
+
+    }
+    
+    func processorImageTwo() {
+        
+        let start = DispatchTime.now()
+        self.imageProcessor.processImagesOnThread(sourceImages: photosArray, filter: .sepia(intensity: 10), qos: .background) { image in
+            
+            for items in image {
+                self.photosArray.append(UIImage(cgImage: items!))
+            }
+            let end = DispatchTime.now()
+            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nanoTime) / 1_000_000_000
+            print("Time to processTwo \(timeInterval)")
+        }
+
+    }
+    
+    func processorImageThree() {
+        
+        let start = DispatchTime.now()
+        self.imageProcessor.processImagesOnThread(sourceImages: photosArray, filter: .sepia(intensity: 10), qos: .userInitiated) { image in
+            
+            for items in image {
+                self.photosArray.append(UIImage(cgImage: items!))
+            }
+            let end = DispatchTime.now()
+            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+            let timeInterval = Double(nanoTime) / 1_000_000_000
+            print("Time to processThree \(timeInterval)")
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -56,13 +110,14 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collection.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell")        
+        collection.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell")
+        collection.reloadData()
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         return collection
         }()
     
-    private func setupConstraints(){
+    private func setupConstraints() {
 
         let safeArea = view.safeAreaLayoutGuide
 
@@ -76,15 +131,17 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
     
     @objc func backButton(){
         self.navigationController?.pushViewController(ProfileViewController(), animated: true)
-        imagePublisherFacade.removeSubscription(for: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotosCollectionViewCell
-        
-        cell.photosImage.image = photosArray[indexPath.row]
-        
+    
+        let images = photosArray[indexPath.row]
+                
+        cell.photosImage.image = images
+                
         return cell
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -113,12 +170,3 @@ class PhotosViewController: UIViewController,UICollectionViewDataSource,UICollec
         
 }
 
-extension PhotosViewController {
-    
-    func receive(images: [UIImage]) {
-        
-        photosArray = images
-        collectionView.reloadData()
-    }
-
-}
